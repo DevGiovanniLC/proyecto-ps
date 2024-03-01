@@ -10,52 +10,74 @@ import { Component } from '@angular/core';
 
 export class RecordButtonComponent {
 
-    ngOnInit(): void {
-        const  button = document.querySelector('button')
+    mediaRecorder: any = null;
 
-        if (button) {
-            button.addEventListener('click', this.record);
+    constructor(){
+        const  record_button = document.getElementById('record-button');
+
+        if (record_button) {
+            record_button.addEventListener('click', (event) =>{ 
+
+            if (this.mediaRecorder == null) {
+                this.setRecord(event)
+                return
+            }
+
+            if (this.mediaRecorder.state == 'recording') {
+                this.mediaRecorder.stop();
+                this.mediaRecorder = null;
+            }
+            
+            });
         }
+
     }
 
-    async record( event : MouseEvent ): Promise<void> {
-        const media = this.getMedia(30)
-
-        const mediaRecorder = this.getMediaRecorder(media)
+    async setRecord( event : MouseEvent ): Promise<void> {
         
-        ;(await mediaRecorder).start()
+        let media = await this.getMedia(30)
 
+        this.mediaRecorder = this.getMediaRecorder(media)
+
+        this.mediaRecorder.start()
+        
         const video = this.getVideoTrack(media)
 
-        ;(await video).addEventListener("ended", async () => {
-            ;(await mediaRecorder).stop()
+        video.addEventListener("ended", async () => {
+            this.mediaRecorder.stop()     
         })
-
-
-
         
+        this.mediaRecorder.addEventListener("dataavailable", (event: BlobEvent) => { 
+            this.downloadVideo(event) 
+        })
 
     }
 
-
-    async getMedia(framerate : number): Promise<MediaStream> {
-        return  await navigator.mediaDevices.getDisplayMedia({
+    private async  getMedia(framerate : number): Promise<MediaStream> {
+        return  navigator.mediaDevices.getDisplayMedia({
             video: { frameRate: { ideal: framerate } }
         })
     }
-
-    async getMediaRecorder(media: Promise<MediaStream>): Promise<MediaRecorder> {
-        return media.then( (mediaStream: MediaStream) => {
-            return new  MediaRecorder(mediaStream, {
-                mimeType: 'video/webm;codecs=vp8,opus'
-            })
+    
+    private getMediaRecorder(media: MediaStream): MediaRecorder {        
+        return new  MediaRecorder(media, {
+            mimeType: 'video/webm;codecs=vp8,opus'
         })
     }
-
-    async getVideoTrack(media: Promise<MediaStream>){
-        return media.then( (mediaStream: MediaStream): MediaStreamTrack => {
-            return  mediaStream.getVideoTracks()[0]
-        })
+    
+    private  getVideoTrack(media: MediaStream): MediaStreamTrack{
+        return  media.getVideoTracks()[0]
     }
-
+    
+    private downloadVideo(event: BlobEvent): void{
+        const link = document.createElement("a")
+        link.href = URL.createObjectURL(event.data)
+        link.download = "captura.webm"
+        link.click()
+    }
+    
+    public async getScreen(){
+        return this 
+    }
+    
 }

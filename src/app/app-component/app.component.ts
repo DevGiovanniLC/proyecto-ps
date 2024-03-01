@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { RecordButtonComponent } from './record-button/record-button.component';
+import { RecordButtonComponent } from '../record-button/record-button.component';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +10,6 @@ import { RecordButtonComponent } from './record-button/record-button.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'proyecto-ps';
+
+  
 }
