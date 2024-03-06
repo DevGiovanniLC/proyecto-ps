@@ -59,7 +59,8 @@ export class RecordButtonComponent {
         return  navigator.mediaDevices.getDisplayMedia({
             video: { 
                 frameRate: { ideal: framerate, max:60} // standar framerate 15, 24, 30, 60
-            } 
+            } ,
+            audio: true
         })
     }
     
