@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 export class RecordButtonComponent {
     mediaRecorder: any = null;
     framerate_value: number = 60
+    resolution_value: number = 1080
     
     ngAfterViewInit(): void {
         const  record_button = document.getElementById('record-button'); 
@@ -32,14 +33,20 @@ export class RecordButtonComponent {
             
             });
         }
-        
+
     }
 
     async setRecord( event : MouseEvent ): Promise<void> {
         
-        let media = await this.getMedia(this.framerate_value)
+        let media = await this.getMedia(this.framerate_value, this.resolution_value)
 
         this.mediaRecorder = this.getMediaRecorder(media)
+        
+        if (this.mediaRecorder ) {
+            (this.mediaRecorder as MediaRecorder).onstop = (event) =>{
+                this.mediaRecorder = null;
+            }
+        }
 
         this.mediaRecorder.start()
         
@@ -55,11 +62,13 @@ export class RecordButtonComponent {
 
     }
 
-    private async  getMedia(framerate : number): Promise<MediaStream> {
+    private async  getMedia(framerate : number, resolution: number): Promise<MediaStream> {
         return  navigator.mediaDevices.getDisplayMedia({
             video: { 
-                frameRate: { ideal: framerate, max:60} // standar framerate 15, 24, 30, 60
-            } 
+                frameRate: { ideal: framerate, max:60}, // standar framerate 15, 24, 30, 60
+                height: resolution
+            }, 
+            audio: true
         })
     }
     
@@ -83,5 +92,6 @@ export class RecordButtonComponent {
     public async getScreen(){
         return this 
     }
+
     
 }
