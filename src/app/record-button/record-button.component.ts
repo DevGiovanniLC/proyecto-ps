@@ -34,6 +34,8 @@ export class RecordButtonComponent {
             });
         }
 
+        this.getCodecs()
+
     }
 
     async setRecord( event : MouseEvent ): Promise<void> {
@@ -74,8 +76,18 @@ export class RecordButtonComponent {
     
     private getMediaRecorder(media: MediaStream): MediaRecorder {        
         return new  MediaRecorder(media, {
-            mimeType: 'video/webm;codecs=vp8,opus'
+            mimeType: 'video/x-matroska'
         })
+    }
+
+    private getCodecs(): void{
+        const video = RTCRtpReceiver.getCapabilities('video')?.codecs
+        const audio = RTCRtpReceiver.getCapabilities('audio')?.codecs
+        video?.forEach((codec)=>{
+            console.log(codec.mimeType)
+        }
+        
+        )
     }
     
     private  getVideoTrack(media: MediaStream): MediaStreamTrack{
@@ -85,7 +97,7 @@ export class RecordButtonComponent {
     private downloadVideo(event: BlobEvent): void{
         const link = document.createElement("a")
         link.href = URL.createObjectURL(event.data)
-        link.download = "captura.webm"
+        link.download = "captura.mkv"
         link.click()
     }
     
