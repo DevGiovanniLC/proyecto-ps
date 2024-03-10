@@ -16,8 +16,19 @@
             ⏺️ Record Screen
         </button>
         
-        <input [(ngModel)]="framerate_value" type="text" id="framerate-selector">
-        <input [(ngModel)]="resolution_value" type="text" id="resolution-selector">
+        <select id=framerate-selector [(ngModel)]="framerate_value">
+            <option> 60
+            <option> 30
+            <option> 24
+            <option> 15
+        </select>
+
+        <select id=resolution-selector [(ngModel)]="resolution_value">
+            <option> 1080
+            <option> 720
+            <option> 480
+            <option> 360
+        </select>
     </div>
 
 </body>
