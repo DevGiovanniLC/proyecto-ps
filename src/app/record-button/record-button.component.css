@@ -13,3 +13,9 @@ div {
 	flex-direction: row;
 	gap: 20px;
 }
+
+select{
+	width: 5em;
+	text-align: center;
+	
+}
