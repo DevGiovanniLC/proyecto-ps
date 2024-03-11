@@ -101,7 +101,4 @@ export class RecordButtonComponent {
 		link.click();
 	}
 
-	public async getScreen() {
-		return this;
-	}
 }
