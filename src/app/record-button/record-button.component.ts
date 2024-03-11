@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { VideoConverter } from './videoConverter';
 
 @Component({
 	selector: 'app-record-button',
@@ -12,6 +13,7 @@ export class RecordButtonComponent {
 	mediaRecorder: any = null;
 	framerate_value: number = 60;
 	resolution_value: number = 1080;
+	videoConverter = new VideoConverter()
 
 	ngAfterViewInit(): void {
 		const record_button = document.getElementById('record-button');
@@ -94,9 +96,9 @@ export class RecordButtonComponent {
 		return media.getVideoTracks()[0];
 	}
 
-	private downloadVideo(event: BlobEvent): void {
+	private async downloadVideo(event: BlobEvent): Promise<void> {
 		const link = document.createElement('a');
-		link.href = URL.createObjectURL(event.data);
+		link.href = await this.videoConverter.transcode(URL.createObjectURL(event.data))
 		link.download = 'captura.mkv';
 		link.click();
 	}
