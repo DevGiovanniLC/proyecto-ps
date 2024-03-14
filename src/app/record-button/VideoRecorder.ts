@@ -39,6 +39,7 @@ export class VideoRecorder{
 	): Promise<MediaStream> {
 		return navigator.mediaDevices.getDisplayMedia({
 			video: {
+
 				frameRate: { ideal: framerate, max: 60 },
 				height: resolution,
 			},
