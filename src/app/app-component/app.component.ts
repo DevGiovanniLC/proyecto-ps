@@ -6,7 +6,8 @@ import { ScreenshotButtonComponent } from "../screenshot-button/screenshot-butto
 @Component({
 	selector: 'app-root',
 	standalone: true,
-  imports: [RouterOutlet, RecordButtonComponent, ScreenshotButtonComponent],
+	imports: [RouterOutlet, RecordButtonComponent, ScreenshotButtonComponent],
 	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.css']
 })
 export class AppComponent {}

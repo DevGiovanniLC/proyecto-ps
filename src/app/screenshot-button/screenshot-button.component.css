@@ -1,21 +1,17 @@
-body {
-  height: 100vh;
-  display: grid;
-  place-content: center;
-}
 
 button {
-  font-size: 24px;
-}
-
-div {
   display: flex;
-  flex-direction: row;
-  gap: 20px;
+  column-gap: 1em;
+  font-size: 1em;
+  align-items: center;
 }
 
-select{
-  width: 5em;
+em{
+  font-size: 1em;
+  align-items: center ;
   text-align: center;
-
+  padding-bottom: 0.45em;
+  display: flex;
+  font-style: normal;
+  font-size: 2em;
 }
