@@ -1,19 +1,23 @@
-<div>
-	<p>Record</p>
-	<button id="record-button"><em>◉</em> Record Screen</button>
-
+<div class="container1">
+<button id="record-button" class="recordbutton"></button>
+</div>	
+<section>
+	
+	<div class="FPS">
 	<select id="framerate-selector" [(ngModel)]="framerate_value">
 		<option>60</option>
 		<option>30</option>
 		<option>24</option>
 		<option>15</option>
 	</select>
-
+	</div>
+	<div class="Resolution">
 	<select id="resolution-selector" [(ngModel)]="resolution_value">
 		<option>1080</option>
 		<option>720</option>
 		<option>480</option>
 		<option>360</option>
 	</select>
-</div>
+	</div>
+</section>
 
