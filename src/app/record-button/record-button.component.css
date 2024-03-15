@@ -1,62 +1,56 @@
-
-
 .container {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		margin-top: 10%; 	
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 10%;
 }
 
 .recordbutton {
-    margin-top: 1%;
+	margin-top: 1%;
 	background-image: url("../../assets/record.png");
 	background-color: rgb(0, 0, 0, 0%);
 	border: none;
 	background-size: cover;
 	width: 8em;
 	height: 8em;
-  }
+	cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+}
 
 .primary {
 	border: 10px solid #000000; /* Establece un borde sólido de 2px de ancho */
-  border-radius: 10px; /* Agrega esquinas redondeadas al botón */
-  background-color: #000000; /* Establece el color de fondo del botón */
-  color: white; /* Establece el color del texto del botón */
-  font-size: 16px; /* Establece el tamaño de la fuente del texto del botón */
-  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-  font-family: 'Jomhuria';
+	border-radius: 10px; /* Agrega esquinas redondeadas al botón */
+	background-color: #000000; /* Establece el color de fondo del botón */
+	color: white; /* Establece el color del texto del botón */
+	font-size: 16px; /* Establece el tamaño de la fuente del texto del botón */
+	font-family: "Jomhuria";
 }
 
-section{
-    display: flex;
-    flex-direction:row;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 10%;
-    
+section {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 10%;
 }
 
-.FPS {
-    text-align: left; /* Alinea el texto al centro */
-    margin-left: 1%;
-    border: 10px solid #000000; /* Establece un borde sólido de 2px de ancho */
-  border-radius: 10px; /* Agrega esquinas redondeadas al botón */
-  background-color: #000000; /* Establece el color de fondo del botón */
-  color: white; /* Establece el color del texto del botón */
-  font-size: 16px; /* Establece el tamaño de la fuente del texto del botón */
-  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-  font-family: 'Jomhuria';
-  }
-  
-.Resolution {
-    text-align: left;
-    margin-left: 1%;
-    border: 10px solid #000000; /* Establece un borde sólido de 2px de ancho */
+.configure-selector {
+	margin-left: 1%;
+	border: 10px solid #000000; /* Establece un borde sólido de 2px de ancho */
+	border-radius: 10px; /* Agrega esquinas redondeadas al botón */
+	background-color: #000000; /* Establece el color de fondo del botón */
+	color: white; /* Establece el color del texto del botón */
+	cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+	width: 6em;
+	
+	p{
+		font-family: "Jomhuria";
+		text-align: center; /* Alinea el texto al centro */
+		font-size: 1.2em; /* Establece el tamaño de la fuente del texto del botón */	
+	}
 
-  border-radius: 10px; /* Agrega esquinas redondeadas al botón */
-  background-color: #000000; /* Establece el color de fondo del botón */
-  color: white; /* Establece el color del texto del botón */
-  font-size: 16px; /* Establece el tamaño de la fuente del texto del botón */
-  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-  font-family: 'Jomhuria';
+	select{
+		padding-left: 1em;
+		width: 100%;
+		text-align: center;
+	}
 }

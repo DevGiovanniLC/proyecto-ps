@@ -27,8 +27,8 @@ export class RecordButtonComponent {
 				}
 			});
 		}
+
+		
 	}
-
-
 
 }
