@@ -1,12 +1,14 @@
 
 
-.containeir1 {
-	display: flex;
-    align-items: center;
+.container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-top: 10%; 	
 }
 
 .recordbutton {
-    margin-top: 10%;
+    margin-top: 1%;
 	background-image: url("../../assets/record.png");
 	background-color: rgb(0, 0, 0, 0%);
 	border: none;
@@ -14,6 +16,16 @@
 	width: 8em;
 	height: 8em;
   }
+
+.primary {
+	border: 10px solid #000000; /* Establece un borde sólido de 2px de ancho */
+  border-radius: 10px; /* Agrega esquinas redondeadas al botón */
+  background-color: #000000; /* Establece el color de fondo del botón */
+  color: white; /* Establece el color del texto del botón */
+  font-size: 16px; /* Establece el tamaño de la fuente del texto del botón */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+  font-family: 'Jomhuria';
+}
 
 section{
     display: flex;
