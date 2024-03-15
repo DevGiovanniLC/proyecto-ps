@@ -7,4 +7,5 @@ html {
     background-position: center bottom; /* La imagen se centrará en el fondo */
     background-repeat: no-repeat; /* Evita que la imagen de fondo se repita */
     height: 100%;
+    width: 100%;
   }
