@@ -23,3 +23,30 @@ em{
 	color: red;
 	font-size: 1em;
 }
+
+p {
+position: absolute;
+padding: 5em;
+
+left: 570px;
+top: 405px;
+background: #000000;
+border-radius: 10px;
+/* RECORD */
+
+font-family: 'Jomhuria';
+font-style: normal;
+font-weight: 400;
+font-size: 2em;
+line-height: 50px;
+text-align: center;
+align-items: center;
+display: flex;
+justify-content: center;
+
+color: #FFFFFF;
+
+
+	
+
+}

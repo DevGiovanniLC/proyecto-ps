@@ -13,8 +13,7 @@ button {
 
 .header {
     height: 20%;
-    display: flex;
-    align-items: center; /* Centra verticalmente los elementos */
+    display: flex; /* Centra verticalmente los elementos */
 } 
 
 .primary {
