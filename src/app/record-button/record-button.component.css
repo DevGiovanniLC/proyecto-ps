@@ -17,11 +17,11 @@
 }
 
 .info-feature {
-	border: 10px solid #000000; /* Establece un borde sólido de 2px de ancho */
-	border-radius: 10px; /* Agrega esquinas redondeadas al botón */
+	padding: 0.5em 1.3em;
+	border-radius: 1em; /* Agrega esquinas redondeadas al botón */
 	background-color: #000000; /* Establece el color de fondo del botón */
 	color: white; /* Establece el color del texto del botón */
-	font-size: 16px; /* Establece el tamaño de la fuente del texto del botón */
+	font-size: 1em; /* Establece el tamaño de la fuente del texto del botón */
 	font-family:"Jomhuria" ,'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -30,11 +30,11 @@ section {
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
-	margin-top: 10%;
+	margin-top: 10em;
 }
 
 .configure-selector {
-	margin-left: 1%;
+	margin: 0 8%;
 	border: 10px solid #000000; /* Establece un borde sólido de 2px de ancho */
 	border-radius: 10px; /* Agrega esquinas redondeadas al botón */
 	background-color: #000000; /* Establece el color de fondo del botón */
@@ -52,6 +52,5 @@ section {
 		padding-left: 1em;
 		width: 100%;
 		text-align: center;
-
 	}
 }
