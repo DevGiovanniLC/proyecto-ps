@@ -1,30 +1,27 @@
 button {
-	width: 114px; /* Establece el ancho del botón */
-	height: 25px; /* Establece la altura del botón */
+	padding: 0.2em 1em; /* Establece la altura del botón */
 	border: 1px solid #000000; /* Establece un borde sólido de 2px de ancho */
-	border-radius: 4px; /* Agrega esquinas redondeadas al botón */
+	border-radius: 0.2em; /* Agrega esquinas redondeadas al botón */
 	background-color: #000000; /* Establece el color de fondo del botón */
 	color: white; /* Establece el color del texto del botón */
-	font-size: 16px; /* Establece el tamaño de la fuente del texto del botón */
+	font-size: 1em; /* Establece el tamaño de la fuente del texto del botón */
 	cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
 	font-family: "Jomhuria", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+
+
 .header {
-	height: 20%;
 	display: flex; /* Centra verticalmente los elementos */
+	justify-content: space-between;
+	flex-direction: row;
 }
 
-.primary {
-	margin-right: auto;
-	margin-top: 5px;
+.users-buttons{
+	display: flex;
+	flex-direction: row;
+	column-gap: 1em;
+	margin: 0 1em;
 }
 
-.secundary {
-	margin-left: 10px;
-	margin-top: 5px;
-}
 
-.spacer {
-	flex-grow: 1; /* El espacio flexible se expande para llenar el espacio restante */
-}
