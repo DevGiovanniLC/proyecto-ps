@@ -7,7 +7,7 @@ button {
 	color: white; /* Establece el color del texto del botón */
 	font-size: 16px; /* Establece el tamaño de la fuente del texto del botón */
 	cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-    font-family:"Jomhuria" ,'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-family: "Jomhuria", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .header {

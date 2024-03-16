@@ -1,17 +1,16 @@
-
 button {
-  display: flex;
-  column-gap: 1em;
-  font-size: 1em;
-  align-items: center;
+	display: flex;
+	column-gap: 1em;
+	font-size: 1em;
+	align-items: center;
 }
 
-em{
-  font-size: 1em;
-  align-items: center ;
-  text-align: center;
-  padding-bottom: 0.45em;
-  display: flex;
-  font-style: normal;
-  font-size: 2em;
+em {
+	font-size: 1em;
+	align-items: center;
+	text-align: center;
+	padding-bottom: 0.45em;
+	display: flex;
+	font-style: normal;
+	font-size: 2em;
 }

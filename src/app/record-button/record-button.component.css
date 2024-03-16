@@ -22,7 +22,7 @@
 	background-color: #000000; /* Establece el color de fondo del botón */
 	color: white; /* Establece el color del texto del botón */
 	font-size: 1em; /* Establece el tamaño de la fuente del texto del botón */
-	font-family:"Jomhuria" ,'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-family: "Jomhuria", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 section {
@@ -41,14 +41,14 @@ section {
 	color: white; /* Establece el color del texto del botón */
 	cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
 	width: 6em;
-	
-	p{
-		font-family:"Jomhuria" ,'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+	p {
+		font-family: "Jomhuria", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 		text-align: center; /* Alinea el texto al centro */
-		font-size: 1.2em; /* Establece el tamaño de la fuente del texto del botón */	
+		font-size: 1.2em; /* Establece el tamaño de la fuente del texto del botón */
 	}
 
-	select{
+	select {
 		padding-left: 1em;
 		width: 100%;
 		text-align: center;

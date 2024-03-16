@@ -1,13 +1,11 @@
+export class VideoRecorder {
+	mediaRecorder: any = null;
 
-
-export class VideoRecorder{
-    mediaRecorder: any = null;
-
-	async start(framerate_value:number, resolution_value:number): Promise<void> {
-		let media = await this.getMedia(
-			framerate_value,
-			resolution_value
-		);
+	async start(
+		framerate_value: number,
+		resolution_value: number
+	): Promise<void> {
+		let media = await this.getMedia(framerate_value, resolution_value);
 
 		this.mediaRecorder = this.getMediaRecorder(media);
 
@@ -39,7 +37,6 @@ export class VideoRecorder{
 	): Promise<MediaStream> {
 		return navigator.mediaDevices.getDisplayMedia({
 			video: {
-
 				frameRate: { ideal: framerate, max: 60 },
 				height: resolution,
 			},
@@ -53,25 +50,23 @@ export class VideoRecorder{
 		});
 	}
 
-
 	private getVideoTrack(media: MediaStream): MediaStreamTrack {
 		return media.getVideoTracks()[0];
 	}
 
 	private async downloadVideo(event: BlobEvent): Promise<void> {
 		const link = document.createElement('a');
-		link.href = URL.createObjectURL(event.data)
+		link.href = URL.createObjectURL(event.data);
 		link.download = 'captura.mkv';
 		link.click();
 	}
 
+	public isRecording(): boolean {
+		return this.mediaRecorder != null;
+	}
 
-    public isRecording(): boolean{
-        return this.mediaRecorder != null
-    }
-
-    public stop(){
-        this.mediaRecorder.stop();
-        this.mediaRecorder = null;
-    }
+	public stop() {
+		this.mediaRecorder.stop();
+		this.mediaRecorder = null;
+	}
 }
