@@ -20,17 +20,9 @@ export class RecordButtonComponent {
 		if (record_button) {
 			record_button.addEventListener('click', (event) => {
 				if (this.videoRecorder.isRecording()) {
-					this.videoRecorder.stop().then(() => {			
-						record_button.style.backgroundImage =
-						"url('../../assets/record.png')";})
+					this.videoRecorder.stop()		
 				} else {
-					this.videoRecorder
-						.start(this.framerate_value, this.resolution_value)
-						.then(() => {
-							if(record_button)
-							record_button.style.backgroundImage =
-								"url('../../assets/stop.png')";
-						});
+					this.videoRecorder.start(this.framerate_value, this.resolution_value, record_button)
 				}
 			});
 		}

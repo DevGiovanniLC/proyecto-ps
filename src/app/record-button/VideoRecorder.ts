@@ -4,7 +4,8 @@ export class VideoRecorder {
 
 	async start(
 		framerate_value: number,
-		resolution_value: number
+		resolution_value: number,
+		record_button: HTMLElement
 	): Promise<void> {
 		let media = await this.getMedia(framerate_value, resolution_value);
 
@@ -17,7 +18,7 @@ export class VideoRecorder {
 		}
 
 		this.mediaRecorder.start();
-
+		record_button.style.backgroundImage ="url('../../assets/stop.png')";
 		this.video = this.getVideoTrack(media);
 
 		this.video.addEventListener('ended', async () => {
@@ -28,6 +29,7 @@ export class VideoRecorder {
 			'dataavailable',
 			(event: BlobEvent) => {
 				this.downloadVideo(event);
+				record_button.style.backgroundImage ="url('../../assets/record.png')";
 			}
 		);
 	}
