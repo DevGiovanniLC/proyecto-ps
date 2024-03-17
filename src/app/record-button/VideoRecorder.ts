@@ -1,5 +1,6 @@
 export class VideoRecorder {
 	mediaRecorder: any = null;
+	video: any = null;
 
 	async start(
 		framerate_value: number,
@@ -17,9 +18,9 @@ export class VideoRecorder {
 
 		this.mediaRecorder.start();
 
-		const video = this.getVideoTrack(media);
+		this.video = this.getVideoTrack(media);
 
-		video.addEventListener('ended', async () => {
+		this.video.addEventListener('ended', async () => {
 			this.mediaRecorder.stop();
 		});
 
@@ -65,7 +66,7 @@ export class VideoRecorder {
 		return this.mediaRecorder != null;
 	}
 
-	public stop() {
+	public async stop(): Promise<void> {
 		this.mediaRecorder.stop();
 		this.mediaRecorder = null;
 	}
