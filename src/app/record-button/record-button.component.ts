@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { VideoRecorder } from './VideoRecorder';
+import { ScreenshotButtonComponent } from "../screenshot-button/screenshot-button.component";
 
 @Component({
 	selector: 'app-record-button',
 	standalone: true,
-	imports: [FormsModule],
+	imports: [FormsModule, ScreenshotButtonComponent],
 	templateUrl: './record-button.component.html',
 	styleUrl: './record-button.component.css',
 })
