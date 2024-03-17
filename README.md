@@ -27,7 +27,7 @@ contenido digital.
 
 Estamos en el umbral de fomentar la comunicación libre, facilitando a todos una
 herramienta poderosa que no solo captura momentos, sino que también potencia la
-creatividad y el intercambio de conocimientos a nivel global.
+creatividad y el intercambio de conocimientos a nivel global .
 
 
 ## Development Section
