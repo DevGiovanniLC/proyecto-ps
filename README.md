@@ -6,19 +6,22 @@ individuos y profesionales capturan, editan y comparten contenido de pantalla. E
 integral no solo simplifica el proceso de grabación de pantalla sino que también eleva la
 experiencia del usuario a través de una serie de funcionalidades innovadoras y
 personalizables.
-(Nombre Plataforma) no se limita a ser una solución más en el mercado; aspira a ser la
+<br>
+SPEED no se limita a ser una solución más en el mercado; aspira a ser la
 solución definitiva que usuarios de todo espectro puedan emplear para grabar, editar y
 compartir sus contenidos digitales con una facilidad y flexibilidad sin precedentes. Al
 combinar una interfaz de usuario excepcionalmente amigable con una amplia gama de
 funcionalidades personalizables, nuestra plataforma está destinada a satisfacer y superar
 las expectativas de educadores, estudiantes, profesionales y creadores de contenido por
 igual.
+<br>
 Al finalizar este proyecto, habremos logrado no solo desarrollar una herramienta de
 grabación y captura de pantalla de vanguardia, sino también haber integrado opciones de
 personalización de calidad y formatos de archivo que se adaptan a cada necesidad
 específica del usuario. Además, con la introducción de capacidades de edición básica de
 video y fotos, nuestra plataforma promete ser una solución integral para la creación de
 contenido digital.
+<br>
 Estamos en el umbral de fomentar la comunicación libre, facilitando a todos una
 herramienta poderosa que no solo captura momentos, sino que también potencia la
 creatividad y el intercambio de conocimientos a nivel global.
