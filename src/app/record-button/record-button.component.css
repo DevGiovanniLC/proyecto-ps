@@ -34,11 +34,10 @@ section {
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
-	margin-top: 10em;
+	margin: 10% 10%;
 }
 
 .configure-selector {
-	margin: 0 8%;
 	border: 1em solid #000000; /* Establece un borde sólido de 2px de ancho */
 	border-radius: 10px; /* Agrega esquinas redondeadas al botón */
 	background-color: #000000; /* Establece el color de fondo del botón */
