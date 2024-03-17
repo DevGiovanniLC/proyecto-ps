@@ -7,29 +7,26 @@ export class VideoRecorder {
 		resolution_value: number,
 		record_button: HTMLElement
 	): Promise<void> {
+
 		let media = await this.getMedia(framerate_value, resolution_value);
 
 		this.mediaRecorder = this.getMediaRecorder(media);
 
-		if (this.mediaRecorder) {
-			(this.mediaRecorder as MediaRecorder).onstop = (event) => {
-				this.mediaRecorder = null;
-			};
-		}
-
 		this.mediaRecorder.start();
-		record_button.style.backgroundImage ="url('../../assets/stop.png')";
+		record_button.style.backgroundImage = "url('../../assets/stop.png')";
+
 		this.video = this.getVideoTrack(media);
 
 		this.video.addEventListener('ended', async () => {
-			this.mediaRecorder.stop();
+			this.stop()
 		});
 
 		this.mediaRecorder.addEventListener(
 			'dataavailable',
 			(event: BlobEvent) => {
 				this.downloadVideo(event);
-				record_button.style.backgroundImage ="url('../../assets/record.png')";
+				record_button.style.backgroundImage =
+					"url('../../assets/record.png')";
 			}
 		);
 	}

@@ -20,9 +20,13 @@ export class RecordButtonComponent {
 		if (record_button) {
 			record_button.addEventListener('click', (event) => {
 				if (this.videoRecorder.isRecording()) {
-					this.videoRecorder.stop()		
+					this.videoRecorder.stop();
 				} else {
-					this.videoRecorder.start(this.framerate_value, this.resolution_value, record_button)
+					this.videoRecorder.start(
+						this.framerate_value,
+						this.resolution_value,
+						record_button
+					);
 				}
 			});
 		}
