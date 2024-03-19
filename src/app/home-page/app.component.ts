@@ -5,9 +5,9 @@ import {
 	NavigationEnd,
 	Router,
 } from '@angular/router';
-import { RecordButtonComponent } from './components/record-button/record-button.component';
-import { HeaderComponent } from './components/header/header.component';
-import { WhoweareComponent } from './whoweare/whoweare.component';
+import { RecordButtonComponent } from '../components/record-button/record-button.component';
+import { HeaderComponent } from '../components/header/header.component';
+import { WhoweareComponent } from '../whoweare-page/whoweare.component';
 
 @Component({
 	selector: 'app-root',
