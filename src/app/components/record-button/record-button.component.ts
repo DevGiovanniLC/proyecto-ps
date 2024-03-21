@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { VideoRecorder } from './VideoRecorder';
 import { ScreenshotButtonComponent } from "../screenshot-button/screenshot-button.component";
@@ -10,23 +10,28 @@ import { ScreenshotButtonComponent } from "../screenshot-button/screenshot-butto
 	templateUrl: './record-button.component.html',
 	styleUrl: './record-button.component.css',
 })
-export class RecordButtonComponent  implements OnInit{
-	framerate_value: number = 60;
-	resolution_value: number = 1080;
-	videoRecorder = new VideoRecorder();
+export class RecordButtonComponent implements AfterViewInit{
+	framerate_value: number
+	resolution_value: number
+	videoRecorder : VideoRecorder
+	@ViewChild('record_button') record_button!: ElementRef;
 
-	ngOnInit(): void {
-		const record_button = document.getElementById('record-button');
+	constructor(){
+		this.framerate_value = 60
+		this.resolution_value= 1080
+		this.videoRecorder = new VideoRecorder()
+	}
 
-		if (record_button) {
-			record_button.addEventListener('click', (event) => {
+	ngAfterViewInit(): void {	
+		if (this.record_button.nativeElement) {
+			this.record_button.nativeElement.addEventListener('click', (event:Event) => {
 				if (this.videoRecorder.isRecording()) {
 					this.videoRecorder.stop();
 				} else {
 					this.videoRecorder.start(
 						this.framerate_value,
 						this.resolution_value,
-						record_button
+						this.record_button.nativeElement
 					);
 				}
 			});
