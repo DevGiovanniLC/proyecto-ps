@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { VideoRecorder } from './VideoRecorder';
 import { ScreenshotButtonComponent } from "../screenshot-button/screenshot-button.component";
@@ -10,12 +10,12 @@ import { ScreenshotButtonComponent } from "../screenshot-button/screenshot-butto
 	templateUrl: './record-button.component.html',
 	styleUrl: './record-button.component.css',
 })
-export class RecordButtonComponent {
+export class RecordButtonComponent  implements OnInit{
 	framerate_value: number = 60;
 	resolution_value: number = 1080;
 	videoRecorder = new VideoRecorder();
 
-	ngAfterViewInit(): void {
+	ngOnInit(): void {
 		const record_button = document.getElementById('record-button');
 
 		if (record_button) {

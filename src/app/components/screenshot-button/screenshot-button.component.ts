@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { VideoRecorder } from '../record-button/VideoRecorder';
 import { ScreenshotTaker } from './ScreenshotTaker';
@@ -10,10 +10,10 @@ import { ScreenshotTaker } from './ScreenshotTaker';
 	templateUrl: './screenshot-button.component.html',
 	styleUrl: './screenshot-button.component.css',
 })
-export class ScreenshotButtonComponent {
+export class ScreenshotButtonComponent implements OnInit {
 	screenshotTaker = new ScreenshotTaker();
 
-	ngAfterViewInit(): void {
+	ngOnInit(): void {
 		const record_button = document.getElementById('screenshot-button');
 
 		if (record_button) {
