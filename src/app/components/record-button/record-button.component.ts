@@ -10,7 +10,7 @@ import { ScreenshotButtonComponent } from '../screenshot-button/screenshot-butto
 	templateUrl: './record-button.component.html',
 	styleUrl: './record-button.component.css',
 })
-export class RecordButtonComponent implements AfterViewInit {
+export class RecordButtonComponent {
 	framerate_value: number;
 	resolution_value: number;
 	videoRecorder: VideoRecorder;
@@ -22,21 +22,14 @@ export class RecordButtonComponent implements AfterViewInit {
 		this.videoRecorder = new VideoRecorder();
 	}
 
-	ngAfterViewInit(): void {
-		if (this.record_button.nativeElement) {
-			this.record_button.nativeElement.addEventListener(
-				'click',
-				(event: Event) => {
-					if (this.videoRecorder.isRecording()) {
-						this.videoRecorder.stop();
-					} else {
-						this.videoRecorder.start(
-							this.framerate_value,
-							this.resolution_value,
-							this.record_button.nativeElement
-						);
-					}
-				}
+	recordEvent(): void {
+		if (this.videoRecorder.isRecording()) {
+			this.videoRecorder.stop();
+		} else {
+			this.videoRecorder.start(
+				this.framerate_value,
+				this.resolution_value,
+				this.record_button.nativeElement
 			);
 		}
 	}
