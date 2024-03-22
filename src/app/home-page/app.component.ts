@@ -8,6 +8,7 @@ import {
 import { RecordButtonComponent } from '../components/record-button/record-button.component';
 import { HeaderComponent } from '../components/header/header.component';
 import { WhoweareComponent } from '../whoweare-page/whoweare.component';
+import { OptionsComponent } from '../options/options.component';
 
 @Component({
 	selector: 'app-root',
@@ -18,6 +19,7 @@ import { WhoweareComponent } from '../whoweare-page/whoweare.component';
 		RecordButtonComponent,
 		HeaderComponent,
 		WhoweareComponent,
+		OptionsComponent
 	],
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css'],
