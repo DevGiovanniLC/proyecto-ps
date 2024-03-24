@@ -9,15 +9,13 @@ button {
 	font-family: "Jomhuria", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-
-
 .header {
 	display: flex; /* Centra verticalmente los elementos */
 	justify-content: space-between;
 	flex-direction: row;
 }
 
-.users-buttons{
+.users-buttons {
 	display: flex;
 	flex-direction: row;
 	column-gap: 1em;
@@ -25,21 +23,19 @@ button {
 }
 
 a {
-    display: inline-block;
-    padding: 8px 16px; /* Ajusta el padding según sea necesario */
-    border: 1px solid #ccc; /* Borde del enlace */
-    border-radius: 4px; /* Bordes redondeados */
-    text-decoration: none; /* Eliminar subrayado */
-    color: white; /* Color del texto */
-    background-color: black; /* Color de fondo */
-    cursor: pointer; /* Cursor al pasar por encima */
-    transition: background-color 0.3s, color 0.3s; /* Transición suave al cambiar colores */
-  }
+	display: inline-block;
+	padding: 8px 16px; /* Ajusta el padding según sea necesario */
+	border: 1px solid #ccc; /* Borde del enlace */
+	border-radius: 0.3em; /* Bordes redondeados */
+	text-decoration: none; /* Eliminar subrayado */
+	color: white; /* Color del texto */
+	background-color: black; /* Color de fondo */
+	cursor: pointer; /* Cursor al pasar por encima */
+	transition: background-color 0.3s, color 0.3s; /* Transición suave al cambiar colores */
+}
 
-  
-  /* Estilos al pasar el ratón por encima */
-  a:hover {
-    background-color: #e0e0e0; /* Color de fondo al pasar el ratón */
-    color: #000; /* Color del texto al pasar el ratón */
-  }
-
+/* Estilos al pasar el ratón por encima */
+a:hover {
+	background-color: #e0e0e0; /* Color de fondo al pasar el ratón */
+	color: #000; /* Color del texto al pasar el ratón */
+}
