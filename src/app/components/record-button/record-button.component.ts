@@ -20,12 +20,14 @@ export class RecordButtonComponent implements Observer {
 	constructor() {
 		this.framerate_value = 60;
 		this.resolution_value = 1080;
+
 		this.videoRecorder = new VideoRecorder(
 			this.framerate_value,
 			this.resolution_value
 		);
 
 		this.videoRecorder.addObserver(this);
+
 	}
 
 	async recordEvent(): Promise<void> {

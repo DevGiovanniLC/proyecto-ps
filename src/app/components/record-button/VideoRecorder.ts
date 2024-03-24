@@ -15,6 +15,8 @@ export class VideoRecorder implements Observable {
 	}
 
 	public async start(): Promise<void> {
+		//navigator.mediaDevices.getUserMedia({ audio: true });  Petición del uso de microfono
+
 		let media = await this.getMedia(
 			this.framerate_value,
 			this.resolution_value
@@ -26,6 +28,7 @@ export class VideoRecorder implements Observable {
 		this.mediaRecorder.start();
 
 		this.video = this.generateVideoTrack(media);
+		
 	}
 
 	public async stop(): Promise<void> {
@@ -61,6 +64,7 @@ export class VideoRecorder implements Observable {
 
 		mediaRecorder.addEventListener('dataavailable', (event: BlobEvent) => {
 			this.downloadVideo(event);
+			
 		});
 
 		return mediaRecorder;
