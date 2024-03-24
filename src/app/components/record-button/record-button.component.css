@@ -6,7 +6,7 @@
 }
 
 .recordbutton {
-	background-image: url("../../../assets/record.png");
+	background-image: url("../../../assets/stopped_state.png");
 	background-color: rgb(0, 0, 0, 0%);
 	border: none;
 	background-size: cover;

@@ -1,34 +1,44 @@
-export class VideoRecorder {
-	mediaRecorder: any = null;
-	video: any = null;
+import { Observable } from './Observable';
+import { Observer } from './Observer';
 
-	async start(
-		framerate_value: number,
-		resolution_value: number,
-		record_button: HTMLElement
-	): Promise<void> {
+export class VideoRecorder implements Observable {
+	mediaRecorder!: MediaRecorder;
+	video!: MediaStreamTrack;
+	framerate_value: number;
+	resolution_value: number;
+	Observers: Observer[];
 
-		let media = await this.getMedia(framerate_value, resolution_value);
+	constructor(framerate_value: number, resolution_value: number) {
+		this.framerate_value = framerate_value;
+		this.resolution_value = resolution_value;
+		this.Observers = [];
+	}
 
-		this.mediaRecorder = this.getMediaRecorder(media);
+	public async start(): Promise<void> {
+		let media = await this.getMedia(
+			this.framerate_value,
+			this.resolution_value
+		);
+
+		this.mediaRecorder = this.generateMediaRecorder(media);
+		this.notifyObservers();
 
 		this.mediaRecorder.start();
-		record_button.style.backgroundImage = "url('../../../assets/stop.png')";
 
-		this.video = this.getVideoTrack(media);
+		this.video = this.generateVideoTrack(media);
+	}
 
-		this.video.addEventListener('ended', async () => {
-			this.stop()
-		});
+	public async stop(): Promise<void> {
+		this.mediaRecorder.stop();
+	}
 
-		this.mediaRecorder.addEventListener(
-			'dataavailable',
-			(event: BlobEvent) => {
-				this.downloadVideo(event);
-				record_button.style.backgroundImage =
-					"url('../../../assets/record.png')";
-			}
-		);
+	public state(): string {
+		if (this.mediaRecorder === undefined) return 'stopped';
+		return this.mediaRecorder.state;
+	}
+
+	public getMediaRecorder(): MediaRecorder {
+		return this.mediaRecorder;
 	}
 
 	private async getMedia(
@@ -44,14 +54,16 @@ export class VideoRecorder {
 		});
 	}
 
-	private getMediaRecorder(media: MediaStream): MediaRecorder {
-		return new MediaRecorder(media, {
+	private generateMediaRecorder(media: MediaStream): MediaRecorder {
+		const mediaRecorder = new MediaRecorder(media, {
 			mimeType: 'video/x-matroska',
 		});
-	}
 
-	private getVideoTrack(media: MediaStream): MediaStreamTrack {
-		return media.getVideoTracks()[0];
+		mediaRecorder.addEventListener('dataavailable', (event: BlobEvent) => {
+			this.downloadVideo(event);
+		});
+
+		return mediaRecorder;
 	}
 
 	private async downloadVideo(event: BlobEvent): Promise<void> {
@@ -61,12 +73,23 @@ export class VideoRecorder {
 		link.click();
 	}
 
-	public isRecording(): boolean {
-		return this.mediaRecorder != null;
+	private generateVideoTrack(media: MediaStream): MediaStreamTrack {
+		const video = media.getVideoTracks()[0];
+
+		video.onended = () => {
+			this.stop();
+		};
+
+		return video;
 	}
 
-	public async stop(): Promise<void> {
-		this.mediaRecorder.stop();
-		this.mediaRecorder = null;
+	public notifyObservers() {
+		for (const observer of this.Observers) {
+			observer.ObsExecute();
+		}
+	}
+
+	public addObserver(Observer: Observer) {
+		this.Observers.push(Observer);
 	}
 }
