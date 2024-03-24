@@ -13,7 +13,7 @@ export class VideoRecorder {
 		this.mediaRecorder = this.getMediaRecorder(media);
 
 		this.mediaRecorder.start();
-		record_button.style.backgroundImage = "url('../../assets/stop.png')";
+		record_button.style.backgroundImage = "url('../../../assets/stop.png')";
 
 		this.video = this.getVideoTrack(media);
 
@@ -26,7 +26,7 @@ export class VideoRecorder {
 			(event: BlobEvent) => {
 				this.downloadVideo(event);
 				record_button.style.backgroundImage =
-					"url('../../assets/record.png')";
+					"url('../../../assets/record.png')";
 			}
 		);
 	}
