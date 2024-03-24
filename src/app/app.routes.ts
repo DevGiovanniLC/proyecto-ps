@@ -1,12 +1,7 @@
 import { Routes } from '@angular/router';
 
-
-import { WhoweareComponent } from "./whoweare-page/whoweare.component";
-import { AppComponent } from './home-page/app.component';
-
+import { WhoweareComponent } from './whoweare-page/whoweare.component';
 
 export const routes: Routes = [
-
-    {path: "whoweare" , component: WhoweareComponent},
-    
+	{ path: 'whoweare', component: WhoweareComponent },
 ];

@@ -10,10 +10,10 @@ import { ScreenshotTaker } from './ScreenshotTaker';
 	styleUrl: './screenshot-button.component.css',
 })
 export class ScreenshotButtonComponent {
-	screenshotTaker: ScreenshotTaker
+	screenshotTaker: ScreenshotTaker;
 
-	constructor(){
-		this.screenshotTaker = new ScreenshotTaker()
+	constructor() {
+		this.screenshotTaker = new ScreenshotTaker();
 	}
 
 	screenshotEvent(): void {

@@ -1,3 +1,3 @@
 export interface Observer {
-    ObsExecute(): void
+	ObsExecute(): void;
 }
