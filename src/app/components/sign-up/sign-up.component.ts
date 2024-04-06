@@ -7,7 +7,8 @@ import { RouterLink } from "@angular/router";
   selector: 'app-sign-up',
   standalone: true,
   imports: [
-    RouterLink
+    RouterLink,
+
   ],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css'

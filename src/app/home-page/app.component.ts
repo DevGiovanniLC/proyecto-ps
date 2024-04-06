@@ -18,6 +18,7 @@ import { WhoweareComponent } from '../whoweare-page/whoweare.component';
 		RecordButtonComponent,
 		HeaderComponent,
 		WhoweareComponent,
+
 	],
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css'],

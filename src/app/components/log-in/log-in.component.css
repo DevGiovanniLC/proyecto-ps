@@ -1,0 +1,12 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container{
+
+  background-color: gray;
+  width: 400px;
+  margin-left: 515px;
+  margin-top: 70px;
+}
