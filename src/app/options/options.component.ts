@@ -22,9 +22,15 @@ export class OptionsComponent {
   }
 
   updateValues() {
+    console.log('Valor de framerateValue:', this.framerate_value);
     this.dataService.framerateValue = this.framerate_value;
+    console.log('Valor actualizado en el servicio:', this.dataService.framerateValue);
+    console.log('Valor de framerateValue:', this.resolution_value);
     this.dataService.resolutionValue = this.resolution_value;
+    console.log('Valor actualizado en el servicio:', this.dataService.resolutionValue);
+    console.log('Valor de framerateValue:', this.delay_value);
     this.dataService.delayValue = this.delay_value;
+    console.log('Valor actualizado en el servicio:', this.dataService.delayValue);
   }
 
 }

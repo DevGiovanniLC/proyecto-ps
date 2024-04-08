@@ -5,6 +5,7 @@ import { ScreenshotButtonComponent } from '../screenshot-button/screenshot-butto
 import { Observer } from './Observer';
 import { DataService } from '../../data.service';
 import { OptionsComponent } from '../../options/options.component';
+
 @Component({
 	selector: 'app-record-button',
 	standalone: true,

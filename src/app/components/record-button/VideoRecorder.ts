@@ -18,7 +18,10 @@ export class VideoRecorder implements Observable {
 
 	public async start(): Promise<void> {
 		//navigator.mediaDevices.getUserMedia({ audio: true });  Petición del uso de microfono
-
+		
+		console.log('Valor de framerateValue:', this.framerate_value);
+    	console.log('Valor de resolutionValue:', this.resolution_value);
+    	console.log('Valor de delayValue:', this.delay_value);
 		let media = await this.getMedia(
 			this.framerate_value,
 			this.resolution_value
@@ -27,9 +30,9 @@ export class VideoRecorder implements Observable {
 		this.mediaRecorder = this.generateMediaRecorder(media);
 		this.notifyObservers();
 
-		await this.delay(delay_value * 1000); // Esperar el tiempo de retraso
+		await this.delay(this.delay_value * 1000); // Esperar el tiempo de retraso
     
-    	console.log('El retraso ha terminado después de ' + delay_value + ' segundos');
+    	console.log('El retraso ha terminado después de ' + this.delay_value + ' segundos');
 
 		this.mediaRecorder.start();
 
