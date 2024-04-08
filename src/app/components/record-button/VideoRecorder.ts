@@ -6,11 +6,13 @@ export class VideoRecorder implements Observable {
 	video!: MediaStreamTrack;
 	framerate_value: number;
 	resolution_value: number;
+	delay_value: number;
 	Observers: Observer[];
 
-	constructor(framerate_value: number, resolution_value: number) {
+	constructor(framerate_value: number, resolution_value: number, delay_value: number) {
 		this.framerate_value = framerate_value;
 		this.resolution_value = resolution_value;
+		this.delay_value = delay_value;
 		this.Observers = [];
 	}
 
@@ -24,6 +26,10 @@ export class VideoRecorder implements Observable {
 
 		this.mediaRecorder = this.generateMediaRecorder(media);
 		this.notifyObservers();
+
+		await this.delay(delay_value * 1000); // Esperar el tiempo de retraso
+    
+    	console.log('El retraso ha terminado después de ' + delay_value + ' segundos');
 
 		this.mediaRecorder.start();
 
@@ -42,6 +48,10 @@ export class VideoRecorder implements Observable {
 
 	public getMediaRecorder(): MediaRecorder {
 		return this.mediaRecorder;
+	}
+
+	private delay(ms: number): Promise<void> {
+		return new Promise(resolve => setTimeout(resolve, ms));
 	}
 
 	private async getMedia(

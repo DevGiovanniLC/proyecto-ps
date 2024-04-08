@@ -3,27 +3,25 @@ import { FormsModule } from '@angular/forms';
 import { VideoRecorder } from './VideoRecorder';
 import { ScreenshotButtonComponent } from '../screenshot-button/screenshot-button.component';
 import { Observer } from './Observer';
-
+import { DataService } from '../../data.service';
+import { OptionsComponent } from '../../options/options.component';
 @Component({
 	selector: 'app-record-button',
 	standalone: true,
-	imports: [FormsModule, ScreenshotButtonComponent],
+	imports: [FormsModule, ScreenshotButtonComponent, OptionsComponent],
 	templateUrl: './record-button.component.html',
 	styleUrl: './record-button.component.css',
 })
 export class RecordButtonComponent implements Observer {
-	framerate_value: number;
-	resolution_value: number;
 	videoRecorder: VideoRecorder;
 	@ViewChild('record_button') record_button!: ElementRef;
 
-	constructor() {
-		this.framerate_value = 60;
-		this.resolution_value = 1080;
+	constructor(private dataService: DataService) {
 
 		this.videoRecorder = new VideoRecorder(
-			this.framerate_value,
-			this.resolution_value
+			this.dataService.framerateValue,
+			this.dataService.resolutionValue,
+			this.dataService.delayValue,
 		);
 
 		this.videoRecorder.addObserver(this);
