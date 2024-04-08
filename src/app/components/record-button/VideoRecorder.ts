@@ -1,3 +1,5 @@
+import { delay } from "rxjs";
+
 export class VideoRecorder {
 	mediaRecorder: any = null;
 	video: any = null;
@@ -5,14 +7,21 @@ export class VideoRecorder {
 	async start(
 		framerate_value: number,
 		resolution_value: number,
+		delay_value: number,
+		
 		record_button: HTMLElement
 	): Promise<void> {
 
-		let media = await this.getMedia(framerate_value, resolution_value);
+    	let media = await this.getMedia(framerate_value, resolution_value);
 
 		this.mediaRecorder = this.getMediaRecorder(media);
 
+		await this.delay(delay_value * 1000); // Esperar el tiempo de retraso
+    
+    	console.log('El retraso ha terminado después de ' + delay_value + ' segundos');
+
 		this.mediaRecorder.start();
+
 		record_button.style.backgroundImage = "url('../../assets/stop.png')";
 
 		this.video = this.getVideoTrack(media);
@@ -29,6 +38,10 @@ export class VideoRecorder {
 					"url('../../assets/record.png')";
 			}
 		);
+	}
+
+	private delay(ms: number): Promise<void> {
+		return new Promise(resolve => setTimeout(resolve, ms));
 	}
 
 	private async getMedia(

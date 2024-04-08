@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { VideoRecorder } from '../components/record-button/VideoRecorder';
 import { ScreenshotButtonComponent } from '../components/screenshot-button/screenshot-button.component';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-options',
@@ -11,9 +11,20 @@ import { ScreenshotButtonComponent } from '../components/screenshot-button/scree
   styleUrl: './options.component.css'
 })
 export class OptionsComponent {
-  framerate_value: number = 60;
-	resolution_value: number = 1080;
-  delay_value: number = 2;
+  framerate_value: number;
+	resolution_value: number;
+  delay_value: number;
 
-	constructor() { }
+	constructor(private dataService: DataService) {
+    this.framerate_value = this.dataService.framerateValue;
+    this.resolution_value = this.dataService.resolutionValue;
+    this.delay_value = this.dataService.delayValue;
+  }
+
+  updateValues() {
+    this.dataService.framerateValue = this.framerate_value;
+    this.dataService.resolutionValue = this.resolution_value;
+    this.dataService.delayValue = this.delay_value;
+  }
+
 }
