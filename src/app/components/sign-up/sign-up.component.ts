@@ -4,7 +4,7 @@ import { AuthService } from "./auth.service";
 import { CommonModule } from "@angular/common";
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
 import { User } from "./user.model";
-
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -21,7 +21,8 @@ export  class SignUpComponent {
 
   firebaseService = inject(AuthService);
 
-
+  constructor(private router:Router) {
+  }
 
   form = new FormGroup({
     email: new FormControl("",[Validators.required,Validators.email]),
@@ -97,6 +98,7 @@ export  class SignUpComponent {
         if (this.form.valid) {
           try {
             await this.firebaseService.signup(this.form.value as User);
+            this.router.navigate(["/login"])
             console.log("Éxito");
           } catch (error) {
             const x = error.code

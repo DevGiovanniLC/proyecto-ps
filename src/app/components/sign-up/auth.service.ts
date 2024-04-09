@@ -1,7 +1,7 @@
 import {Injectable,inject} from "@angular/core";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {getAuth,createUserWithEmailAndPassword} from "@angular/fire/auth";
+import {getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword} from "@angular/fire/auth";
 import {User} from "./user.model";
 import { Router } from "@angular/router";
 
@@ -26,7 +26,11 @@ export class AuthService{
     return createUserWithEmailAndPassword(getAuth(),user.email,user.password);
 
 
+  }
 
+  login(user:User){
+    console.log("chao");
+    return  signInWithEmailAndPassword(getAuth(),user.email,user.password);
   }
 
 }

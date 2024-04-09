@@ -21,7 +21,7 @@ const firebaseConfig = {
 initializeApp(firebaseConfig)
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes, withHashLocation()),
+  providers: [provideRouter(routes),
   importProvidersFrom(
     HttpClientModule,
     AngularFireModule.initializeApp(firebaseConfig),

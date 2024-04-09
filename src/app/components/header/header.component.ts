@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from "@angular/router";
 
+
 @Component({
 	selector: 'header',
 	standalone: true,
@@ -8,4 +9,7 @@ import { RouterLink } from "@angular/router";
 	templateUrl: './header.component.html',
 	styleUrl: './header.component.css',
 })
-export class HeaderComponent {}
+export class HeaderComponent {}{
+
+
+}
