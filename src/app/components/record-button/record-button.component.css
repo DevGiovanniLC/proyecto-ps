@@ -32,6 +32,7 @@
 	height: 4em;
 	cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
 	transition: 1s transform;
+	
 }
 
 .recordButton:hover {

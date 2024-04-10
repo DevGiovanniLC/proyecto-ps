@@ -1,12 +1,13 @@
 import { NextObserver, Subscribable, Unsubscribable } from 'rxjs';
-import { CombineMediaStreams } from './CombineMediaStreams';
+import { MediaCombiner } from './MediaCombiner';
 
 export class VideoRecorder implements Subscribable<any>, Unsubscribable {
-	mediaRecorder!: MediaRecorder;
-	framerate_value: number;
-	resolution_value: number;
-	delay_value: number;
-	observers: NextObserver<any>[];
+	private mediaRecorder!: MediaRecorder;
+	private framerate_value: number;
+	private resolution_value: number;
+	private delay_value: number;
+	private observers: NextObserver<any>[];
+	private micro: boolean;
 
 	constructor(
 		framerate_value: number,
@@ -17,22 +18,29 @@ export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 		this.resolution_value = resolution_value;
 		this.delay_value = delay_value;
 		this.observers = [];
+		this.micro = true;
 	}
 
 	public async start(): Promise<void> {
-		const audioStream = await navigator.mediaDevices.getUserMedia({
-			audio: true,
-		});
+		let media: MediaStream;
 
-		const videoStream = await this.getMedia(
-			this.framerate_value,
-			this.resolution_value
-		);
+		if (this.micro) {
+			const audioStream = await navigator.mediaDevices.getUserMedia({
+				audio: true,
+			});
 
-		const media = new CombineMediaStreams([
-			audioStream,
-			videoStream,
-		]).combine();
+			const videoStream = await this.getMedia(
+				this.framerate_value,
+				this.resolution_value
+			);
+
+			media = new MediaCombiner([audioStream, videoStream]).combine();
+		} else {
+			media = await this.getMedia(
+				this.framerate_value,
+				this.resolution_value
+			);
+		}
 
 		this.mediaRecorder = this.generateMediaRecorder(media);
 		this.notify(this.mediaRecorder);
@@ -42,15 +50,6 @@ export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 		this.mediaRecorder.start();
 
 		this.generateTracks(media);
-	}
-
-	public async stop(): Promise<void> {
-		this.mediaRecorder.stop();
-	}
-
-	public state(): string {
-		if (this.mediaRecorder === undefined) return 'stopped';
-		return this.mediaRecorder.state;
 	}
 
 	private async delay(ms: number): Promise<void> {
@@ -104,6 +103,20 @@ export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 
 		return video;
 	}
+
+	async stop(): Promise<void> {
+		this.mediaRecorder.stop();
+	}
+
+	state(): string {
+		if (this.mediaRecorder === undefined) return 'stopped';
+		return this.mediaRecorder.state;
+	}
+
+	microphone(state: boolean) {
+		this.micro = state;
+	}
+
 	subscribe(observer: NextObserver<any>): Unsubscribable {
 		this.observers.push(observer);
 		return this;

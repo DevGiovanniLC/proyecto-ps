@@ -14,8 +14,10 @@ import { NextObserver } from 'rxjs';
 	styleUrl: './record-button.component.css',
 })
 export class RecordButtonComponent implements NextObserver<any> {
-	videoRecorder: VideoRecorder;
 	@ViewChild('record_button') record_button!: ElementRef;
+	@ViewChild('micro_button') micro_button!: ElementRef;
+	videoRecorder: VideoRecorder;
+	microState: boolean;
 
 	constructor(private dataService: DataService) {
 		this.videoRecorder = new VideoRecorder(
@@ -24,6 +26,7 @@ export class RecordButtonComponent implements NextObserver<any> {
 			this.dataService.delayValue
 		);
 
+		this.microState = true;
 		this.videoRecorder.subscribe(this);
 	}
 
@@ -31,21 +34,35 @@ export class RecordButtonComponent implements NextObserver<any> {
 		if (this.videoRecorder.state() == 'recording') {
 			this.videoRecorder.stop();
 		} else {
+			this.videoRecorder.microphone(this.microState);
 			await this.videoRecorder.start();
 		}
 	}
-
+	
 	next(mediaRecorder: MediaRecorder): void {
 		if (mediaRecorder == null) return;
-
+		
 		mediaRecorder.addEventListener('start', () => {
 			this.record_button.nativeElement.style.backgroundImage =
-				"url('../../../assets/recording_state.png')";
+			"url('../../../assets/recording_state.png')";
+			this.micro_button.nativeElement.disabled = true
 		});
-
+		
 		mediaRecorder.addEventListener('dataavailable', () => {
 			this.record_button.nativeElement.style.backgroundImage =
-				"url('../../../assets/stopped_state.png')";
+			"url('../../../assets/stopped_state.png')";
+			this.micro_button.nativeElement.disabled = false
 		});
+	}
+
+	toggleMicrophone() {
+		this.microState = !this.microState;
+		if (this.microState) {
+			this.micro_button.nativeElement.style.backgroundImage =
+				"url('../../../assets/micro_enable.png')";
+		}else{
+			this.micro_button.nativeElement.style.backgroundImage =
+			"url('../../../assets/micro_disable.png')";
+		}
 	}
 }

@@ -1,4 +1,4 @@
-export class CombineMediaStreams {
+export class MediaCombiner {
 	streamsList: MediaStream[];
 
 	constructor(streamsList: MediaStream[]) {
