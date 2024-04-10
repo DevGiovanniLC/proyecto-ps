@@ -1,8 +1,8 @@
-.button-container {
+.record-container {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin-top: 9%;
+	margin-top: 8%;
 }
 
 .recordButton {
@@ -40,32 +40,4 @@
 	font-family: "Jomhuria", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-section {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-between;
-	margin: 5% 10%;
-}
-
-.configure-selector {
-	border: 1em solid #000000; /* Establece un borde sólido de 2px de ancho */
-	border-radius: 10px; /* Agrega esquinas redondeadas al botón */
-	background-color: #000000; /* Establece el color de fondo del botón */
-	color: white; /* Establece el color del texto del botón */
-	cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-	width: 6em;
-
-	p {
-		font-family: "Jomhuria", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-		text-align: center; /* Alinea el texto al centro */
-		font-size: 1.2em; /* Establece el tamaño de la fuente del texto del botón */
-	}
-
-	select {
-		padding-left: 1em;
-		width: 100%;
-		text-align: center;
-	}
-}
 

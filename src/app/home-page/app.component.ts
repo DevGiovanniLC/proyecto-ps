@@ -8,19 +8,21 @@ import {
 import { RecordButtonComponent } from '../components/record-button/record-button.component';
 import { HeaderComponent } from '../components/header/header.component';
 import { OptionsComponent } from '../components/options/options.component';
+import { ScreenshotButtonComponent } from "../components/screenshot-button/screenshot-button.component";
 
 @Component({
-	selector: 'app-root',
-	standalone: true,
-	imports: [
-		RouterOutlet,
-		RouterLink,
-		RecordButtonComponent,
-		HeaderComponent,
-		OptionsComponent
-	],
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css'],
+    selector: 'app-root',
+    standalone: true,
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    imports: [
+        RouterOutlet,
+        RouterLink,
+        RecordButtonComponent,
+        HeaderComponent,
+        OptionsComponent,
+        ScreenshotButtonComponent
+    ]
 })
 export class AppComponent {
 	showLandingPage: boolean = true;
