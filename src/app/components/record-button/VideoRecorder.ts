@@ -1,12 +1,11 @@
-import { Observable } from './Observable';
-import { Observer } from './Observer';
+import { NextObserver, Subscribable, Unsubscribable } from 'rxjs';
 
-export class VideoRecorder implements Observable {
+export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 	mediaRecorder!: MediaRecorder;
 	framerate_value: number;
 	resolution_value: number;
 	delay_value: number;
-	Observers: Observer[];
+	observers: NextObserver<any>[];
 
 	constructor(
 		framerate_value: number,
@@ -16,7 +15,7 @@ export class VideoRecorder implements Observable {
 		this.framerate_value = framerate_value;
 		this.resolution_value = resolution_value;
 		this.delay_value = delay_value;
-		this.Observers = [];
+		this.observers = [];
 	}
 
 	public async start(): Promise<void> {
@@ -32,7 +31,7 @@ export class VideoRecorder implements Observable {
 		const media = this.combineVideoAndAudio(audioStream, videoStream);
 
 		this.mediaRecorder = this.generateMediaRecorder(media);
-		this.notifyObservers();
+		this.notify(this.mediaRecorder);
 
 		await this.delay(this.delay_value * 1000); // Esperar el tiempo de retraso
 
@@ -54,10 +53,6 @@ export class VideoRecorder implements Observable {
 	public state(): string {
 		if (this.mediaRecorder === undefined) return 'stopped';
 		return this.mediaRecorder.state;
-	}
-
-	public getMediaRecorder(): MediaRecorder {
-		return this.mediaRecorder;
 	}
 
 	private delay(ms: number): Promise<void> {
@@ -119,13 +114,17 @@ export class VideoRecorder implements Observable {
 		return combinedStream;
 	}
 
-	public notifyObservers() {
-		for (const observer of this.Observers) {
-			observer.ObsExecute();
+	private notify(data: any) {
+		for (const observer of this.observers) {
+			observer.next(data);
 		}
 	}
 
-	public addObserver(Observer: Observer) {
-		this.Observers.push(Observer);
+	unsubscribe(): void {
+		console.log('observer unsusbribed');
+	}
+	subscribe(observer: NextObserver<any>): Unsubscribable {
+		this.observers.push(observer);
+		return this;
 	}
 }
