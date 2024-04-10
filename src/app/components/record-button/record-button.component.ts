@@ -2,9 +2,9 @@ import { Component, ElementRef, inject, ViewChild } from "@angular/core";
 import { FormsModule } from '@angular/forms';
 import { VideoRecorder } from './VideoRecorder';
 import { ScreenshotButtonComponent } from '../screenshot-button/screenshot-button.component';
-import { Observer } from './Observer';
 import { DataService } from '../../data.service';
-import { OptionsComponent } from '../../options/options.component';
+import { OptionsComponent } from '../options/options.component';
+import { NextObserver } from 'rxjs';
 
 
 
@@ -15,49 +15,56 @@ import { OptionsComponent } from '../../options/options.component';
 	templateUrl: './record-button.component.html',
 	styleUrl: './record-button.component.css',
 })
-export class RecordButtonComponent implements Observer {
-	videoRecorder: VideoRecorder;
+export class RecordButtonComponent implements NextObserver<any> {
 	@ViewChild('record_button') record_button!: ElementRef;
+	@ViewChild('micro_button') micro_button!: ElementRef;
+	videoRecorder: VideoRecorder;
+	microState: boolean;
 
 	constructor(private dataService: DataService) {
-
 		this.videoRecorder = new VideoRecorder(
 			this.dataService.framerateValue,
 			this.dataService.resolutionValue,
-			this.dataService.delayValue,
+			this.dataService.delayValue
 		);
 
-		this.videoRecorder.addObserver(this);
-
+		this.microState = true;
+		this.videoRecorder.subscribe(this);
 	}
 
 	async recordEvent(): Promise<void> {
 		if (this.videoRecorder.state() == 'recording') {
 			this.videoRecorder.stop();
 		} else {
+			this.videoRecorder.microphone(this.microState);
 			await this.videoRecorder.start();
 		}
 	}
-
-	public ObsExecute(): void {
-		const mediaRecorder = this.videoRecorder.getMediaRecorder();
-
+	
+	next(mediaRecorder: MediaRecorder): void {
+		if (mediaRecorder == null) return;
+		
 		mediaRecorder.addEventListener('start', () => {
-			this.setRecordingButtonState(true);
+			this.record_button.nativeElement.style.backgroundImage =
+			"url('../../../assets/recording_state.png')";
+			this.micro_button.nativeElement.disabled = true
 		});
-
+		
 		mediaRecorder.addEventListener('dataavailable', () => {
-			this.setRecordingButtonState(false);
+			this.record_button.nativeElement.style.backgroundImage =
+			"url('../../../assets/stopped_state.png')";
+			this.micro_button.nativeElement.disabled = false
 		});
 	}
 
-	private setRecordingButtonState(election: boolean) {
-		if (election) {
-			this.record_button.nativeElement.style.backgroundImage =
-				"url('../../../assets/recording_state.png')";
-		} else {
-			this.record_button.nativeElement.style.backgroundImage =
-				"url('../../../assets/stopped_state.png')";
+	toggleMicrophone() {
+		this.microState = !this.microState;
+		if (this.microState) {
+			this.micro_button.nativeElement.style.backgroundImage =
+				"url('../../../assets/micro_enable.png')";
+		}else{
+			this.micro_button.nativeElement.style.backgroundImage =
+			"url('../../../assets/micro_disable.png')";
 		}
 	}
 }

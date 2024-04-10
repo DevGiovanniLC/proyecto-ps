@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component} from '@angular/core';
 import {
 	RouterLink,
 	RouterOutlet,
@@ -7,29 +7,28 @@ import {
 } from '@angular/router';
 import { RecordButtonComponent } from '../components/record-button/record-button.component';
 import { HeaderComponent } from '../components/header/header.component';
-import { WhoweareComponent } from '../whoweare-page/whoweare.component';
-import { OptionsComponent } from '../options/options.component';
+import { OptionsComponent } from '../components/options/options.component';
+import { ScreenshotButtonComponent } from "../components/screenshot-button/screenshot-button.component";
 
 @Component({
-	selector: 'app-root',
-	standalone: true,
-	imports: [
-		RouterOutlet,
-		RouterLink,
-		RecordButtonComponent,
-		HeaderComponent,
-		WhoweareComponent,
-		OptionsComponent
-	],
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css'],
+    selector: 'app-root',
+    standalone: true,
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    imports: [
+        RouterOutlet,
+        RouterLink,
+        RecordButtonComponent,
+        HeaderComponent,
+        OptionsComponent,
+        ScreenshotButtonComponent
+    ]
 })
 export class AppComponent {
 	showLandingPage: boolean = true;
 	constructor(private router: Router) {
 		this.router.events.subscribe((event) => {
 			if (event instanceof NavigationEnd) {
-				// Si la ruta es diferente a la ruta de la landing page, ocultarla
 				this.showLandingPage = event.url !== '/';
 			}
 		});

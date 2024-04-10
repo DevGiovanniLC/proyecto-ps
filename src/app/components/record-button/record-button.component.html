@@ -1,9 +1,11 @@
-<div class="button-container">
-	<p class="info-feature">Record</p>
-	<button
-		#record_button
-		(click)="recordEvent()"
-		class="recordbutton"
-	></button>
-	<app-screenshot-button />
-</div>
+<section class="record-container">
+	<h2 class="info-feature">Record</h2>
+	<div class="control-buttons">
+		<button
+			#record_button
+			(click)="recordEvent()"
+			class="recordButton"
+		></button>
+		<button #micro_button (click)="toggleMicrophone()" class="microButton"></button>
+	</div>
+</section>
