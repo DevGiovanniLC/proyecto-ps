@@ -15,8 +15,9 @@ import { AuthService } from "../sign-up/auth.service";
 export class LogInComponent {
 
   firebaseService = inject(AuthService);
-
+  login1 = false;
   constructor(private router:Router) {
+
   }
 
   form = new FormGroup({
@@ -25,19 +26,34 @@ export class LogInComponent {
 
   })
 
+  errorPassword(){
+    const emailError = document.getElementById("passwordreg-error")
+    emailError.textContent = '';
+    emailError.style.display = 'none';
+
+    emailError.textContent = "Clave incorrecta.";
+    emailError.style.display = 'block';
+
+}
+
 
   async submit() {
 
           try {
             await this.firebaseService.login(this.form.value as User);
             this.router.navigate([""])
+            this.login1 = true;
             console.log("Éxito");
           } catch (error) {
             const x = error.code
-            // Aquí puedes manejar el error, por ejemplo, mostrando un mensaje de error al usuario
+            if(x  == 'auth/invalid-credential'){
+              this.errorPassword();
+              console.error("CLAVE INVALIDA");
+            }
           }
 
 
   }
+
 
 }
