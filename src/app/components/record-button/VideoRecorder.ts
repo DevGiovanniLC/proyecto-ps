@@ -1,4 +1,5 @@
 import { NextObserver, Subscribable, Unsubscribable } from 'rxjs';
+import { CombineMediaStreams } from './CombineMediaStreams';
 
 export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 	mediaRecorder!: MediaRecorder;
@@ -28,18 +29,15 @@ export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 			this.resolution_value
 		);
 
-		const media = this.combineVideoAndAudio(audioStream, videoStream);
+		const media = new CombineMediaStreams([
+			audioStream,
+			videoStream,
+		]).combine();
 
 		this.mediaRecorder = this.generateMediaRecorder(media);
 		this.notify(this.mediaRecorder);
 
-		await this.delay(this.delay_value * 1000); // Esperar el tiempo de retraso
-
-		console.log(
-			'El retraso ha terminado después de ' +
-				this.delay_value +
-				' segundos'
-		);
+		await this.delay(this.delay_value);
 
 		this.mediaRecorder.start();
 
@@ -55,8 +53,14 @@ export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 		return this.mediaRecorder.state;
 	}
 
-	private delay(ms: number): Promise<void> {
-		return new Promise((resolve) => setTimeout(resolve, ms));
+	private async delay(ms: number): Promise<void> {
+		new Promise((resolve) => setTimeout(resolve, ms * 1000)).then(() => {
+			console.log(
+				'El retraso ha terminado después de ' +
+					this.delay_value +
+					'segundos'
+			);
+		});
 	}
 
 	private async getMedia(
@@ -100,31 +104,18 @@ export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 
 		return video;
 	}
-
-	private combineVideoAndAudio(
-		audioStream: MediaStream,
-		videoStream: MediaStream
-	) {
-		const combinedStream = new MediaStream();
-		[videoStream, audioStream].forEach((stream) =>
-			stream
-				.getTracks()
-				.forEach((track) => combinedStream.addTrack(track))
-		);
-		return combinedStream;
+	subscribe(observer: NextObserver<any>): Unsubscribable {
+		this.observers.push(observer);
+		return this;
 	}
 
 	private notify(data: any) {
-		for (const observer of this.observers) {
+		this.observers.forEach((observer) => {
 			observer.next(data);
-		}
+		});
 	}
 
 	unsubscribe(): void {
 		console.log('observer unsusbribed');
-	}
-	subscribe(observer: NextObserver<any>): Unsubscribable {
-		this.observers.push(observer);
-		return this;
 	}
 }
