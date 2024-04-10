@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ScreenshotButtonComponent } from '../components/screenshot-button/screenshot-button.component';
-import { DataService } from '../data.service';
+import { ScreenshotButtonComponent } from '../screenshot-button/screenshot-button.component';
+import { DataService } from '../../data.service';
 
 @Component({
   selector: 'app-options',

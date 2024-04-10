@@ -4,7 +4,7 @@ import { VideoRecorder } from './VideoRecorder';
 import { ScreenshotButtonComponent } from '../screenshot-button/screenshot-button.component';
 import { Observer } from './Observer';
 import { DataService } from '../../data.service';
-import { OptionsComponent } from '../../options/options.component';
+import { OptionsComponent } from '../options/options.component';
 
 @Component({
 	selector: 'app-record-button',
