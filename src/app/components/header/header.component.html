@@ -3,7 +3,7 @@
 		<a href="/whoweare">Who Are We</a>
 		<div class="users-buttons">
 
-      @if(getlog()){
+      @if(storage()){
         <a (click)="getout()" routerLink="">Log out</a>
       } @else {
         <a routerLink="/login">Log in</a>

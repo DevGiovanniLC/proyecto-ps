@@ -14,20 +14,30 @@ import { AuthService } from "../sign-up/auth.service";
 	styleUrl: './header.component.css',
 })
 export class HeaderComponent {
-
+  isloogedIn:boolean
   firebaseService = inject(AuthService);
 
+  constructor() {
+
+
+  }
+
+  storage(){
+
+    const x = localStorage.getItem('isloogedIn') === 'true';
+    console.log(x)
+    return x
+
+  }
 
   getlog():boolean{
+    //localStorage.setItem('isloogedIn',"false")
     return this.firebaseService.getLogin()
   }
 
   getout(){
+    console.log("no puede ser")
     return this.firebaseService.signout()
-  }
-
-  boton(){
-    this.getout();
   }
 
 

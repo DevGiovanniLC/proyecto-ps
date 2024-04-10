@@ -71,11 +71,31 @@ export  class SignUpComponent {
   emailBadly():void{
 
     const emailError = document.getElementById("email-error")
+
     emailError.textContent = '';
     emailError.style.display = 'none';
 
     emailError.textContent = "Correo invalido.";
     emailError.style.display = 'block';
+
+
+  }
+
+  emailerrorr() {
+    const emailError = document.getElementById("email-error")
+
+    emailError.textContent = '';
+    emailError.style.display = 'none';
+    const x = document.getElementById("email") as HTMLInputElement
+
+
+    const pattern =  /^(([^<>()\[\]\.,;:\s@\”]+(\.[^<>()\[\]\.,;:\s@\”]+)*)|(\”.+\”))@(([^<>()[\]\.,;:\s@\”]+\.)+[^<>()[\]\.,;:\s@\”]{2,})$/;
+    const value = x.value;
+
+    if (!pattern.test(value)){
+      return false
+    }else
+      return true;
 
 
   }
@@ -90,33 +110,39 @@ export  class SignUpComponent {
 
   }
 
+  googlesignin(){
+
+    this.firebaseService.googlesignin();
+  }
 
 
   async submit() {
-    if(this.passwordlenght()) {
-      if (this.coincidenClaves()) {
-        if (this.form.valid) {
-          try {
-            await this.firebaseService.signup(this.form.value as User);
-            this.router.navigate(["/login"])
-            console.log("Éxito");
-          } catch (error) {
-            const x = error.code
-            if(x  == 'auth/invalid-email'){
-              console.error("Error al registrarse:", x + "ayudameeeee");
-              this.emailBadly();
-            }else if(x == 'auth/email-already-in-use'){
-              console.error("Error al registrarse:", x + "ayudameeeee");
-              this.emailUsed();
+    if(this.emailerrorr()) {
+      if (this.passwordlenght()) {
+        if (this.coincidenClaves()) {
+          if (this.form.valid) {
+            try {
+              await this.firebaseService.signup(this.form.value as User);
+              this.router.navigate(["/login"])
+              console.log("Éxito");
+            } catch (error) {
+              const x = error.code
+              if (x == 'auth/invalid-email') {
+                this.emailBadly();
+              } else if (x == 'auth/email-already-in-use') {
+
+                this.emailUsed();
+              }
+
+
+              // Aquí puedes manejar el error, por ejemplo, mostrando un mensaje de error al usuario
             }
-
-
-            // Aquí puedes manejar el error, por ejemplo, mostrando un mensaje de error al usuario
           }
         }
       }
+    }else{
+      this.emailBadly();
     }
-
   }
 
 }
