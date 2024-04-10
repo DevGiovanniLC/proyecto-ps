@@ -39,23 +39,21 @@ export class RecordButtonComponent implements Observer {
 
 	public ObsExecute(): void {
 		const mediaRecorder = this.videoRecorder.getMediaRecorder();
+		
+		if (mediaRecorder == null) return
 
 		mediaRecorder.addEventListener('start', () => {
-			this.setRecordingButtonState(true);
+			this.record_button.nativeElement.style.backgroundImage =
+			"url('../../../assets/recording_state.png')";
 		});
 
 		mediaRecorder.addEventListener('dataavailable', () => {
-			this.setRecordingButtonState(false);
+			this.record_button.nativeElement.style.backgroundImage =
+			"url('../../../assets/stopped_state.png')";
 		});
 	}
 
-	private setRecordingButtonState(election: boolean) {
-		if (election) {
-			this.record_button.nativeElement.style.backgroundImage =
-				"url('../../../assets/recording_state.png')";
-		} else {
-			this.record_button.nativeElement.style.backgroundImage =
-				"url('../../../assets/stopped_state.png')";
-		}
-	}
+
+
+
 }

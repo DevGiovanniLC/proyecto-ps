@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component} from '@angular/core';
 import {
 	RouterLink,
 	RouterOutlet,
@@ -7,8 +7,6 @@ import {
 } from '@angular/router';
 import { RecordButtonComponent } from '../components/record-button/record-button.component';
 import { HeaderComponent } from '../components/header/header.component';
-import { WhoweareComponent } from '../whoweare-page/whoweare.component';
-import { OptionsComponent } from '../options/options.component';
 
 @Component({
 	selector: 'app-root',
@@ -18,8 +16,6 @@ import { OptionsComponent } from '../options/options.component';
 		RouterLink,
 		RecordButtonComponent,
 		HeaderComponent,
-		WhoweareComponent,
-		OptionsComponent
 	],
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css'],
@@ -29,7 +25,6 @@ export class AppComponent {
 	constructor(private router: Router) {
 		this.router.events.subscribe((event) => {
 			if (event instanceof NavigationEnd) {
-				// Si la ruta es diferente a la ruta de la landing page, ocultarla
 				this.showLandingPage = event.url !== '/';
 			}
 		});
