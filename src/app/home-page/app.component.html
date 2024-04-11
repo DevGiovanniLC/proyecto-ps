@@ -2,9 +2,9 @@
   <body>
     <header></header>
     <main>
-      <app-record-button />
+      <app-record-button [framerate]="options.framerate" [resolution]="options.resolution" [delay]="options.delay" />
       <app-screenshot-button />
-      <app-options/>
+      <app-options #options/>
     </main>
   </body>
 }

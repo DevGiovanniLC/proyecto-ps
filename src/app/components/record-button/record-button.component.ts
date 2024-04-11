@@ -1,8 +1,7 @@
-import { Component, ElementRef, inject, ViewChild } from "@angular/core";
+import { Component, ElementRef, Input, ViewChild} from "@angular/core";
 import { FormsModule } from '@angular/forms';
 import { VideoRecorder } from './VideoRecorder';
 import { ScreenshotButtonComponent } from '../screenshot-button/screenshot-button.component';
-import { DataService } from '../../data.service';
 import { OptionsComponent } from '../options/options.component';
 import { NextObserver } from 'rxjs';
 
@@ -20,12 +19,16 @@ export class RecordButtonComponent implements NextObserver<any> {
 	@ViewChild('micro_button') micro_button!: ElementRef;
 	videoRecorder: VideoRecorder;
 	microState: boolean;
+	@Input() framerate: number;
+	@Input() resolution: number;
+	@Input() delay: number;
 
-	constructor(private dataService: DataService) {
+
+	constructor() {
 		this.videoRecorder = new VideoRecorder(
-			this.dataService.framerateValue,
-			this.dataService.resolutionValue,
-			this.dataService.delayValue
+			this.framerate,
+			this.resolution,
+			this.delay
 		);
 
 		this.microState = true;
