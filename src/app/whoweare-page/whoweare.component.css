@@ -40,14 +40,16 @@ h2 {
 	font-size: 1.8em;
 	color: white;
 	text-align: center;
+  font-family: Oswald;
 }
 
 p {
 	background-color: rgba(161, 161, 161, 1);
+  color: #fff;
 	margin: 1em 5%;
 	border-radius: 0.4em;
 	padding: 1.8em;
-	font-family: inter, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-	text-wrap: pretty;
+	font-family: Oswald;
+	text-wrap: wrap;
 	font-size: 1.6em;
 }

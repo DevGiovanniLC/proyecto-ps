@@ -1,9 +1,9 @@
 section {
 	display: flex;
 	flex-direction: row;
-	align-items: center;
+	align-items: flex-end;
 	justify-content: space-between;
-	margin: 5% 10%;
+	margin: 10% 10%;
 }
 
 .configure-selector {
@@ -15,9 +15,10 @@ section {
 	width: 6em;
 
 	p {
-		font-family: "Jomhuria", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+		font-family: Oswald;
 		text-align: center; /* Alinea el texto al centro */
 		font-size: 1.2em; /* Establece el tamaño de la fuente del texto del botón */
+    font-weight: bold;
 	}
 
 	select {
