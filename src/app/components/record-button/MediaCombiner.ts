@@ -15,10 +15,11 @@ export class MediaCombiner {
 		const audioContext = new AudioContext();
 		const audioMedia = audioContext.createMediaStreamDestination();
 
-		this.streamsList.forEach((stream) => {
+		for (const stream of this.streamsList){
+			if (stream.getAudioTracks().length == 0) continue;
 			const streamNode = audioContext.createMediaStreamSource(stream);
 			streamNode.connect(audioMedia);
-		});
+		}
 
 		return audioMedia.stream;
 	}
