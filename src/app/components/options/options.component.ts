@@ -23,11 +23,16 @@ export class OptionsComponent {
 	onFramerateChange() {
 		this.framerate_event.emit(this.framerate);
 	}
-
+	onResolutionChange() {
+		this.resolution_event.emit(this.resolution);
+	}
+	onDelayChange() {
+		this.delay_event.emit(this.delay);
+	}
 
 	constructor() {
 		this.framerate = 60;
 		this.resolution = 1080;
-		this.delay = 2;
+		this.delay = 0;
 	}
 }

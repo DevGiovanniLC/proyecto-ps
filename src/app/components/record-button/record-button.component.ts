@@ -14,6 +14,7 @@ import { NextObserver } from 'rxjs';
 	templateUrl: './record-button.component.html',
 	styleUrl: './record-button.component.css',
 })
+
 export class RecordButtonComponent implements NextObserver<any> {
 	@ViewChild('record_button') record_button!: ElementRef;
 	@ViewChild('micro_button') micro_button!: ElementRef;
