@@ -4,6 +4,7 @@ import { WhoweareComponent } from './whoweare-page/whoweare.component';
 import { LogInComponent } from "./components/log-in/log-in.component";
 import { SignUpComponent } from "./components/sign-up/sign-up.component";
 import { AppComponent } from "./home-page/app.component";
+import { ForgotpasswordComponent } from "./components/forgotpassword/forgotpassword.component";
 
 export const routes: Routes = [
 
@@ -13,5 +14,7 @@ export const routes: Routes = [
   {path:"login",component:LogInComponent},
 
   {path:"signup",component:SignUpComponent},
+
+  {path:"forgotpassword", component:ForgotpasswordComponent}
 
 ];
