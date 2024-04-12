@@ -1,23 +1,25 @@
-import { AfterViewInit, Component, ElementRef, inject, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, inject, ViewChild, Input } from "@angular/core";
 import { FormsModule } from '@angular/forms';
 import { ScreenshotTaker } from './ScreenshotTaker';
 import { AuthService } from "../sign-up/auth.service";
+import { OptionsComponent } from '../options/options.component';
 
 @Component({
 	selector: 'app-screenshot-button',
 	standalone: true,
-	imports: [FormsModule],
+	imports: [FormsModule, OptionsComponent],
 	templateUrl: './screenshot-button.component.html',
 	styleUrl: './screenshot-button.component.css',
 })
 export class ScreenshotButtonComponent {
 	screenshotTaker: ScreenshotTaker;
+	@Input() delay: number;
 
 	constructor() {
 		this.screenshotTaker = new ScreenshotTaker();
 	}
 
 	screenshotEvent(): void {
-		this.screenshotTaker.take();
+		this.screenshotTaker.take(this.delay);
 	}
 }

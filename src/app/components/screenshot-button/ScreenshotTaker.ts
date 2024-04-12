@@ -1,5 +1,5 @@
 export class ScreenshotTaker {
-	async take() {
+	async take(delay_value:number ) {
 		try {
 			// Obtener el stream de la pantalla usando la API de mediaDevices
 			const stream = await navigator.mediaDevices.getDisplayMedia({
@@ -20,7 +20,7 @@ export class ScreenshotTaker {
 			const canvas = document.createElement('canvas');
 			canvas.width = videoElement.videoWidth;
 			canvas.height = videoElement.videoHeight;
-
+			
 			// Dibujar el video en el canvas
 			const context = canvas.getContext('2d')!;
 			context.drawImage(videoElement, 0, 0, canvas.width, canvas.height)!;
