@@ -11,14 +11,7 @@
 
     <div class="configure-selector">
 		<p>Delay</p>
-		<select id="delay-selector" [(ngModel)]="delay" (change)="onDelayChange()">
-			<option>0</option>
-			<option>1</option>
-			<option>2</option>
-			<option>5</option>
-			<option>10</option>
-			<option>15</option>
-		</select>
+    	<input type="number" id="delay-input" [(ngModel)]="delay" (change)="onDelayChange()" min="0">
 	</div>
 
 	<div class="configure-selector">

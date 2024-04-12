@@ -18,7 +18,7 @@ section {
 		font-family: Oswald;
 		text-align: center; /* Alinea el texto al centro */
 		font-size: 1.2em; /* Establece el tamaño de la fuente del texto del botón */
-    font-weight: bold;
+    	font-weight: bold;
 	}
 
 	select {
@@ -26,4 +26,11 @@ section {
 		width: 100%;
 		text-align: center;
 	}
+
+	input {
+		padding-left: 1em;
+		width: 85%;
+		text-align: center;
+	}
+
 }

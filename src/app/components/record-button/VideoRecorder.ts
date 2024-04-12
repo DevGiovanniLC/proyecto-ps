@@ -34,6 +34,7 @@ export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 		}
 
 		this.mediaRecorder = this.generateMediaRecorder(media);
+		console.log(delay_value)
 		setTimeout(() => {
 			this.notify(this.mediaRecorder);
 			this.mediaRecorder.start();
