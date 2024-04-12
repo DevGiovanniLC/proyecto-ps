@@ -32,7 +32,7 @@
 	height: 4em;
 	cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
 	transition: 1s transform;
-	
+
 }
 
 .recordButton:hover {
@@ -48,7 +48,8 @@
 	background-color: #000000; /* Establece el color de fondo del botón */
 	color: white; /* Establece el color del texto del botón */
 	font-size: 1em; /* Establece el tamaño de la fuente del texto del botón */
-	font-family: "Jomhuria", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	font-family: Oswald;
 }
+
 
 

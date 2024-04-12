@@ -123,6 +123,7 @@ export  class SignUpComponent {
           if (this.form.valid) {
             try {
               await this.firebaseService.signup(this.form.value as User);
+              this.firebaseService.enviarCorreo()
               this.router.navigate(["/login"])
               console.log("Éxito");
             } catch (error) {

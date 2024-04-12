@@ -6,7 +6,7 @@ button {
 	color: white; /* Establece el color del texto del botón */
 	font-size: 1em; /* Establece el tamaño de la fuente del texto del botón */
 	cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-	font-family: "Jomhuria", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .header {
@@ -38,4 +38,9 @@ a {
 a:hover {
 	background-color: #e0e0e0; /* Color de fondo al pasar el ratón */
 	color: #000; /* Color del texto al pasar el ratón */
+}
+
+.hola{
+  font-family: Oswald;
+  font-weight: bold;
 }

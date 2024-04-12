@@ -2,10 +2,12 @@ import { Injectable, inject, OnInit } from "@angular/core";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,
-  GoogleAuthProvider,signInWithPopup} from "@angular/fire/auth";
+  GoogleAuthProvider,signInWithPopup,sendEmailVerification,sendPasswordResetEmail} from "@angular/fire/auth";
 import {User} from "./user.model";
 import { Router } from "@angular/router";
 import { error } from "@angular/compiler-cli/src/transformers/util";
+import firebase from "firebase/compat";
+import app = firebase.app;
 
 @Injectable({
   providedIn:"root"
@@ -16,6 +18,7 @@ export class AuthService implements OnInit{
   firestore = inject(AngularFirestore);
   router = inject(Router);
   login2 = false
+
 
   ngOnInit() {
     localStorage.setItem('isloogedIn', 'false');
@@ -38,6 +41,12 @@ export class AuthService implements OnInit{
 
 
   }
+  enviarCorreo(){
+    sendEmailVerification(getAuth().currentUser).then(()=> {
+    console.log("correo enviado")
+    })
+  }
+
 
 
   signup(user:User){
@@ -80,6 +89,16 @@ export class AuthService implements OnInit{
     const valor = localStorage.getItem("isloogedIn")
     console.log(valor)
     return signOut(getAuth());
+  }
+
+  Forgotpassword(user:User){
+    sendPasswordResetEmail(getAuth(),user.email).then(()=>{
+      window.alert("password reset email send, check your inbox.")
+
+    })
+      .catch((error) =>{
+        window.alert(error)
+    })
   }
 
 }
