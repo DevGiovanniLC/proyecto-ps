@@ -14,21 +14,21 @@ import { CounterDown } from './CounterDown';
 	styleUrl: './record-button.component.css',
 })
 export class RecordButtonComponent implements NextObserver<any> {
-	@ViewChild('record_button') record_button: ElementRef;
-	@ViewChild('micro_button') micro_button: ElementRef;
+	@ViewChild('record_button') recordButton: ElementRef;
+	@ViewChild('micro_button') microButton: ElementRef;
 
 	videoRecorder: VideoRecorder;
 
-	microState: boolean;
-	recordState: string;
+	microphoneEnabled: boolean;
+	state: string;
 
 	@Input() framerate: number;
 	@Input() resolution: number;
 	@Input() delay: number;
 
 	constructor() {
-		this.recordState = 'RECORD';
-		this.microState = true;
+		this.state = 'RECORD';
+		this.microphoneEnabled = true;
 	}
 
 	ngOnInit(): void {
@@ -36,16 +36,13 @@ export class RecordButtonComponent implements NextObserver<any> {
 		this.videoRecorder.subscribe(this);
 	}
 
-	async recordEvent(): Promise<void> {
-		if (this.videoRecorder.state() == 'recording') {
-			this.videoRecorder.stop();
+
+	async toggleRecording(): Promise<void> {
+		if (this.videoRecorder.isRecording()) {
+			await this.videoRecorder.stop();
 		} else {
-			this.videoRecorder.microphone(this.microState);
-			this.videoRecorder.start(
-				this.framerate,
-				this.resolution,
-				this.delay
-			);
+			this.videoRecorder.toggleMicrophone(this.microphoneEnabled);
+			await this.videoRecorder.start(this.framerate, this.resolution, this.delay);
 		}
 	}
 
@@ -56,38 +53,40 @@ export class RecordButtonComponent implements NextObserver<any> {
 		}
 
 		if (data instanceof MediaRecorder) {
-			this.mediaRecorderEvents(data);
+			this.handleMediaRecorderEvents(data);
 			return;
 		}
 	}
 
-	private mediaRecorderEvents(mediaRecorder: MediaRecorder) {
-		mediaRecorder.addEventListener('start', async () => {
-			this.record_button.nativeElement.style.backgroundImage =
-				"url('/assets/recording_state.png')";
-			this.micro_button.nativeElement.disabled = true;
-			this.recordState = 'RECORDING';
-		});
+	private handleMediaRecorderEvents(recorder: MediaRecorder): void {
+		recorder.addEventListener('start', () =>
+			this.updateStateAndButtonStyle('RECORDING')
+		);
+		recorder.addEventListener('dataavailable', () =>
+			this.updateStateAndButtonStyle('RECORD')
+		);
+	}
 
-		mediaRecorder.addEventListener('dataavailable', () => {
-			this.record_button.nativeElement.style.backgroundImage =
-				"url('/assets/stopped_state.png')";
-			this.micro_button.nativeElement.disabled = false;
-			this.recordState = 'RECORD';
-		});
+	private updateStateAndButtonStyle(state: string): void {
+		this.state = state;
+		this.recordButton.nativeElement.style.backgroundImage =
+			state === 'RECORDING'
+				? "url('/assets/recording_state.png')"
+				: "url('/assets/stopped_state.png')";
+		this.microButton.nativeElement.disabled = state !== 'RECORD';
 	}
 
 	private countDownEvents(second: number) {
-		this.recordState = second.toString();
+		this.state = second.toString();
 	}
 
-	toggleMicrophone() {
-		this.microState = !this.microState;
-		if (this.microState) {
-			this.micro_button.nativeElement.style.backgroundImage =
+	protected toggleMicrophone() {
+		this.microphoneEnabled = !this.microphoneEnabled;
+		if (this.microphoneEnabled) {
+			this.microButton.nativeElement.style.backgroundImage =
 				"url('/assets/micro_enable.png')";
 		} else {
-			this.micro_button.nativeElement.style.backgroundImage =
+			this.microButton.nativeElement.style.backgroundImage =
 				"url('/assets/micro_disable.png')";
 		}
 	}

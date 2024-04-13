@@ -13,20 +13,20 @@ export class MediaCombiner {
 
 	private combineAudio(): MediaStream {
 		const audioContext = new AudioContext();
-		const audioMedia = audioContext.createMediaStreamDestination();
+		const audioStream = audioContext.createMediaStreamDestination();
 
-		for (const stream of this.streamsList){
-			if (stream.getAudioTracks().length == 0) continue;
+		for (const stream of this.streamsList) {
+			if (stream.getAudioTracks().length === 0) continue;
 			const streamNode = audioContext.createMediaStreamSource(stream);
-			streamNode.connect(audioMedia);
+			streamNode.connect(audioStream);
 		}
 
-		return audioMedia.stream;
+		return audioStream.stream;
 	}
 
 	private combineVideo() {
 		const videoMedia = new MediaStream();
-		this.streamsList.forEach((stream) =>
+		this.streamsList.forEach(stream =>
 			stream
 				.getVideoTracks()
 				.forEach((track) => videoMedia.addTrack(track))
@@ -34,13 +34,10 @@ export class MediaCombiner {
 		return videoMedia;
 	}
 
-	private combineVideoAudio(
-		audioStream: MediaStream,
-		videoStream: MediaStream
-	) {
-		const media = new MediaStream();
-		videoStream.getVideoTracks().forEach((track) => media.addTrack(track));
-		audioStream.getAudioTracks().forEach((track) => media.addTrack(track));
-		return media;
+	private combineVideoAudio(audioStream: MediaStream, videoStream: MediaStream): MediaStream {
+		const combinedMedia = new MediaStream();
+		[...videoStream.getVideoTracks(), ...audioStream.getAudioTracks()]
+			.forEach(track => combinedMedia.addTrack(track));
+		return combinedMedia;
 	}
 }

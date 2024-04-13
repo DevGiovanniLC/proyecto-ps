@@ -13,94 +13,72 @@ export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 	}
 
 	public async start(
-		framerate_value: number,
-		resolution_value: number,
-		delay_value: number
+		framerate: number,
+		resolution: number,
+		delay: number
 	): Promise<void> {
-		if (this.micro) {
-			const audioStream = await navigator.mediaDevices.getUserMedia({
-				audio: true,
-			});
+		const audioStream = this.micro
+			? await navigator.mediaDevices.getUserMedia({ audio: true })
+			: null;
+		const videoStream = await this.getDisplayMedia(framerate, resolution);
+		const media = audioStream
+			? new MediaCombiner([audioStream, videoStream]).combine()
+			: videoStream;
 
-			const videoStream = await this.getMedia(
-				framerate_value,
-				resolution_value
-			);
+		this.mediaRecorder = this.generateMediaRecorder(media);
 
-			this.media = new MediaCombiner([
-				audioStream,
-				videoStream,
-			]).combine();
-		} else {
-			this.media = await this.getMedia(framerate_value, resolution_value);
-		}
-
-		this.mediaRecorder = this.generateMediaRecorder(this.media);
 		setTimeout(() => {
-			this.notify(this.mediaRecorder);
+			this.notifyObserver(this.mediaRecorder);
 			this.mediaRecorder.start();
-			this.generateTracks(this.media);
-		}, delay_value);
+			this.generateVideoTrack(media);
+		}, delay);
 	}
 
-	private async getMedia(
-		framerate: number,
-		resolution: number
+	private async getDisplayMedia(
+		frameRate: number,
+		height: number
 	): Promise<MediaStream> {
 		return navigator.mediaDevices.getDisplayMedia({
-			video: {
-				frameRate: { ideal: framerate, max: 60 },
-				height: resolution,
-			},
+			video: { frameRate: { ideal: frameRate, max: 60 }, height },
 			audio: true,
 		});
 	}
 
-	private generateMediaRecorder(media: MediaStream): MediaRecorder {
-		const mediaRecorder = new MediaRecorder(media, {
+	private generateMediaRecorder(stream: MediaStream): MediaRecorder {
+		const recorder = new MediaRecorder(stream, {
 			mimeType: 'video/x-matroska',
 		});
 
-		mediaRecorder.addEventListener('dataavailable', (event: BlobEvent) => {
-			this.downloadVideo(event.data);
-		});
-		return mediaRecorder;
+		recorder.addEventListener('dataavailable', this.downloadVideo);
+		return recorder;
 	}
 
-	private async downloadVideo(data: Blob): Promise<void> {
+	private async downloadVideo(event: BlobEvent): Promise<void> {
 		const link = document.createElement('a');
-		link.href = URL.createObjectURL(data);
+		link.href = URL.createObjectURL(event.data);
 		link.download = 'video.mkv';
 		link.click();
 	}
 
-	private generateTracks(media: MediaStream): MediaStreamTrack {
-		const video = media.getVideoTracks()[0];
-
-		video.onended = () => {
-			this.stop();
-		};
-
-		return video;
+	private generateVideoTrack(media: MediaStream): MediaStreamTrack {
+		const videoTrack = media.getVideoTracks()[0];
+		videoTrack.onended = () => this.stop();
+		return videoTrack;
 	}
 
 	async stop(): Promise<void> {
 		this.mediaRecorder.stop();
-
-		this.media.getTracks().forEach((track) => {
-			track.stop();
-		});
-
+		this.media.getTracks().forEach((track) => track.stop());
 		this.media = null;
 	}
 
-	state(): string {
-		if (this.mediaRecorder === undefined) return 'stopped';
-		return this.mediaRecorder.state;
+	isRecording(): boolean {
+		if (this.mediaRecorder === undefined) return false;
+		return true;
 	}
 
-	microphone(state: boolean) {
-		this.micro = state;
+	toggleMicrophone(enabled: boolean): void {
+		this.micro = enabled;
 	}
 
 	subscribe(observer: NextObserver<any>): Unsubscribable {
@@ -108,13 +86,11 @@ export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 		return this;
 	}
 
-	private notify(data: any) {
-		this.observers.forEach((observer) => {
-			observer.next(data);
-		});
+	private notifyObserver(data: any): void {
+		this.observers.forEach((observer) => observer.next(data));
 	}
 
 	unsubscribe(): void {
-		console.log('observer unsusbribed');
+		this.observers = [];
 	}
 }
