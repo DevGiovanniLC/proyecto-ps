@@ -1,12 +1,9 @@
-import { Component, ElementRef, inject, ViewChild } from "@angular/core";
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { VideoRecorder } from './VideoRecorder';
 import { ScreenshotButtonComponent } from '../screenshot-button/screenshot-button.component';
-import { DataService } from '../../data.service';
 import { OptionsComponent } from '../options/options.component';
 import { NextObserver } from 'rxjs';
-
-
 
 @Component({
 	selector: 'app-record-button',
@@ -20,15 +17,16 @@ export class RecordButtonComponent implements NextObserver<any> {
 	@ViewChild('micro_button') micro_button!: ElementRef;
 	videoRecorder: VideoRecorder;
 	microState: boolean;
+	@Input() framerate: number;
+	@Input() resolution: number;
+	@Input() delay: number;
 
-	constructor(private dataService: DataService) {
-		this.videoRecorder = new VideoRecorder(
-			this.dataService.framerateValue,
-			this.dataService.resolutionValue,
-			this.dataService.delayValue
-		);
-
+	constructor() {
 		this.microState = true;
+	}
+
+	ngOnInit(): void {
+		this.videoRecorder = new VideoRecorder();
 		this.videoRecorder.subscribe(this);
 	}
 
@@ -37,23 +35,28 @@ export class RecordButtonComponent implements NextObserver<any> {
 			this.videoRecorder.stop();
 		} else {
 			this.videoRecorder.microphone(this.microState);
-			await this.videoRecorder.start();
+
+			await this.videoRecorder.start(
+				this.framerate,
+				this.resolution,
+				this.delay
+			);
 		}
 	}
-	
+
 	next(mediaRecorder: MediaRecorder): void {
 		if (mediaRecorder == null) return;
-		
-		mediaRecorder.addEventListener('start', () => {
+
+		mediaRecorder.addEventListener('start', async () => {
 			this.record_button.nativeElement.style.backgroundImage =
-			"url('../../../assets/recording_state.png')";
-			this.micro_button.nativeElement.disabled = true
+				"url('../../../assets/recording_state.png')";
+			this.micro_button.nativeElement.disabled = true;
 		});
-		
+
 		mediaRecorder.addEventListener('dataavailable', () => {
 			this.record_button.nativeElement.style.backgroundImage =
-			"url('../../../assets/stopped_state.png')";
-			this.micro_button.nativeElement.disabled = false
+				"url('../../../assets/stopped_state.png')";
+			this.micro_button.nativeElement.disabled = false;
 		});
 	}
 
@@ -62,9 +65,9 @@ export class RecordButtonComponent implements NextObserver<any> {
 		if (this.microState) {
 			this.micro_button.nativeElement.style.backgroundImage =
 				"url('../../../assets/micro_enable.png')";
-		}else{
+		} else {
 			this.micro_button.nativeElement.style.backgroundImage =
-			"url('../../../assets/micro_disable.png')";
+				"url('../../../assets/micro_disable.png')";
 		}
 	}
 }
