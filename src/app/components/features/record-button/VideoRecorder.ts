@@ -2,7 +2,8 @@ import { NextObserver, Subscribable, Unsubscribable } from 'rxjs';
 import { MediaCombiner } from './MediaCombiner';
 
 export class VideoRecorder implements Subscribable<any>, Unsubscribable {
-	private mediaRecorder!: MediaRecorder;
+	private media: MediaStream;
+	private mediaRecorder: MediaRecorder;
 	private observers: NextObserver<any>[];
 	private micro: boolean;
 
@@ -16,8 +17,6 @@ export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 		resolution_value: number,
 		delay_value: number
 	): Promise<void> {
-		let media: MediaStream;
-
 		if (this.micro) {
 			const audioStream = await navigator.mediaDevices.getUserMedia({
 				audio: true,
@@ -28,16 +27,19 @@ export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 				resolution_value
 			);
 
-			media = new MediaCombiner([audioStream, videoStream]).combine();
+			this.media = new MediaCombiner([
+				audioStream,
+				videoStream,
+			]).combine();
 		} else {
-			media = await this.getMedia(framerate_value, resolution_value);
+			this.media = await this.getMedia(framerate_value, resolution_value);
 		}
 
-		this.mediaRecorder = this.generateMediaRecorder(media);
+		this.mediaRecorder = this.generateMediaRecorder(this.media);
 		setTimeout(() => {
 			this.notify(this.mediaRecorder);
 			this.mediaRecorder.start();
-			this.generateTracks(media);
+			this.generateTracks(this.media);
 		}, delay_value);
 	}
 
@@ -62,7 +64,6 @@ export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 		mediaRecorder.addEventListener('dataavailable', (event: BlobEvent) => {
 			this.downloadVideo(event.data);
 		});
-
 		return mediaRecorder;
 	}
 
@@ -85,6 +86,12 @@ export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 
 	async stop(): Promise<void> {
 		this.mediaRecorder.stop();
+
+		this.media.getTracks().forEach((track) => {
+			track.stop();
+		});
+
+		this.media = null;
 	}
 
 	state(): string {
