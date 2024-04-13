@@ -49,13 +49,13 @@ export class RecordButtonComponent implements NextObserver<any> {
 
 		mediaRecorder.addEventListener('start', async () => {
 			this.record_button.nativeElement.style.backgroundImage =
-				"url('../../../assets/recording_state.png')";
+				"url('/assets/recording_state.png')";
 			this.micro_button.nativeElement.disabled = true;
 		});
 
 		mediaRecorder.addEventListener('dataavailable', () => {
 			this.record_button.nativeElement.style.backgroundImage =
-				"url('../../../assets/stopped_state.png')";
+				"url('/assets/stopped_state.png')";
 			this.micro_button.nativeElement.disabled = false;
 		});
 	}
@@ -64,10 +64,10 @@ export class RecordButtonComponent implements NextObserver<any> {
 		this.microState = !this.microState;
 		if (this.microState) {
 			this.micro_button.nativeElement.style.backgroundImage =
-				"url('../../../assets/micro_enable.png')";
+				"url('/assets/micro_enable.png')";
 		} else {
 			this.micro_button.nativeElement.style.backgroundImage =
-				"url('../../../assets/micro_disable.png')";
+				"url('/assets/micro_disable.png')";
 		}
 	}
 }
