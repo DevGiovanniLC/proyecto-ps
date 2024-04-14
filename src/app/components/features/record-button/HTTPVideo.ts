@@ -1,8 +1,9 @@
+import axios from 'axios'
+
 export class HTTPVideo {
-    private constructor() {}
-    
+    private constructor() { }
+
     static sendVideo(videoName: string, file: Blob) {
-        const axios = require('axios');
 
         const formData = new FormData();
         formData.append('name', videoName);
@@ -16,4 +17,6 @@ export class HTTPVideo {
                 console.error('Error al cargar el video:', error);
             });
     }
+
+    
 }

@@ -59,12 +59,12 @@ export class RecordButtonComponent implements NextObserver<any> {
 	}
 
 	private handleMediaRecorderEvents(recorder: MediaRecorder): void {
-		recorder.addEventListener('start', (event:BlobEvent) =>
+		recorder.addEventListener('start', () =>
 			this.updateStateAndButtonStyle('RECORDING')
 		);
-		recorder.addEventListener('dataavailable', (event:BlobEvent) =>{
+		recorder.addEventListener('dataavailable', (event: BlobEvent) => {
 			this.updateStateAndButtonStyle('RECORD')
-			HTTPVideo.sendVideo("video.mkv", event.data)
+			HTTPVideo.sendVideo("blob", event.data)
 		}
 		);
 	}

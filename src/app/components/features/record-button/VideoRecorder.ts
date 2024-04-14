@@ -48,7 +48,7 @@ export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 		const recorder = new MediaRecorder(stream, {
 			mimeType: 'video/x-matroska',
 		});
-		
+
 		return recorder;
 	}
 
@@ -62,8 +62,6 @@ export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 
 	async stop(): Promise<void> {
 		this.mediaRecorder.stop();
-		this.media.getTracks().forEach((track) => track.stop());
-		this.media = null;
 	}
 
 	isRecording(): boolean {
