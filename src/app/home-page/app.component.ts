@@ -9,7 +9,7 @@ import { RecordButtonComponent } from '../components/record-button/record-button
 import { HeaderComponent } from '../components/header/header.component';
 import { OptionsComponent } from '../components/options/options.component';
 import { ScreenshotButtonComponent } from "../components/screenshot-button/screenshot-button.component";
-
+import { PrevisualitionContentDialogComponent } from "../components/previsualition-content-dialog/previsualition-content-dialog.component";
 @Component({
     selector: 'app-root',
     standalone: true,
@@ -21,7 +21,8 @@ import { ScreenshotButtonComponent } from "../components/screenshot-button/scree
         RecordButtonComponent,
         HeaderComponent,
         OptionsComponent,
-        ScreenshotButtonComponent
+        ScreenshotButtonComponent,
+        PrevisualitionContentDialogComponent
     ]
 })
 export class AppComponent {

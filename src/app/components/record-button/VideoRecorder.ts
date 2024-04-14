@@ -58,19 +58,7 @@ export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 		const mediaRecorder = new MediaRecorder(media, {
 			mimeType: 'video/x-matroska',
 		});
-
-		mediaRecorder.addEventListener('dataavailable', (event: BlobEvent) => {
-			this.downloadVideo(event.data);
-		});
-
 		return mediaRecorder;
-	}
-
-	private async downloadVideo(data: Blob): Promise<void> {
-		const link = document.createElement('a');
-		link.href = URL.createObjectURL(data);
-		link.download = 'video.mkv';
-		link.click();
 	}
 
 	private generateTracks(media: MediaStream): MediaStreamTrack {

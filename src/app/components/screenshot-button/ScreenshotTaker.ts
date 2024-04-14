@@ -23,6 +23,7 @@ export class ScreenshotTaker {
 
 			// Dibujar el video en el canvas
 			const context = canvas.getContext('2d')!;
+      
 			context.drawImage(videoElement, 0, 0, canvas.width, canvas.height)!;
 
 			// Convertir el canvas a una URL de datos (data URL)

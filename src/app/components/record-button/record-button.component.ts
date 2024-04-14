@@ -4,6 +4,10 @@ import { VideoRecorder } from './VideoRecorder';
 import { ScreenshotButtonComponent } from '../screenshot-button/screenshot-button.component';
 import { OptionsComponent } from '../options/options.component';
 import { NextObserver } from 'rxjs';
+import { MatDialog } from "@angular/material/dialog";
+import {
+  PrevisualitionContentDialogComponent
+} from "../previsualition-content-dialog/previsualition-content-dialog.component";
 
 @Component({
 	selector: 'app-record-button',
@@ -21,7 +25,7 @@ export class RecordButtonComponent implements NextObserver<any> {
 	@Input() resolution: number;
 	@Input() delay: number;
 
-	constructor() {
+	constructor(private _matdialog: MatDialog) {
 		this.microState = true;
 	}
 
@@ -43,6 +47,12 @@ export class RecordButtonComponent implements NextObserver<any> {
 			);
 		}
 	}
+  openModal(blob : Blob):void{
+    this._matdialog.open(PrevisualitionContentDialogComponent, {
+      width: "900px",
+      data:{ blob : blob}
+    })
+  }
 
 	next(mediaRecorder: MediaRecorder): void {
 		if (mediaRecorder == null) return;
@@ -53,12 +63,15 @@ export class RecordButtonComponent implements NextObserver<any> {
 			this.micro_button.nativeElement.disabled = true;
 		});
 
-		mediaRecorder.addEventListener('dataavailable', () => {
+		mediaRecorder.addEventListener('dataavailable', (event) => {
 			this.record_button.nativeElement.style.backgroundImage =
 				"url('../../../assets/stopped_state.png')";
 			this.micro_button.nativeElement.disabled = false;
+      this.openModal(event.data)
 		});
 	}
+
+
 
 	toggleMicrophone() {
 		this.microState = !this.microState;

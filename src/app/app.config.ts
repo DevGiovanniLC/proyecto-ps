@@ -6,6 +6,7 @@ import { initializeApp } from "firebase/app";
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 
 const firebaseConfig = {
@@ -26,5 +27,5 @@ export const appConfig: ApplicationConfig = {
     HttpClientModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule
-  )]
+  ), provideAnimationsAsync()]
 };
