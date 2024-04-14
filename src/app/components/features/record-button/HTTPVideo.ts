@@ -9,14 +9,24 @@ export class HTTPVideo {
         formData.append('name', videoName);
         formData.append('video', file);
 
-        axios.post('http://localhost:3000/upload', formData)
-            .then(response => {
-                console.log(response.data);
+        fetch('http://localhost:3000/upload', {
+            method: 'POST', 
+            body:formData  
+        })
+            .then(async (response) => {
+                console.log("video recibido");
+                this.downloadVideo(await response.arrayBuffer())
             })
             .catch(error => {
                 console.error('Error al cargar el video:', error);
             });
     }
 
-    
+    private static async downloadVideo(data: ArrayBuffer): Promise<void> {
+		const link = document.createElement('a');
+		link.href = URL.createObjectURL(new Blob([data], { type: 'video/mp4' }));
+		link.download = 'video.mp4';
+		link.click();
+	}
+
 }

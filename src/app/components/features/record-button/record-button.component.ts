@@ -78,12 +78,7 @@ export class RecordButtonComponent implements NextObserver<any> {
 		this.microButton.nativeElement.disabled = state !== 'RECORD';
 	}
 
-	private async downloadVideo(event: BlobEvent): Promise<void> {
-		const link = document.createElement('a');
-		link.href = URL.createObjectURL(event.data);
-		link.download = 'video.mkv';
-		link.click();
-	}
+
 
 	private countDownEvents(second: number) {
 		this.state = second.toString();
