@@ -33,6 +33,6 @@ export class OptionsComponent {
 	constructor() {
 		this.framerate = 60;
 		this.resolution = 1080;
-		this.delay = 15;
+		this.delay = 0;
 	}
 }

@@ -30,42 +30,21 @@ export  class SignUpComponent {
     password1: new FormControl("",[Validators.required])
   })
 
+  passwordlenght(valor:string):void{
 
-
-
-  coincidenClaves(): boolean {
     const passwordErrorDiv = document.getElementById("passwordreg-error")
     passwordErrorDiv.textContent = '';
     passwordErrorDiv.style.display = 'none';
-    const contrasena = this.form.get('password')!.value;
-    const contrasena1 = this.form.get('password1')!.value;
 
-    if(contrasena === contrasena1){
-      console.log("son la misma clave")
-      return true
-    }
-    console.log("son distintas claves")
-
-    passwordErrorDiv.textContent = "Las contraseñas no coinciden.";
+    passwordErrorDiv.textContent = valor;
     passwordErrorDiv.style.display = 'block';
-    return false
+
   }
 
-  passwordlenght():boolean{
-
+  clean(){
     const passwordErrorDiv = document.getElementById("passwordreg-error")
     passwordErrorDiv.textContent = '';
     passwordErrorDiv.style.display = 'none';
-    const contrasena = this.form.get('password')!.value;
-    if(contrasena.length < 6){
-      passwordErrorDiv.textContent = "La contraseña tiene menos de 6 caracteres.";
-      passwordErrorDiv.style.display = 'block';
-      return false
-
-    }
-    return true;
-
-
 
   }
   emailBadly():void{
@@ -115,7 +94,65 @@ export  class SignUpComponent {
     this.firebaseService.googlesignin();
   }
 
+  passwordverification():string{
 
+    const contrasena = this.form.get('password')!.value;
+    const contrasena1 = this.form.get('password1')!.value;
+
+    if(contrasena.length < 6){
+
+
+      return "La contraseña es menor de 6 digitos"
+    }
+    const numero = /\d/.test(contrasena);
+    const tieneSimbolo = /[!@#$%&*(),.?":{}|<>]/.test(contrasena);
+    if(!numero || !tieneSimbolo){
+        return "La contraseña debe tener un numero y algun simbolo $@&"
+    }
+    if(contrasena != contrasena1 ){
+      return "Las contraseñas no coinciden"
+    }
+
+
+    return ""
+
+
+
+  }
+
+  async submit() {
+    const x = this.passwordverification();
+    if(this.emailerrorr()) {
+      if(this.passwordverification() === "") {
+        try {
+          await this.firebaseService.signup(this.form.value as User);
+          this.firebaseService.enviarCorreo()
+          this.router.navigate(["/login"])
+          console.log("Éxito");
+        } catch (error) {
+          const x = error.code
+          if (x == 'auth/email-already-in-use') {
+            this.emailUsed();
+          }
+
+        }
+
+      }else{
+        this.passwordlenght(x);
+
+      }
+
+    }else{
+      this.emailBadly();
+      this.clean()
+      if(x != "") {
+        this.passwordlenght(x);
+        console.log("toy aqui")
+      }
+    }
+  }
+
+  /*
   async submit() {
     if(this.emailerrorr()) {
       if (this.passwordlenght()) {
@@ -145,7 +182,7 @@ export  class SignUpComponent {
       this.emailBadly();
     }
   }
-
+  */
 }
 
 
