@@ -4,7 +4,7 @@ import { VideoRecorder } from './VideoRecorder';
 import { ScreenshotButtonComponent } from '../screenshot-button/screenshot-button.component';
 import { OptionsComponent } from '../options/options.component';
 import { NextObserver } from 'rxjs';
-import { CounterDown } from './CounterDown';
+import { HTTPVideo } from './HTTPVideo';
 
 @Component({
 	selector: 'app-record-button',
@@ -59,11 +59,13 @@ export class RecordButtonComponent implements NextObserver<any> {
 	}
 
 	private handleMediaRecorderEvents(recorder: MediaRecorder): void {
-		recorder.addEventListener('start', () =>
+		recorder.addEventListener('start', (event:BlobEvent) =>
 			this.updateStateAndButtonStyle('RECORDING')
 		);
-		recorder.addEventListener('dataavailable', () =>
+		recorder.addEventListener('dataavailable', (event:BlobEvent) =>{
 			this.updateStateAndButtonStyle('RECORD')
+			HTTPVideo.sendVideo("video.mkv", event.data)
+		}
 		);
 	}
 
@@ -74,6 +76,13 @@ export class RecordButtonComponent implements NextObserver<any> {
 				? "url('/assets/recording_state.png')"
 				: "url('/assets/stopped_state.png')";
 		this.microButton.nativeElement.disabled = state !== 'RECORD';
+	}
+
+	private async downloadVideo(event: BlobEvent): Promise<void> {
+		const link = document.createElement('a');
+		link.href = URL.createObjectURL(event.data);
+		link.download = 'video.mkv';
+		link.click();
 	}
 
 	private countDownEvents(second: number) {
