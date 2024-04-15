@@ -5,6 +5,8 @@ import { ScreenshotButtonComponent } from '../screenshot-button/screenshot-butto
 import { OptionsComponent } from '../options/options.component';
 import { NextObserver } from 'rxjs';
 import { CounterDown } from './CounterDown';
+import { PrevisualitionContentDialogComponent } from '../previsualition-content-dialog/previsualition-content-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
 	selector: 'app-record-button',
@@ -32,16 +34,16 @@ export class RecordButtonComponent implements NextObserver<any> {
 	}
 
 	ngOnInit(): void {
-    this.videoRecorder = new VideoRecorder();
+		this.videoRecorder = new VideoRecorder();
 		this.videoRecorder.subscribe(this);
 	}
 
-  private abrirModal(data: Blob) {
-    this._matDialog.open(PrevisualitionContentDialogComponent,{
-      width: '600px',
-      data: {blobData: data}
-    })
-  }
+	private abrirModal(data: Blob) {
+		this._matDialog.open(PrevisualitionContentDialogComponent, {
+			width: '600px',
+			data: { blobData: data }
+		})
+	}
 
 	async toggleRecording(): Promise<void> {
 		if (this.videoRecorder.isRecording()) {
@@ -70,7 +72,8 @@ export class RecordButtonComponent implements NextObserver<any> {
 		);
 		recorder.addEventListener('dataavailable', (event: BlobEvent) => {
 			this.updateStateAndButtonStyle('RECORD')
-		);
+			this.abrirModal(event.data);
+		});
 	}
 
 	private updateStateAndButtonStyle(state: string): void {
@@ -81,8 +84,6 @@ export class RecordButtonComponent implements NextObserver<any> {
 				: "url('/assets/stopped_state.png')";
 		this.$microButton.nativeElement.disabled = state !== 'RECORD';
 	}
-
-
 
 	private countDownEvents(second: number) {
 		this.state = second.toString();

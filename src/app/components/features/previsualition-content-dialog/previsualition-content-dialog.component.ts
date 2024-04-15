@@ -1,5 +1,6 @@
 import { Component, Inject } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import { HTTPVideo } from "../record-button/HTTPVideo";
 
 @Component({
   selector: 'app-previsualition-content-dialog',
@@ -10,12 +11,13 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 })
 export class PrevisualitionContentDialogComponent {
   VideoUrl : string
+  blob: Blob
   constructor(public _matDialogRef: MatDialogRef<PrevisualitionContentDialogComponent>, @Inject(MAT_DIALOG_DATA) public data:any) {
+    this.blob = data.blobData
     this.VideoUrl = URL.createObjectURL(data.blobData);
+    
   }
-  private async downloadVideo(data: Blob): Promise<void> {
-    const link = document.createElement('a');
-    link.download = 'video.mkv';
-    link.click();
+  async downloadVideo(data: Blob): Promise<void> {
+    HTTPVideo.sendVideo('video.mkv', data)
   }
 }
