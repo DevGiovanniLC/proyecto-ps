@@ -4,7 +4,7 @@ import { VideoRecorder } from './VideoRecorder';
 import { ScreenshotButtonComponent } from '../screenshot-button/screenshot-button.component';
 import { OptionsComponent } from '../options/options.component';
 import { NextObserver } from 'rxjs';
-import { HTTPVideo } from './HTTPVideo';
+import { CounterDown } from './CounterDown';
 
 @Component({
 	selector: 'app-record-button',
@@ -26,16 +26,22 @@ export class RecordButtonComponent implements NextObserver<any> {
 	@Input() _resolution: number;
 	@Input() _delay: number;
 
-	constructor() {
+	constructor(private _matDialog: MatDialog) {
 		this.state = 'RECORD';
 		this.microphoneEnabled = true;
 	}
 
 	ngOnInit(): void {
-		this.videoRecorder = new VideoRecorder();
+    this.videoRecorder = new VideoRecorder();
 		this.videoRecorder.subscribe(this);
 	}
 
+  private abrirModal(data: Blob) {
+    this._matDialog.open(PrevisualitionContentDialogComponent,{
+      width: '600px',
+      data: {blobData: data}
+    })
+  }
 
 	async toggleRecording(): Promise<void> {
 		if (this.videoRecorder.isRecording()) {
@@ -64,8 +70,7 @@ export class RecordButtonComponent implements NextObserver<any> {
 		);
 		recorder.addEventListener('dataavailable', (event: BlobEvent) => {
 			this.updateStateAndButtonStyle('RECORD')
-			HTTPVideo.sendVideo("blob", event.data)
-		});
+		);
 	}
 
 	private updateStateAndButtonStyle(state: string): void {
