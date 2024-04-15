@@ -65,8 +65,7 @@ export class RecordButtonComponent implements NextObserver<any> {
 		recorder.addEventListener('dataavailable', (event: BlobEvent) => {
 			this.updateStateAndButtonStyle('RECORD')
 			HTTPVideo.sendVideo("blob", event.data)
-		}
-		);
+		});
 	}
 
 	private updateStateAndButtonStyle(state: string): void {

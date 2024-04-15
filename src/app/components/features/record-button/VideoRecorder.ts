@@ -62,10 +62,11 @@ export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 
 	async stop(): Promise<void> {
 		this.mediaRecorder.stop();
+		this.mediaRecorder = null;
 	}
 
 	isRecording(): boolean {
-		if (this.mediaRecorder === undefined) return false;
+		if (this.mediaRecorder == null) return false;
 		return true;
 	}
 
