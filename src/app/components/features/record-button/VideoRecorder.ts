@@ -1,5 +1,12 @@
 import { NextObserver, Subscribable, Unsubscribable } from 'rxjs';
 import { MediaCombiner } from './MediaCombiner';
+import { MatDialog } from "@angular/material/dialog";
+import {
+  PrevisualitionContentDialogComponent
+} from "../previsualition-content-dialog/previsualition-content-dialog.component";
+import { Inject } from "@angular/core";
+import { blob } from "node:stream/consumers";
+
 
 export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 	private media: MediaStream;
@@ -7,9 +14,11 @@ export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 	private observers: NextObserver<any>[];
 	private micro: boolean;
 
-	constructor() {
+
+  constructor() {
 		this.observers = [];
 		this.micro = true;
+
 	}
 
 	public async start(
@@ -49,16 +58,18 @@ export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 			mimeType: 'video/x-matroska',
 		});
 
-		recorder.addEventListener('dataavailable', this.downloadVideo);
+		//recorder.addEventListener('dataavailable', this.downloadVideo);
 		return recorder;
 	}
 
 	private async downloadVideo(event: BlobEvent): Promise<void> {
-		const link = document.createElement('a');
-		link.href = URL.createObjectURL(event.data);
-		link.download = 'video.mkv';
-		link.click();
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(event.data);
+    link.download = 'video.mkv';
+    link.click();
 	}
+
+
 
 	private generateVideoTrack(media: MediaStream): MediaStreamTrack {
 		const videoTrack = media.getVideoTracks()[0];
@@ -90,7 +101,8 @@ export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 		this.observers.forEach((observer) => observer.next(data));
 	}
 
-	unsubscribe(): void {
+  unsubscribe(): void {
 		this.observers = [];
 	}
+
 }

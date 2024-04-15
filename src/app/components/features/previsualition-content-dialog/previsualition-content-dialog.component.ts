@@ -10,8 +10,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 })
 export class PrevisualitionContentDialogComponent {
   VideoUrl : string
-  constructor(public matDialogRef: MatDialogRef<PrevisualitionContentDialogComponent>, @Inject(MAT_DIALOG_DATA) public data:any) {
-    this.VideoUrl = URL.createObjectURL(data.blob);
+  constructor(public _matDialogRef: MatDialogRef<PrevisualitionContentDialogComponent>, @Inject(MAT_DIALOG_DATA) public data:any) {
+    this.VideoUrl = URL.createObjectURL(data.blobData);
   }
   private async downloadVideo(data: Blob): Promise<void> {
     const link = document.createElement('a');
