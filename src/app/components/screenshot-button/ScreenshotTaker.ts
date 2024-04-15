@@ -16,28 +16,32 @@ export class ScreenshotTaker {
 				videoElement.onloadedmetadata = resolve;
 			});
 
-			// Crear un canvas del mismo tamaño que el video
-			const canvas = document.createElement('canvas');
-			canvas.width = videoElement.videoWidth;
-			canvas.height = videoElement.videoHeight;
-			
-			// Dibujar el video en el canvas
-			const context = canvas.getContext('2d')!;
-			context.drawImage(videoElement, 0, 0, canvas.width, canvas.height)!;
+			setTimeout(async () => {
+                console.log(delay_value);
 
-			// Convertir el canvas a una URL de datos (data URL)
-			const screenshotDataUrl = canvas.toDataURL('image/png');
+                // Crear un canvas del mismo tamaño que el video
+                const canvas = document.createElement('canvas');
+                canvas.width = videoElement.videoWidth;
+                canvas.height = videoElement.videoHeight;
+                // Dibujar el video en el canvas
+                const context = canvas.getContext('2d')!;
 
-			// Crear un enlace temporal para descargar la captura de pantalla
-			const downloadLink = document.createElement('a');
-			downloadLink.href = screenshotDataUrl;
-			downloadLink.download = 'screenshot.png';
+                context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
 
-			// Simular un clic en el enlace para iniciar la descarga
-			downloadLink.click();
+                // Convertir el canvas a una URL de datos (data URL)
+                const screenshotDataUrl = canvas.toDataURL('image/png');
 
-			// Detener el stream para liberar recursos
-			stream.getTracks().forEach((track) => track.stop());
+                // Crear un enlace temporal para descargar la captura de pantalla
+                const downloadLink = document.createElement('a');
+                downloadLink.href = screenshotDataUrl;
+                downloadLink.download = 'screenshot.png';
+
+                // Simular un clic en el enlace para iniciar la descarga
+                downloadLink.click();
+
+                // Detener el stream para liberar recursos
+                stream.getTracks().forEach((track) => track.stop());
+            }, delay_value);
 		} catch (error) {
 			console.error('Error al tomar la captura de pantalla:', error);
 		}
