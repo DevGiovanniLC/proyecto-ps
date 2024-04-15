@@ -1,12 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
 
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
+<body>
+<a class="exit" routerLink="">Go Back</a>
+<div class="login-container">
+  <div class="login-form">
+    <div class="h2box">
+      <h2>SIGN UP</h2>
+    </div>
+    <form [formGroup]="form" class="space-y-6" action="#" method="POST" (ngSubmit)="submit()"  >
+      <div class="input-group">
+        <label for="email">EMAIL</label>
+        <input formControlName="email" type="email" id="email" name="email" class="email">
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert" id="email-error" style = 'display: none; color: red;'></div>
+
+      </div>
+      <div class="input-group">
+        <label for="password">PASSWORD</label>
+        <input formControlName="password" type="password" id="password" name="password" class="password" required>
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert" id="passwordreg-error" style = 'display: none; color: red;'></div>
+
+      </div>
+      <div class="input-group">
+        <label for="password">CONFIRM PASSWORD</label>
+        <input formControlName="password1" type="password" id="passwordd" name="password" class="password" required>
+      </div>
+
+      <div class="botones">
+        <button id="login" class="login" type="submit">LOG IN</button>
+
+        <button (click)="googlesignin()" type="button" class="login-with-google-btn" >
+            Sign in with Google
+        </button>
+
+        <button id="login1" class="login" type="submit">CANCEL</button>
+      </div>
+    </form>
+    <p class="sign-up-text">Do you have already an account? <a routerLink="/login">Log in</a></p>
+  </div>
+</div>
+</body>
+
+<!--
+
+
 <body>
 
 <div class="container">
@@ -69,4 +104,5 @@
 </div>
 
 </body>
-</html>
+
+-->
