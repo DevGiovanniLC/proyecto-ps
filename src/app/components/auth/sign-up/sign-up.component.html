@@ -10,14 +10,12 @@
       <div class="input-group">
         <label for="email">EMAIL</label>
         <input formControlName="email" type="email" id="email" name="email" class="email">
-        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert" id="email-error" style = 'display: none; color: red;'></div>
-
+        <div id="email-error" style="display: none; color: red; margin-top: 1%;"></div>
       </div>
       <div class="input-group">
         <label for="password">PASSWORD</label>
         <input formControlName="password" type="password" id="password" name="password" class="password" required>
-        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert" id="passwordreg-error" style = 'display: none; color: red;'></div>
-
+        <div id="passwordreg-error" style="display: none; color: red; margin-top: 1%;"></div>
       </div>
       <div class="input-group">
         <label for="password">CONFIRM PASSWORD</label>
@@ -25,7 +23,7 @@
       </div>
 
       <div class="botones">
-        <button id="login" class="login" type="submit">LOG IN</button>
+        <button id="login" class="login" type="submit">SIGN UP</button>
 
         <button (click)="googlesignin()" type="button" class="login-with-google-btn" >
             Sign in with Google
