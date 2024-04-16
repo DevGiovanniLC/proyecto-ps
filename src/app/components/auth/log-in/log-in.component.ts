@@ -32,9 +32,8 @@ export class LogInComponent {
     emailError.textContent = '';
     emailError.style.display = 'none';
 
-    emailError.textContent = "Clave incorrecta.";
+    emailError.textContent = "Correo electrónico o contraseña incorrectos";
     emailError.style.display = 'block';
-
 }
 
 
@@ -50,6 +49,8 @@ export class LogInComponent {
             if(x  == 'auth/invalid-credential'){
               this.errorPassword();
               console.error("CLAVE INVALIDA");
+            }else {
+              console.error("el error es:" + x);
             }
           }
 
