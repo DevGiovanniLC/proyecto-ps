@@ -6,7 +6,7 @@
     <div class="h2box">
       <h2>SIGN UP</h2>
     </div>
-    <form [formGroup]="form" class="space-y-6" action="#" method="POST" (ngSubmit)="submit()"  >
+    <form [formGroup]="form" class="forma" action="#" method="POST" (ngSubmit)="submit()"  >
       <div class="input-group">
         <label for="email">EMAIL</label>
         <input formControlName="email" type="email" id="email" name="email" class="email">
@@ -25,11 +25,11 @@
       <div class="botones">
         <button id="login" class="login" type="submit">SIGN UP</button>
 
-        <button routerLink=""  id="login1" class="login" type="">CANCEL</button>
-
-        <button (click)="googlesignin()" type="button" class="login-with-google-btn" >
+        <button (click)="googlesignin()" type="button" class="login-with-google-btn" style="margin-right: 80px;">
             Sign in with Google
         </button>
+
+        <button routerLink="/"  id="login1" class="login" type="">CANCEL</button>
 
       </div>
     </form>

@@ -120,10 +120,14 @@ button:hover {
   text-decoration: underline;
 }
 
+.forma{
+  display: flex;
+  justify-content: center;
+}
 
 .botones{
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-top: 20px;
 }
 
