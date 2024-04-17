@@ -41,6 +41,7 @@ export class LogInComponent {
 
           try {
             await this.firebaseService.login(this.form.value as User);
+            this.firebaseService.changestatus();
             this.router.navigate([""])
             this.login1 = true;
             console.log("Éxito");

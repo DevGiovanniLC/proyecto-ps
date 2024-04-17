@@ -31,7 +31,7 @@ export class HeaderComponent {
   }
 
   getlog():boolean{
-    //localStorage.setItem('isloogedIn',"false")
+    localStorage.setItem('isloogedIn',"false")
     return this.firebaseService.getLogin()
   }
 

@@ -60,9 +60,12 @@ export class AuthService implements OnInit{
 
   login(user:User){
     this.login2 = true
-    localStorage.setItem('isloogedIn', 'true');
+
     return signInWithEmailAndPassword(getAuth(),user.email,user.password);
 
+  }
+  changestatus(){
+    localStorage.setItem('isloogedIn', 'true')
   }
   /*
   login(user:User){
