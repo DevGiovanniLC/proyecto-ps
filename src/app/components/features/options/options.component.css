@@ -1,20 +1,11 @@
 section {
-	display: flex;
-<<<<<<< HEAD
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	margin: 4% 10%;
-  gap: 1em;
-=======
-	flex-direction: row;
-	align-items: flex-end;
-	justify-content: space-between;
-	margin: 8% 10%;
+	display:block;
+  justify-content: center;
+  align-items: center;
+  margin: 50px 10px
 }
->>>>>>> a8703f75bad670a6b7f7e4b899367011ccc655af
 
-}
+
 .first-row{
   display: flex;
   justify-content: center;
@@ -23,6 +14,7 @@ section {
 }
 .second-row{
   display: flex;
+  justify-content: center;
   flex-direction: row;
   gap: 16em;
 }

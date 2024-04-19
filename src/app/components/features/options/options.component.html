@@ -1,9 +1,10 @@
 <section class="main">
+@if(storage()){
   <div class="first-row">
 
     <div class="configure-selector">
       <p>Video format</p>
-      <select id="format-video-selector" [(ngModel)]="videoformat" (change)="onResolutionChange()" >
+      <select id="format-video-selector" [(ngModel)]="videoformat" (change)="onformatVideoChange()" >
         <option>mp4</option>
         <option>avi</option>
         <option>mkv</option>
@@ -12,7 +13,7 @@
     </div>
     <div class="configure-selector">
       <p>image format</p>
-      <select id="format-image-selector" [(ngModel)]="imageformat" (change)="onResolutionChange()" >
+      <select id="format-image-selector" [(ngModel)]="imageformat" (change)="onformatImageChange()" >
         <option>png</option>
         <option>jpg</option>
         <option>webp</option>
@@ -21,6 +22,7 @@
     </div>
 
       </div>
+}
   <div class="second-row">
       <div class="configure-selector">
         <p>Resolution</p>
