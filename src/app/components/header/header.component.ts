@@ -7,7 +7,7 @@ import { AuthService } from "../auth/sign-up/auth.service";
 
 
 @Component({
-	selector: 'header',
+	selector: 'app-header',
 	standalone: true,
 	imports: [RouterLink, LogInComponent],
 	templateUrl: './header.component.html',

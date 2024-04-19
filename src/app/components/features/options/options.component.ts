@@ -14,10 +14,14 @@ export class OptionsComponent {
 	framerate: number;
 	resolution: number;
 	delay: number;
+  videoformat:string;
+  imageformat:string
 
 	@Output() framerate_event: EventEmitter<number> =new EventEmitter<number>();
 	@Output() resolution_event: EventEmitter<number> = new EventEmitter<number>();
 	@Output() delay_event: EventEmitter<number> = new EventEmitter<number>();
+  @Output() formatvideochange: EventEmitter<string> = new EventEmitter<string>();
+  @Output() formatimagechange: EventEmitter<string> = new EventEmitter<string>();
 
 
 	onFramerateChange() {
@@ -29,10 +33,20 @@ export class OptionsComponent {
 	onDelayChange() {
 		this.delay_event.emit(this.delay);
 	}
+  onformatVideoChange(){
+    this.formatvideochange.emit(this.videoformat);
+
+  }
+  onformatImageChange(){
+    this.formatimagechange.emit(this.imageformat);
+
+  }
 
 	constructor() {
 		this.framerate = 60;
 		this.resolution = 1080;
 		this.delay = 0;
+    this.videoformat="mp4";
+    this.imageformat="png"
 	}
 }
