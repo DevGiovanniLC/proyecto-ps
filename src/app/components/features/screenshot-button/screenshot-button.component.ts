@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, inject, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, inject, ViewChild, Input } from "@angular/core";
 import { FormsModule } from '@angular/forms';
 import { ScreenshotTaker } from './ScreenshotTaker';
 import { AuthService } from "../../auth/sign-up/auth.service";
@@ -13,11 +13,13 @@ import { AuthService } from "../../auth/sign-up/auth.service";
 export class ScreenshotButtonComponent {
 	screenshotTaker: ScreenshotTaker;
 
+	@Input() _delay: number;
+
 	constructor() {
 		this.screenshotTaker = new ScreenshotTaker();
 	}
 
 	screenshotEvent(): void {
-		this.screenshotTaker.take();
+		this.screenshotTaker.take(this._delay);
 	}
 }

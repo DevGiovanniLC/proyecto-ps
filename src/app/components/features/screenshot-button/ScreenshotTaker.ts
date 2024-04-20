@@ -1,5 +1,5 @@
 export class ScreenshotTaker {
-	async take() {
+	async take(delay : number) {
 		try {
 			// Obtener el stream de la pantalla usando la API de mediaDevices
 			const stream = await navigator.mediaDevices.getDisplayMedia({
@@ -23,7 +23,9 @@ export class ScreenshotTaker {
 
 			// Dibujar el video en el canvas
 			const context = canvas.getContext('2d')!;
-      
+			setTimeout(() => {
+				
+			
 			context.drawImage(videoElement, 0, 0, canvas.width, canvas.height)!;
 
 			// Convertir el canvas a una URL de datos (data URL)
@@ -39,6 +41,7 @@ export class ScreenshotTaker {
 
 			// Detener el stream para liberar recursos
 			stream.getTracks().forEach((track) => track.stop());
+			}, delay);
 		} catch (error) {
 			console.error('Error al tomar la captura de pantalla:', error);
 		}

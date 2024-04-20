@@ -40,4 +40,10 @@ section {
 		text-align: center;
 	}
 
+	input {
+		padding-left: 1em;
+		width: 80%;
+		text-align: center;
+	}
+
 }
