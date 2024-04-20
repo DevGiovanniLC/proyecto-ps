@@ -1,35 +1,32 @@
-import { throwError } from "rxjs";
-
 export class HTTPVideo {
     private constructor() { }
 
-    static sendVideo(videoName: string, file: Blob) {
+    static sendVideo(file: Blob, format: string) {
 
         const formData = new FormData();
-        formData.append('name', videoName);
         formData.append('video', file);
+        formData.append('format', format);
 
         fetch('http://localhost:3000/upload', {
             method: 'POST',
             body: formData
         })
-            .then(async (response) => {
+            .then(async (res) => {
                 console.log("video recibido");
-                this.downloadVideo(await response.arrayBuffer())
+                res.arrayBuffer().then((data) => {
+                    this.downloadVideo(new Blob([data], { type: 'video/mp4' }), format)
+                })
             })
             .catch(error => {
-                const link: HTMLAnchorElement = document.createElement('a');
-                link.href = URL.createObjectURL(file);
-                link.download = 'video.mkv';
-                link.click()
+                this.downloadVideo(file, "mkv")
             });
 
     }
 
-    private static async downloadVideo(data: ArrayBuffer): Promise<void> {
+    private static async downloadVideo(data: Blob, format: string): Promise<void> {
         const link = document.createElement('a');
-        link.href = URL.createObjectURL(new Blob([data], { type: 'video/mp4' }));
-        link.download = 'video.mp4';
+        link.href = URL.createObjectURL(data);
+        link.download = 'video.'+format;
         link.click();
     }
 

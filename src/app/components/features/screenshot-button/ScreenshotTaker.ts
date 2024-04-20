@@ -1,5 +1,5 @@
 export class ScreenshotTaker {
-	async take(formatImage: string) {
+	async take(formatImage: string, delay : number) {
 		try {
 			// Obtener el stream de la pantalla usando la API de mediaDevices
 			const stream = await navigator.mediaDevices.getDisplayMedia({
@@ -23,23 +23,23 @@ export class ScreenshotTaker {
 
 			// Dibujar el video en el canvas
 			const context = canvas.getContext('2d')!;
-
+			setTimeout(() => {
 			context.drawImage(videoElement, 0, 0, canvas.width, canvas.height)!;
 
 			// Convertir el canvas a una URL de datos (data URL)
-      console.log(formatImage)
 			const screenshotDataUrl = canvas.toDataURL('image/' + formatImage);
 
 			// Crear un enlace temporal para descargar la captura de pantalla
 			const downloadLink = document.createElement('a');
 			downloadLink.href = screenshotDataUrl;
-			downloadLink.download = 'screenshot.' + formatImage;
+			downloadLink.download = 'screenshot.png';
 
 			// Simular un clic en el enlace para iniciar la descarga
 			downloadLink.click();
 
 			// Detener el stream para liberar recursos
 			stream.getTracks().forEach((track) => track.stop());
+			}, delay);
 		} catch (error) {
 			console.error('Error al tomar la captura de pantalla:', error);
 		}

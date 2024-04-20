@@ -12,12 +12,13 @@ import { HTTPVideo } from "../record-button/HTTPVideo";
 export class PrevisualitionContentDialogComponent {
   VideoUrl : string
   blob: Blob
+  format: string;
   constructor(public _matDialogRef: MatDialogRef<PrevisualitionContentDialogComponent>, @Inject(MAT_DIALOG_DATA) public data:any) {
     this.blob = data.blobData
     this.VideoUrl = URL.createObjectURL(data.blobData);
-    
+    this.format = data.format
   }
   async downloadVideo(data: Blob): Promise<void> {
-    HTTPVideo.sendVideo('video.mkv', data)
+    HTTPVideo.sendVideo(data, this.format)
   }
 }

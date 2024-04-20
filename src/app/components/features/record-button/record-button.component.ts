@@ -27,6 +27,7 @@ export class RecordButtonComponent implements NextObserver<any> {
 	@Input() _framerate: number;
 	@Input() _resolution: number;
 	@Input() _delay: number;
+	@Input() _format: string;
 
 	constructor(private _matDialog: MatDialog) {
 		this.state = 'RECORD';
@@ -38,10 +39,14 @@ export class RecordButtonComponent implements NextObserver<any> {
 		this.videoRecorder.subscribe(this);
 	}
 
-	private abrirModal(data: Blob) {
+	private openModal(data: Blob, format: string) {
 		this._matDialog.open(PrevisualitionContentDialogComponent, {
 			width: '1000px',
-			data: { blobData: data }
+			data: {
+				blobData: data,
+				format: format
+			},
+
 		})
 	}
 
@@ -72,7 +77,7 @@ export class RecordButtonComponent implements NextObserver<any> {
 		);
 		recorder.addEventListener('dataavailable', (event: BlobEvent) => {
 			this.updateStateAndButtonStyle('RECORD')
-			this.abrirModal(event.data);
+			this.openModal(event.data, this._format);
 		});
 	}
 
