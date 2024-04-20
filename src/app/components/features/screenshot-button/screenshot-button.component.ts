@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, inject, ViewChild } from "@angular/core";
+import {AfterViewInit, Component, ElementRef, inject, Input, ViewChild} from "@angular/core";
 import { FormsModule } from '@angular/forms';
 import { ScreenshotTaker } from './ScreenshotTaker';
 import { AuthService } from "../../auth/sign-up/auth.service";
