@@ -17,11 +17,13 @@
 }
 
 #buttondownload{
+  padding: 4px 8px;
   background-color: black; /* Establece el color de fondo del botón */
   border-radius: 0.3em;
   color: white; /* Establece el color del texto del botón */
   cursor: pointer; /* Cursor al pasar por encima */
   transition: background-color 0.3s, color 0.3s; /* Transición suave al cambiar colores */
+  border: 1px solid #ccc; /* Borde del enlace */
 }
 #buttondownload:hover{
   background-color: #e0e0e0; /* Color de fondo al pasar el ratón */
