@@ -1,6 +1,13 @@
-<video src='{{this.VideoUrl}}' controls></video>
-<div>
-  <button (click)="this.downloadVideo(this.blob)">Descargar</button>
-  <button>Cancelar</button>
+<div id="closediv">
+  <div id="buttonclose" mat-dialog-close>&times;</div>
 </div>
+<mat-dialog-content>
+  <video id="videomodal" src='{{this.VideoUrl}}' controls></video>
+</mat-dialog-content>
+
+<div id="optionsmodal">
+  <button id="buttondownload" (click)="this.downloadVideo(this.blob)">Descargar</button>
+</div>
+
+
 

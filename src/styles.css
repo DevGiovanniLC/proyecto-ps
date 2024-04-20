@@ -13,6 +13,8 @@ html {
   font-family: Oswald;
 }
 
-
+.mat-mdc-dialog-container {
+  --mdc-dialog-container-shape: 2em;
+}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
