@@ -127,7 +127,7 @@ export  class SignUpComponent {
         try {
           await this.firebaseService.signup(this.form.value as User);
           this.firebaseService.enviarCorreo()
-          window.alert("Usuario logeado");
+          window.alert("Usuario Creado");
           this.router.navigate(["/login"])
           console.log("Éxito");
         } catch (error) {

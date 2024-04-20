@@ -1,6 +1,7 @@
-import { Component, Output,EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, inject } from "@angular/core";
 import { FormsModule } from '@angular/forms';
 import { ScreenshotButtonComponent } from '../screenshot-button/screenshot-button.component';
+import { AuthService } from "../../auth/sign-up/auth.service";
 
 
 @Component({
@@ -41,6 +42,8 @@ export class OptionsComponent {
     this.formatimagechange.emit(this.imageformat);
 
   }
+  firebaseService = inject(AuthService);
+
 
 	constructor() {
 		this.framerate = 60;
@@ -49,4 +52,12 @@ export class OptionsComponent {
     this.videoformat="mp4";
     this.imageformat="png"
 	}
+
+  storage(){
+
+    const x = localStorage.getItem('isloogedIn') === 'true';
+    console.log(x)
+    return x
+
+  }
 }
