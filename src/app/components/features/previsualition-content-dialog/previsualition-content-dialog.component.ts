@@ -1,11 +1,13 @@
 import { Component, Inject } from "@angular/core";
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogContent, MatDialogRef} from "@angular/material/dialog";
 import { HTTPVideo } from "../record-button/HTTPVideo";
 
 @Component({
   selector: 'app-previsualition-content-dialog',
   standalone: true,
-  imports: [],
+  imports: [
+    MatDialogContent
+  ],
   templateUrl: './previsualition-content-dialog.component.html',
   styleUrl: './previsualition-content-dialog.component.css'
 })
