@@ -102,12 +102,12 @@ export class SignUpComponent {
         if (contrasena.length < 6) {
 
 
-            return "La contraseña es menor de 6 digitos"
+            return "La contraseña debe tener al menos 6 caracteres, un numero y un simbolo $@&"
         }
         const numero = /\d/.test(contrasena);
         const tieneSimbolo = /[!@#$%&*(),.?":{}|<>]/.test(contrasena);
         if (!numero || !tieneSimbolo) {
-            return "La contraseña debe tener un numero y algun simbolo $@&"
+            return "La contraseña debe contener al menos un número y un símbolo $@&"
         }
         if (contrasena != contrasena1) {
             return "Las contraseñas no coinciden"
