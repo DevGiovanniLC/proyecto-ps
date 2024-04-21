@@ -13,8 +13,3 @@ html {
 	--mdc-dialog-container-shape: 2em;
 }
 
-html,
-body {
-	height: 100%;
-}
-

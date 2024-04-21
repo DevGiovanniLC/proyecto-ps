@@ -2,21 +2,22 @@ form {
 	display: block;
 	justify-content: center;
 	align-items: center;
-	margin: 50px 10px;
+	margin-top: 3.5em;
 }
 
 .first-row {
 	display: flex;
 	justify-content: center;
 	flex-direction: row;
-	gap: 16em;
+	gap: 10%;
 }
 
 .second-row {
 	display: flex;
 	justify-content: center;
 	flex-direction: row;
-	gap: 16em;
+	flex-wrap: wrap;
+	gap: 10%;
 }
 
 .configure-selector {
@@ -48,6 +49,7 @@ form {
 
 	input{
 		text-align: center;
+		padding-left: 1em;
 	}
 
 }

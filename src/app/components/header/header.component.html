@@ -1,11 +1,11 @@
 <header class="header">
-	<a href="/whoweare">WHO WE ARE</a>
+	<a href="/whoweare" draggable="false">WHO WE ARE</a>
 	<div class="users-buttons">
 		@if(storage()){
-		<a (click)="getout()" routerLink="">LOG OUT</a>
+		<a (click)="getout()" routerLink draggable="false">LOG OUT</a>
 		} @else {
-		<a routerLink="/login">LOG IN</a>
-		<a routerLink="/signup">SIGN UP</a>
+		<a routerLink="/login" draggable="false">LOG IN</a>
+		<a routerLink="/signup" draggable="false">SIGN UP</a>
 
 		}
 
