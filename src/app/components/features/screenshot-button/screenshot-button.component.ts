@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, inject, Input, ViewChild} from "@angular/core";
 import { FormsModule } from '@angular/forms';
-import { ScreenshotTaker } from '../../../services/ScreenshotTaker';
-import { AuthService } from "../../auth/sign-up/auth.service";
+import { ScreenshotTaker } from '../../../services/ScreenshotTaker.service';
+import { AuthService } from "../../../services/AuthService.service";
 
 @Component({
 	selector: 'app-screenshot-button',

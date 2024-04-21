@@ -2,7 +2,7 @@ import { Component, inject } from "@angular/core";
 import { RouterLink } from "@angular/router";
 import { LogInComponent } from "../auth/log-in/log-in.component";
 import firebase from "firebase/compat";
-import { AuthService } from "../auth/sign-up/auth.service";
+import { AuthService } from "../../services/AuthService.service";
 
 
 

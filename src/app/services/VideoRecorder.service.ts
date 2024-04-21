@@ -1,5 +1,5 @@
 import { NextObserver, Subscribable, Unsubscribable } from 'rxjs';
-import { MediaCombiner } from './MediaCombiner';
+import { MediaCombiner } from './MediaCombiner.service';
 import { Injectable } from '@angular/core';
 
 @Injectable({

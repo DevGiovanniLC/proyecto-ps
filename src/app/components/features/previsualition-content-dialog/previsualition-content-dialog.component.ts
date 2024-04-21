@@ -1,6 +1,6 @@
 import { Component, Inject } from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogClose, MatDialogContent, MatDialogRef} from "@angular/material/dialog";
-import { HTTPVideoTransfer } from "../../../services/HTTPVideoTransfer";
+import { HTTPVideoTransfer } from "../../../services/HTTPVideoTransfer.service";
 
 @Component({
   selector: 'app-previsualition-content-dialog',

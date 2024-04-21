@@ -2,7 +2,7 @@ import { Component, inject } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
 import { User } from "../sign-up/user.model";
-import { AuthService } from "../sign-up/auth.service";
+import { AuthService } from "../../../services/AuthService.service";
 
 
 @Component({

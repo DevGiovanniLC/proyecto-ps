@@ -5,7 +5,7 @@ import { OptionsComponent } from '../options/options.component';
 import { NextObserver } from 'rxjs';
 import { PrevisualitionContentDialogComponent } from '../previsualition-content-dialog/previsualition-content-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { VideoRecorder } from '../../../services/VideoRecorder';
+import { VideoRecorder } from '../../../services/VideoRecorder.service';
 
 @Component({
 	selector: 'app-record-button',

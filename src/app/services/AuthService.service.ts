@@ -5,7 +5,7 @@ import {
     getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut,
     GoogleAuthProvider, signInWithPopup, sendEmailVerification, sendPasswordResetEmail
 } from "@angular/fire/auth";
-import { User } from "./user.model";
+import { User } from "../components/auth/sign-up/user.model";
 import { Router } from "@angular/router";
 import firebase from "firebase/compat";
 import app = firebase.app;

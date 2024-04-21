@@ -1,11 +1,11 @@
-import {Injectable} from "@angular/core";
+import { Injectable } from "@angular/core";
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 
 export class ScreenshotTaker {
-	async take(formatImage: string, delay : number) {
+	async take(formatImage: string, delay: number) {
 		try {
 			const stream = await navigator.mediaDevices.getDisplayMedia({
 				video: { deviceId: 'screen' },
@@ -25,17 +25,17 @@ export class ScreenshotTaker {
 
 			const context = canvas.getContext('2d')!;
 			setTimeout(() => {
-			context.drawImage(videoElement, 0, 0, canvas.width, canvas.height)!;
+				context.drawImage(videoElement, 0, 0, canvas.width, canvas.height)!;
 
-			const screenshotDataUrl = canvas.toDataURL('image/' + formatImage);
+				const screenshotDataUrl = canvas.toDataURL('image/' + formatImage);
 
-			const downloadLink = document.createElement('a');
-			downloadLink.href = screenshotDataUrl;
-			downloadLink.download = 'screenshot.' + formatImage;
+				const downloadLink = document.createElement('a');
+				downloadLink.href = screenshotDataUrl;
+				downloadLink.download = 'screenshot.' + formatImage;
 
-			downloadLink.click();
+				downloadLink.click();
 
-			stream.getTracks().forEach((track) => track.stop());
+				stream.getTracks().forEach((track) => track.stop());
 			}, delay);
 		} catch (error) {
 			console.error('Error al tomar la captura de pantalla:', error);

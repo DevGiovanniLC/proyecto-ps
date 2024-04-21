@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter, inject } from "@angular/core";
 import { FormsModule } from '@angular/forms';
 import { ScreenshotButtonComponent } from '../screenshot-button/screenshot-button.component';
-import { AuthService } from "../../auth/sign-up/auth.service";
+import { AuthService } from "../../../services/AuthService.service";
 
 
 @Component({
