@@ -26,23 +26,24 @@ form {
 	color: white; /* Establece el color del texto del botón */
 	cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
 	width: 6em;
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+	gap : 0.8em;
 
-	p {
+	label {
 		font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
 		text-align: center; /* Alinea el texto al centro */
 		font-size: 1.2em; /* Establece el tamaño de la fuente del texto del botón */
 		font-weight: bold;
+		cursor: inherit; 
 	}
 
 	select {
 		padding-left: 1em;
 		width: 100%;
 		text-align: center;
+		cursor: inherit; 
 	}
 
-	input {
-		padding-left: 1em;
-		width: 80%;
-		text-align: center;
-	}
 }
