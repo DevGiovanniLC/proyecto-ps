@@ -9,8 +9,12 @@ import { Injectable } from '@angular/core';
 export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 	private media: MediaStream;
 	private mediaRecorder: MediaRecorder;
+
 	private observers: NextObserver<any>[];
 	private micro: boolean;
+
+	private audioStream: MediaStream;
+	private videoStream: MediaStream;
 
 	constructor(private mediaCombiner: MediaCombiner) {
 		this.observers = [];
@@ -22,20 +26,20 @@ export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 		resolution: number,
 		delay: number
 	): Promise<void> {
-		const audioStream = this.micro
-			? await navigator.mediaDevices.getUserMedia({ audio: true })
-			: null;
-		const videoStream = await this.getDisplayMedia(framerate, resolution);
-		const media = audioStream
-			? this.mediaCombiner.combine([audioStream, videoStream])
-			: videoStream;
+		this.videoStream = await this.getDisplayMedia(framerate, resolution);
+		this.audioStream = this.micro
+		? await navigator.mediaDevices.getUserMedia({ audio: true })
+		: null;
+		this.media = this.audioStream
+			? this.mediaCombiner.combine([this.audioStream, this.videoStream])
+			: this.videoStream;
 
-		this.mediaRecorder = this.generateMediaRecorder(media);
+		this.mediaRecorder = this.generateMediaRecorder(this.media);
 
 		setTimeout(() => {
 			this.notifyObserver(this.mediaRecorder);
 			this.mediaRecorder.start();
-			this.generateVideoTrack(media);
+			this.generateVideoTrack(this.media);
 		}, delay);
 	}
 
@@ -57,8 +61,6 @@ export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 		return recorder;
 	}
 
-
-
 	private generateVideoTrack(media: MediaStream): MediaStreamTrack {
 		const videoTrack = media.getVideoTracks()[0];
 		videoTrack.onended = () => this.stop();
@@ -66,8 +68,11 @@ export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 	}
 
 	async stop(): Promise<void> {
-		this.mediaRecorder.stop();
+		this.mediaRecorder?.stop();
 		this.mediaRecorder = null;
+		this.media.getTracks().forEach((track) => track.stop());
+		this.audioStream?.getTracks().forEach((track) => track.stop());
+		this.videoStream?.getTracks().forEach((track) => track.stop());
 	}
 
 	isRecording(): boolean {
