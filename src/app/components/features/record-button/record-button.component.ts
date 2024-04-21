@@ -43,8 +43,7 @@ export class RecordButtonComponent implements NextObserver<any> {
 			data: {
 				blobData: data,
 				format: format
-			},
-
+			}
 		})
 	}
 

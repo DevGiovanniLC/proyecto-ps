@@ -46,4 +46,8 @@ form {
 		cursor: inherit; 
 	}
 
+	input{
+		text-align: center;
+	}
+
 }
