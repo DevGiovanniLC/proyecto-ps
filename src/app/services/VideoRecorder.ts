@@ -1,5 +1,10 @@
 import { NextObserver, Subscribable, Unsubscribable } from 'rxjs';
 import { MediaCombiner } from './MediaCombiner';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+	providedIn: 'root'
+})
 
 export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 	private media: MediaStream;
@@ -7,7 +12,7 @@ export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 	private observers: NextObserver<any>[];
 	private micro: boolean;
 
-	constructor() {
+	constructor(private mediaCombiner: MediaCombiner) {
 		this.observers = [];
 		this.micro = true;
 	}
@@ -22,7 +27,7 @@ export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 			: null;
 		const videoStream = await this.getDisplayMedia(framerate, resolution);
 		const media = audioStream
-			? new MediaCombiner([audioStream, videoStream]).combine()
+			? this.mediaCombiner.combine([audioStream, videoStream])
 			: videoStream;
 
 		this.mediaRecorder = this.generateMediaRecorder(media);

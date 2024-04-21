@@ -1,21 +1,24 @@
+import { Injectable } from "@angular/core";
+
+@Injectable({
+	providedIn: 'root'
+})
+
 export class MediaCombiner {
-	streamsList: MediaStream[];
 
-	constructor(streamsList: MediaStream[]) {
-		this.streamsList = streamsList;
-	}
+	constructor() { }
 
-	combine() {
-		const audioStream = this.combineAudio();
-		const videoStream = this.combineVideo();
+	combine(streamsList: MediaStream[]): MediaStream {
+		const audioStream = this.combineAudio(streamsList);
+		const videoStream = this.combineVideo(streamsList);
 		return this.combineVideoAudio(audioStream, videoStream);
 	}
 
-	private combineAudio(): MediaStream {
+	private combineAudio(streamsList: MediaStream[]): MediaStream {
 		const audioContext = new AudioContext();
 		const audioStream = audioContext.createMediaStreamDestination();
 
-		for (const stream of this.streamsList) {
+		for (const stream of streamsList) {
 			if (stream.getAudioTracks().length === 0) continue;
 			const streamNode = audioContext.createMediaStreamSource(stream);
 			streamNode.connect(audioStream);
@@ -24,9 +27,9 @@ export class MediaCombiner {
 		return audioStream.stream;
 	}
 
-	private combineVideo() {
+	private combineVideo(streamsList: MediaStream[]): MediaStream {
 		const videoMedia = new MediaStream();
-		this.streamsList.forEach(stream =>
+		streamsList.forEach(stream =>
 			stream
 				.getVideoTracks()
 				.forEach((track) => videoMedia.addTrack(track))
