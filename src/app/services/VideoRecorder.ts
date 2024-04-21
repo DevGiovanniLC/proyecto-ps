@@ -26,10 +26,10 @@ export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 		resolution: number,
 		delay: number
 	): Promise<void> {
-		this.audioStream = this.micro
-			? await navigator.mediaDevices.getUserMedia({ audio: true })
-			: null;
 		this.videoStream = await this.getDisplayMedia(framerate, resolution);
+		this.audioStream = this.micro
+		? await navigator.mediaDevices.getUserMedia({ audio: true })
+		: null;
 		this.media = this.audioStream
 			? this.mediaCombiner.combine([this.audioStream, this.videoStream])
 			: this.videoStream;
