@@ -129,7 +129,6 @@ export  class SignUpComponent {
           this.firebaseService.enviarCorreo()
           window.alert("Usuario Creado");
           this.router.navigate(["/login"])
-          console.log("Éxito");
         } catch (error) {
           const x = error.code
           if (x == 'auth/email-already-in-use') {
@@ -148,42 +147,9 @@ export  class SignUpComponent {
       this.clean()
       if(x != "") {
         this.passwordlenght(x);
-        console.log("toy aqui")
       }
     }
   }
-
-  /*
-  async submit() {
-    if(this.emailerrorr()) {
-      if (this.passwordlenght()) {
-        if (this.coincidenClaves()) {
-          if (this.form.valid) {
-            try {
-              await this.firebaseService.signup(this.form.value as User);
-              this.firebaseService.enviarCorreo()
-              this.router.navigate(["/login"])
-              console.log("Éxito");
-            } catch (error) {
-              const x = error.code
-              if (x == 'auth/invalid-email') {
-                this.emailBadly();
-              } else if (x == 'auth/email-already-in-use') {
-
-                this.emailUsed();
-              }
-
-
-              // Aquí puedes manejar el error, por ejemplo, mostrando un mensaje de error al usuario
-            }
-          }
-        }
-      }
-    }else{
-      this.emailBadly();
-    }
-  }
-  */
 }
 
 

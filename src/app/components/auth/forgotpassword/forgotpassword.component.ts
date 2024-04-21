@@ -33,7 +33,6 @@ export class ForgotpasswordComponent {
 
     try {
       this.firabase.Forgotpassword(this.form.value as User)
-      console.log("correo enviado correctamente")
       setTimeout(() => {
         // Navegar a otra página después de 2 segundos
         this.router.navigate(["/login"])
@@ -41,7 +40,6 @@ export class ForgotpasswordComponent {
 
 
     }catch (error){
-      console.log("Hubo un error en enviar correo")
     }
 
 

@@ -25,7 +25,6 @@ export class HeaderComponent {
   storage(){
 
     const x = localStorage.getItem('isloogedIn') === 'true';
-    console.log(x)
     return x
 
   }
@@ -36,7 +35,6 @@ export class HeaderComponent {
   }
 
   getout(){
-    console.log("no puede ser")
     return this.firebaseService.signout()
   }
 

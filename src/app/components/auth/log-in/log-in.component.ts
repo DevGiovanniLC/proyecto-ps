@@ -44,7 +44,6 @@ export class LogInComponent {
             this.firebaseService.changestatus();
             this.router.navigate([""])
             this.login1 = true;
-            console.log("Éxito");
           } catch (error) {
             const x = error.code
             if(x  == 'auth/invalid-credential'){

@@ -56,7 +56,6 @@ export class OptionsComponent {
 	storage() {
 
 		const x = localStorage.getItem('isloogedIn') === 'true';
-		console.log(x)
 		return x
 
 	}

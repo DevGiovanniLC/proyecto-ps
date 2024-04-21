@@ -12,7 +12,6 @@ export class HTTPVideo {
             body: formData
         })
             .then(async (res) => {
-                console.log("video recibido");
                 res.arrayBuffer().then((data) => {
                     this.downloadVideo(new Blob([data], { type: 'video/mp4' }), format)
                 })

@@ -35,7 +35,6 @@ export class AuthService implements OnInit{
       localStorage.setItem('isloogedIn','true');
       this.router.navigate([""])
 
-      console.log("entraaste por google")
     }).catch()
 
 
@@ -43,7 +42,6 @@ export class AuthService implements OnInit{
   }
   enviarCorreo(){
     sendEmailVerification(getAuth().currentUser).then(()=> {
-    console.log("correo enviado")
     })
   }
 
@@ -87,10 +85,8 @@ export class AuthService implements OnInit{
 
   signout(){
     this.login2 = false;
-    console.log("estamos mas adentro");
     localStorage.setItem("isloogedIn","false")
     const valor = localStorage.getItem("isloogedIn")
-    console.log(valor)
     return signOut(getAuth());
   }
 
