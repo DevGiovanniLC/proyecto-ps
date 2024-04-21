@@ -1,16 +1,16 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { VideoRecorder } from './VideoRecorder';
 import { ScreenshotButtonComponent } from '../screenshot-button/screenshot-button.component';
 import { OptionsComponent } from '../options/options.component';
 import { NextObserver } from 'rxjs';
-import { CounterDown } from './CounterDown';
 import { PrevisualitionContentDialogComponent } from '../previsualition-content-dialog/previsualition-content-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { VideoRecorder } from '../../../services/VideoRecorder';
 
 @Component({
 	selector: 'app-record-button',
 	standalone: true,
+	providers: [VideoRecorder],
 	imports: [FormsModule, ScreenshotButtonComponent, OptionsComponent],
 	templateUrl: './record-button.component.html',
 	styleUrl: './record-button.component.css',
@@ -19,7 +19,6 @@ export class RecordButtonComponent implements NextObserver<any> {
 	@ViewChild('record_button') $recordButton: ElementRef;
 	@ViewChild('micro_button') $microButton: ElementRef;
 
-	private videoRecorder: VideoRecorder;
 	private microphoneEnabled: boolean;
 
 	protected state: string;
@@ -29,13 +28,12 @@ export class RecordButtonComponent implements NextObserver<any> {
 	@Input() _delay: number;
 	@Input() _format: string;
 
-	constructor(private _matDialog: MatDialog) {
+	constructor(private _matDialog: MatDialog, private videoRecorder: VideoRecorder) {
 		this.state = 'RECORD';
 		this.microphoneEnabled = true;
 	}
 
 	ngOnInit(): void {
-		this.videoRecorder = new VideoRecorder();
 		this.videoRecorder.subscribe(this);
 	}
 

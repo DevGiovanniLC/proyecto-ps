@@ -1,22 +1,21 @@
 section {
-	display:block;
-  justify-content: center;
-  align-items: center;
-  margin: 50px 10px
+	display: block;
+	justify-content: center;
+	align-items: center;
+	margin: 50px 10px;
 }
 
-
-.first-row{
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  gap: 16em;
+.first-row {
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+	gap: 16em;
 }
-.second-row{
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  gap: 16em;
+.second-row {
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+	gap: 16em;
 }
 .configure-selector {
 	border: 1em solid #000000; /* Establece un borde sólido de 2px de ancho */
@@ -30,8 +29,7 @@ section {
 		font-family: Oswald;
 		text-align: center; /* Alinea el texto al centro */
 		font-size: 1.2em; /* Establece el tamaño de la fuente del texto del botón */
-    font-weight: bold;
-
+		font-weight: bold;
 	}
 
 	select {
@@ -45,5 +43,4 @@ section {
 		width: 80%;
 		text-align: center;
 	}
-
 }

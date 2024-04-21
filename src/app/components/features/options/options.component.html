@@ -1,54 +1,71 @@
 <section class="main">
-@if(storage()){
-  <div class="first-row">
+	@if(storage()){
+	<div class="first-row">
+		<div class="configure-selector">
+			<p>Video format</p>
+			<select
+				id="format-video-selector"
+				[(ngModel)]="videoformat"
+				(change)="onformatVideoChange()"
+			>
+				<option>mp4</option>
+				<option>avi</option>
+				<option>webm</option>
+				<option>mov</option>
+				<option>flv</option>
+			</select>
+		</div>
+		<div class="configure-selector">
+			<p>image format</p>
+			<select
+				id="format-image-selector"
+				[(ngModel)]="imageformat"
+				(change)="onformatImageChange()"
+			>
+				<option>png</option>
+				<option>jpeg</option>
+				<option>webp</option>
+			</select>
+		</div>
+	</div>
+	}
+	<div class="second-row">
+		<div class="configure-selector">
+			<p>Resolution</p>
+			<select
+				id="resolution-selector"
+				[(ngModel)]="resolution"
+				(change)="onResolutionChange()"
+			>
+				<option>1080</option>
+				<option>720</option>
+				<option>480</option>
+				<option>360</option>
+			</select>
+		</div>
+		<div class="configure-selector">
+			<p>FPS</p>
+			<select
+				id="framerate-selector"
+				[(ngModel)]="framerate"
+				(change)="onFramerateChange()"
+			>
+				<option>60</option>
+				<option>30</option>
+				<option>24</option>
+				<option>15</option>
+			</select>
+		</div>
 
-    <div class="configure-selector">
-      <p>Video format</p>
-      <select id="format-video-selector" [(ngModel)]="videoformat" (change)="onformatVideoChange()" >
-        <option>mp4</option>
-        <option>avi</option>
-        <option>webm</option>
-        <option>mov</option>
-        <option>flv</option>
-
-      </select>
-    </div>
-    <div class="configure-selector">
-      <p>image format</p>
-      <select id="format-image-selector" [(ngModel)]="imageformat" (change)="onformatImageChange()" >
-        <option>png</option>
-        <option>jpeg</option>
-        <option>webp</option>
-
-      </select>
-    </div>
-
-      </div>
-}
-  <div class="second-row">
-      <div class="configure-selector">
-        <p>Resolution</p>
-        <select id="resolution-selector" [(ngModel)]="resolution" (change)="onResolutionChange()" >
-          <option>1080</option>
-          <option>720</option>
-          <option>480</option>
-          <option>360</option>
-        </select>
-      </div>
-    <div class="configure-selector">
-      <p>FPS</p>
-      <select id="framerate-selector" [(ngModel)]="framerate" (change)="onFramerateChange()">
-        <option>60</option>
-        <option>30</option>
-        <option>24</option>
-        <option>15</option>
-      </select>
-    </div>
-
-    <div class="configure-selector">
-      <p>Delay</p>
-        <input type="number" id="delay-input" [(ngModel)]="delay" (change)="onDelayChange()" min="0">
-    </div>
-
-  </div>
+		<div class="configure-selector">
+			<p>Delay</p>
+			<input
+				type="number"
+				id="delay-input"
+				[(ngModel)]="delay"
+				(change)="onDelayChange()"
+				min="0"
+			/>
+		</div>
+	</div>
 </section>
