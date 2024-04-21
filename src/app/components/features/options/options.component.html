@@ -1,8 +1,8 @@
-<section class="main">
+<form class="main">
 	@if(storage()){
 	<div class="first-row">
 		<div class="configure-selector">
-			<p>Video format</p>
+			<label>Video format</label>
 			<select
 				id="format-video-selector"
 				[(ngModel)]="videoformat"
@@ -16,7 +16,7 @@
 			</select>
 		</div>
 		<div class="configure-selector">
-			<p>image format</p>
+			<label>image format</label>
 			<select
 				id="format-image-selector"
 				[(ngModel)]="imageformat"
@@ -31,7 +31,7 @@
 	}
 	<div class="second-row">
 		<div class="configure-selector">
-			<p>Resolution</p>
+			<label>Resolution</label>
 			<select
 				id="resolution-selector"
 				[(ngModel)]="resolution"
@@ -44,7 +44,7 @@
 			</select>
 		</div>
 		<div class="configure-selector">
-			<p>FPS</p>
+			<label>FPS</label>
 			<select
 				id="framerate-selector"
 				[(ngModel)]="framerate"
@@ -58,7 +58,7 @@
 		</div>
 
 		<div class="configure-selector">
-			<p>Delay</p>
+			<label>Delay</label>
 			<input
 				type="number"
 				id="delay-input"
@@ -68,4 +68,4 @@
 			/>
 		</div>
 	</div>
-</section>
+</form>

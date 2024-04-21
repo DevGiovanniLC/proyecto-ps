@@ -1,4 +1,4 @@
-section {
+form {
 	display: block;
 	justify-content: center;
 	align-items: center;
@@ -11,12 +11,14 @@ section {
 	flex-direction: row;
 	gap: 16em;
 }
+
 .second-row {
 	display: flex;
 	justify-content: center;
 	flex-direction: row;
 	gap: 16em;
 }
+
 .configure-selector {
 	border: 1em solid #000000; /* Establece un borde sólido de 2px de ancho */
 	border-radius: 10px; /* Agrega esquinas redondeadas al botón */

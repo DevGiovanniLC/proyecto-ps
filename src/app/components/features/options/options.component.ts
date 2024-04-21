@@ -24,6 +24,19 @@ export class OptionsComponent {
 	@Output() formatvideochange: EventEmitter<string> = new EventEmitter<string>();
 	@Output() formatimagechange: EventEmitter<string> = new EventEmitter<string>();
 
+	constructor() {
+		this.framerate = 60;
+		this.resolution = 1080;
+		this.videoformat = "mp4";
+		this.imageformat = "png"
+		this.delay = 0;
+	}
+
+	firebaseService = inject(AuthService);
+	
+	storage() {
+		return (localStorage.getItem('isloogedIn') === 'true');
+	}
 
 	onFramerateChange() {
 		this.framerate_event.emit(this.framerate);
@@ -40,23 +53,5 @@ export class OptionsComponent {
 	}
 	onformatImageChange() {
 		this.formatimagechange.emit(this.imageformat);
-
-	}
-	firebaseService = inject(AuthService);
-
-
-	constructor() {
-		this.framerate = 60;
-		this.resolution = 1080;
-		this.delay = 0;
-		this.videoformat = "mp4";
-		this.imageformat = "png"
-	}
-
-	storage() {
-
-		const x = localStorage.getItem('isloogedIn') === 'true';
-		return x
-
 	}
 }
