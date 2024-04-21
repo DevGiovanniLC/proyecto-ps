@@ -32,7 +32,7 @@ export class ScreenshotTaker {
 			// Crear un enlace temporal para descargar la captura de pantalla
 			const downloadLink = document.createElement('a');
 			downloadLink.href = screenshotDataUrl;
-			downloadLink.download = 'screenshot.png';
+			downloadLink.download = 'screenshot.' + formatImage;
 
 			// Simular un clic en el enlace para iniciar la descarga
 			downloadLink.click();
