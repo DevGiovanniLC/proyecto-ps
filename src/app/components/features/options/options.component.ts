@@ -28,12 +28,12 @@ export class OptionsComponent {
 		this.framerate = 60;
 		this.resolution = 1080;
 		this.videoformat = "mp4";
-		this.imageformat = "png"
+		this.imageformat = "png";
 		this.delay = 0;
 	}
 
 	firebaseService = inject(AuthService);
-	
+
 	storage() {
 		return (localStorage.getItem('isloogedIn') === 'true');
 	}
