@@ -63,7 +63,7 @@ h2 {
 }
 
 .exit {
-	font-family: Oswald;
+	font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
 	font-weight: bold;
 	position: absolute;
 	top: 20px;

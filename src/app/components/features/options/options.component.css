@@ -26,7 +26,7 @@ section {
 	width: 6em;
 
 	p {
-		font-family: Oswald;
+		font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
 		text-align: center; /* Alinea el texto al centro */
 		font-size: 1.2em; /* Establece el tamaño de la fuente del texto del botón */
 		font-weight: bold;

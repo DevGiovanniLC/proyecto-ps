@@ -1,5 +1,5 @@
 .login-container {
-	font-family: Oswald;
+	font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -18,7 +18,7 @@
 }
 
 .h2box {
-	font-family: Oswald;
+	font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
 	background-color: black;
 	display: flex;
 	justify-content: flex-start;
@@ -30,7 +30,7 @@
 }
 
 h2 {
-	font-family: Oswald;
+	font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
 	color: white;
 	text-align: center;
 	font-weight: bolder;
@@ -39,7 +39,7 @@ h2 {
 }
 
 .login-form form {
-	font-family: Oswald;
+	font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
 	margin-top: 60px;
 	display: flex;
 	flex-direction: column;
@@ -47,28 +47,28 @@ h2 {
 }
 
 .input-group {
-	font-family: Oswald;
+	font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
 	margin-bottom: 1em;
 	display: flex;
 	flex-direction: column;
 }
 
 .input-group label {
-	font-family: Oswald;
+	font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
 	margin-bottom: 0.5em;
 	color: #666666;
 	font-weight: bolder;
 }
 
 .input-group input {
-	font-family: Oswald;
+	font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
 	padding: 0.5em;
 	border-radius: 10px;
 	font-size: 1em;
 }
 
 .exit {
-	font-family: Oswald;
+	font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
 	font-weight: bold;
 	position: absolute;
 	top: 20px;
@@ -82,7 +82,7 @@ h2 {
 }
 
 .login {
-	font-family: Oswald;
+	font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
 	background: black;
 	color: white;
 	padding: 0.5em;
@@ -107,7 +107,7 @@ button:hover {
 }
 
 .sign-up-text {
-	font-family: Oswald;
+	font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
 	text-align: center;
 	margin-top: 3em;
 	color: #333333;
@@ -124,7 +124,7 @@ button:hover {
 }
 
 .botones {
-	font-family: Oswald;
+	font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
 	display: flex;
 	justify-content: space-between;
 	margin-top: 20px;
@@ -149,7 +149,7 @@ button:hover {
 }
 
 .login-container {
-	font-family: Oswald;
+	font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -168,7 +168,7 @@ button:hover {
 }
 
 .h2box {
-	font-family: Oswald;
+	font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
 	background-color: black;
 	display: flex;
 	justify-content: center;
@@ -180,7 +180,7 @@ button:hover {
 }
 
 h2 {
-	font-family: Oswald;
+	font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
 	color: white;
 	text-align: center;
 	margin-bottom: 1em;
@@ -189,7 +189,7 @@ h2 {
 }
 
 .login-form form {
-	font-family: Oswald;
+	font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
 	margin-top: 60px;
 	display: flex;
 	flex-direction: column;
@@ -197,28 +197,28 @@ h2 {
 }
 
 .input-group {
-	font-family: Oswald;
+	font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
 	margin-bottom: 1em;
 	display: flex;
 	flex-direction: column;
 }
 
 .input-group label {
-	font-family: Oswald;
+	font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
 	margin-bottom: 0.5em;
 	color: #666666;
 	font-weight: bolder;
 }
 
 .input-group input {
-	font-family: Oswald;
+	font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
 	padding: 0.5em;
 	border-radius: 10px;
 	font-size: 1em;
 }
 
 .exit {
-	font-family: Oswald;
+	font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
 	font-weight: bold;
 	position: absolute;
 	top: 20px;
@@ -232,7 +232,7 @@ h2 {
 }
 
 .login {
-	font-family: Oswald;
+	font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
 	background: black;
 	color: white;
 	padding: 0.5em;
@@ -257,7 +257,7 @@ button:hover {
 }
 
 .sign-up-text {
-	font-family: Oswald;
+	font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
 	text-align: center;
 	margin-top: 3em;
 	color: #333333;
@@ -274,7 +274,7 @@ button:hover {
 }
 
 .botones {
-	font-family: Oswald;
+	font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
 	display: flex;
 	justify-content: space-between;
 	margin-top: 20px;

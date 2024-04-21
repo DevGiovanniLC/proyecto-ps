@@ -13,6 +13,8 @@ button {
 	display: flex; /* Centra verticalmente los elementos */
 	justify-content: space-between;
 	flex-direction: row;
+	font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
+	font-weight: bold;
 }
 
 .users-buttons {
@@ -38,9 +40,4 @@ a {
 a:hover {
 	background-color: #e0e0e0; /* Color de fondo al pasar el ratón */
 	color: #000; /* Color del texto al pasar el ratón */
-}
-
-.hola{
-  font-family: Oswald;
-  font-weight: bold;
 }

@@ -83,8 +83,8 @@ export class RecordButtonComponent implements NextObserver<any> {
 		this.state = state;
 		this.$recordButton.nativeElement.style.backgroundImage =
 			state === 'RECORDING'
-				? "url('/assets/recording_state.png')"
-				: "url('/assets/stopped_state.png')";
+				? "url('/assets/recording_state.webp')"
+				: "url('/assets/stopped_state.webp')";
 		this.$microButton.nativeElement.disabled = state !== 'RECORD';
 	}
 
@@ -96,10 +96,10 @@ export class RecordButtonComponent implements NextObserver<any> {
 		this.microphoneEnabled = !this.microphoneEnabled;
 		if (this.microphoneEnabled) {
 			this.$microButton.nativeElement.style.backgroundImage =
-				"url('/assets/micro_enable.png')";
+				"url('/assets/micro_enable.webp')";
 		} else {
 			this.$microButton.nativeElement.style.backgroundImage =
-				"url('/assets/micro_disable.png')";
+				"url('/assets/micro_disable.webp')";
 		}
 	}
 }
