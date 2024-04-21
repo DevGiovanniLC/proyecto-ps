@@ -4,6 +4,7 @@
 		<div class="configure-selector">
 			<label>Video format</label>
 			<select
+			name="format-video-selector"
 				id="format-video-selector"
 				[(ngModel)]="videoformat"
 				(change)="onformatVideoChange()"
@@ -18,6 +19,7 @@
 		<div class="configure-selector">
 			<label>image format</label>
 			<select
+				name="format-image-selector"
 				id="format-image-selector"
 				[(ngModel)]="imageformat"
 				(change)="onformatImageChange()"
@@ -33,6 +35,7 @@
 		<div class="configure-selector">
 			<label>Resolution</label>
 			<select
+				name="resolution-selector"
 				id="resolution-selector"
 				[(ngModel)]="resolution"
 				(change)="onResolutionChange()"
@@ -46,6 +49,7 @@
 		<div class="configure-selector">
 			<label>FPS</label>
 			<select
+				name="framerate-selector"
 				id="framerate-selector"
 				[(ngModel)]="framerate"
 				(change)="onFramerateChange()"
@@ -60,6 +64,7 @@
 		<div class="configure-selector">
 			<label>Delay</label>
 			<input
+			name="delay-input"
 				placeholder="0"
 				type="number"
 				id="delay-input"
