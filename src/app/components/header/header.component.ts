@@ -7,36 +7,36 @@ import { AuthService } from "../auth/sign-up/auth.service";
 
 
 @Component({
-	selector: 'app-header',
-	standalone: true,
-	imports: [RouterLink, LogInComponent],
-	templateUrl: './header.component.html',
-	styleUrl: './header.component.css',
+    selector: 'app-header',
+    standalone: true,
+    imports: [RouterLink, LogInComponent],
+    templateUrl: './header.component.html',
+    styleUrl: './header.component.css',
 })
 export class HeaderComponent {
-  isloogedIn:boolean
-  firebaseService = inject(AuthService);
+    isloogedIn: boolean
+    firebaseService = inject(AuthService);
 
-  constructor() {
+    constructor() {
 
 
-  }
+    }
 
-  storage(){
+    storage() {
 
-    const x = localStorage.getItem('isloogedIn') === 'true';
-    return x
+        const x = localStorage.getItem('isloogedIn') === 'true';
+        return x
 
-  }
+    }
 
-  getlog():boolean{
-    localStorage.setItem('isloogedIn',"false")
-    return this.firebaseService.getLogin()
-  }
+    getlog(): boolean {
+        localStorage.setItem('isloogedIn', "false")
+        return this.firebaseService.getLogin()
+    }
 
-  getout(){
-    return this.firebaseService.signout()
-  }
+    getout() {
+        return this.firebaseService.signout()
+    }
 
 
 
