@@ -39,7 +39,7 @@ export class RecordButtonComponent implements NextObserver<any> {
 
 	private openModal(data: Blob, format: string) {
 		this._matDialog.open(PrevisualitionContentDialogComponent, {
-			width: '1000px',
+			width: '65%',
 			data: {
 				blobData: data,
 				format: format
