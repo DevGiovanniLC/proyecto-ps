@@ -11,29 +11,31 @@ import { HTTPVideoTransfer } from '../services/HTTPVideoTransfer.service';
     HeaderComponent,
   ],
   providers: [HTTPVideoTransfer]
-  
+
 })
-export  class FormatconverterPageComponent implements OnInit {
+export class FormatconverterPageComponent implements OnInit {
 
   constructor(private httpVideo: HTTPVideoTransfer) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   onDrop(event: DragEvent) {
     event.preventDefault();
     const files = event.dataTransfer.files;
-    this.uploadFiles(files);
+    this.httpVideo.sendVideo(files[0],"mp4");
   }
-  
+
   onDragOver(event: DragEvent) {
     event.preventDefault();
   }
-  
+
   onDragLeave(event: DragEvent) {
     event.preventDefault();
   }
 
-  uploadFiles(files: FileList) {
-    throw new Error('Method not implemented.');
+  onFileSelected(event: Event) {
+    const files = (event.target as HTMLInputElement).files;
+    this.httpVideo.sendVideo(files[0],"mp4");
   }
+
 }

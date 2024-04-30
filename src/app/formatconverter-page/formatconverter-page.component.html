@@ -1,13 +1,17 @@
 <app-header></app-header>
 
-<section>
+<section draggable="false">
     <div 
         class="dropzone"
         (drop)="onDrop($event)"
         (dragover)="onDragOver($event)"
         (dragleave)="onDragLeave($event)"
+        draggable="false"
+        
     >
-    <img src="/assets/videoplaceholder.jpg"/>
-        Drag and drop videos here
+    <img src="/assets/videoplaceholder.jpg" draggable="false"/>
+    <em draggable="false" style="user-select: none;">Drag and drop videos here</em>
+    <em draggable="false" style="user-select: none;">or click to select video</em>
+    <input type="file"  (change)="onFileSelected($event)">
     </div>
 </section>
