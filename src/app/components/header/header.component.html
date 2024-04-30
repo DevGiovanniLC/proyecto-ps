@@ -1,14 +1,20 @@
 <header class="header">
-	<a href="/whoweare" draggable="false">WHO WE ARE</a>
-	<div class="users-buttons">
-		@if(storage()){
-		<a (click)="getout()" routerLink draggable="false">LOG OUT</a>
-		} @else {
-		<a routerLink="/login" draggable="false">LOG IN</a>
-		<a routerLink="/signup" draggable="false">SIGN UP</a>
-
+	<section>
+		<a href="/whoweare" draggable="false">WHO WE ARE</a>
+		@if (currentPage == '/home') {
+			<a href="/formatconverter" draggable="false">FORMAT CONVERTER</a>
+		}@else{
+			<a href="/home" draggable="false">HOME</a>
 		}
+	</section>
 
-		<button class="secundary" type="button">. . .</button>
-	</div>
+	<section class="users-buttons">
+		@if(storage()){
+			<a (click)="getout()" routerLink draggable="false">LOG OUT</a>
+		} @else {
+			<a routerLink="/login" draggable="false">LOG IN</a>
+			<a routerLink="/signup" draggable="false">SIGN UP</a>
+		}
+		<button class="secundary" type="button" draggable="false">...</button>
+	</section>
 </header>

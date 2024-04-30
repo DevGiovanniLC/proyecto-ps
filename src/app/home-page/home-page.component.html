@@ -1,0 +1,16 @@
+<body>
+	<app-header></app-header>
+	<main>
+		<app-record-button
+			[_framerate]="options.framerate"
+			[_resolution]="options.resolution"
+			[_delay]="options.delay * 1000"
+			[_format]="options.videoformat"
+		/>
+		<app-screenshot-button
+			[_formatImage]="options.imageformat"
+			[_delay]="options.delay * 1000"
+		/>
+		<app-options #options />
+	</main>
+</body>

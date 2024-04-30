@@ -1,8 +1,8 @@
 import { Component, inject } from "@angular/core";
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink, NavigationEnd } from "@angular/router";
 import { LogInComponent } from "../auth/log-in/log-in.component";
-import firebase from "firebase/compat";
 import { AuthService } from "../../services/AuthService.service";
+
 
 
 
@@ -16,17 +16,18 @@ import { AuthService } from "../../services/AuthService.service";
 export class HeaderComponent {
     isloogedIn: boolean
     firebaseService = inject(AuthService);
+    currentPage: string;
 
-    constructor() {
-
-
+    constructor(private router: Router) {
+        this.router.events.subscribe((event) => {
+            if (event instanceof NavigationEnd) {
+                this.currentPage = event.url;
+            }
+        });
     }
 
     storage() {
-
-        const x = localStorage.getItem('isloogedIn') === 'true';
-        return x
-
+        return localStorage.getItem('isloogedIn') === 'true'
     }
 
     getlog(): boolean {
