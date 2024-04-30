@@ -1,0 +1,13 @@
+<app-header></app-header>
+
+<section>
+    <div 
+        class="dropzone"
+        (drop)="onDrop($event)"
+        (dragover)="onDragOver($event)"
+        (dragleave)="onDragLeave($event)"
+    >
+    <img src="/assets/videoplaceholder.jpg"/>
+        Drag and drop videos here
+    </div>
+</section>

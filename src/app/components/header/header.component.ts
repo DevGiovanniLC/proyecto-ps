@@ -13,7 +13,7 @@ import { AuthService } from "../../services/AuthService.service";
     templateUrl: './header.component.html',
     styleUrl: './header.component.css',
 })
-export class HeaderComponent {
+export default class HeaderComponent {
     isloogedIn: boolean
     firebaseService = inject(AuthService);
     currentPage: string;
