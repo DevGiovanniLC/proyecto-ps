@@ -7,7 +7,7 @@ import { Injectable } from "@angular/core";
 export class HTTPVideoTransfer {
     constructor() { }
 
-    sendVideo(file: Blob, format: string) {
+    sendVideo(file: Blob, format: string, func?: Function) {
 
         const formData = new FormData();
         formData.append('video', file);
@@ -19,6 +19,7 @@ export class HTTPVideoTransfer {
         })
             .then(async (res) => {
                 res.arrayBuffer().then((data) => {
+                    if (func) func();
                     this.downloadVideo(new Blob([data], { type: 'video/mp4' }), format)
                 })
             })

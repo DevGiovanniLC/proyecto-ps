@@ -1,0 +1,25 @@
+<div class="container" *ngIf="fileList.length > 0">
+	<section class="fileList">
+		<div *ngFor="let file of fileList" class="file">
+			<em>{{ file.name }}</em>
+			<button (click)="deleteFile(file)">delete</button>
+		</div>
+	</section>
+	<div class="configure-selector">
+		<button (click)="convertFiles()">Convert</button>
+
+		<label>Video formats</label>
+		<select
+			name="format-video-selector"
+			id="format-video-selector"
+			[(ngModel)]="format"
+		>
+			<option selected>mp4</option>
+			<option>avi</option>
+			<option>webm</option>
+			<option>mov</option>
+			<option>flv</option>
+			<option>mkv</option>
+		</select>
+	</div>
+</div>

@@ -1,0 +1,88 @@
+.container{
+    margin: auto;
+    margin-top: 2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+.fileList {
+    border: black 0.5em solid;
+    background: #ffffff;
+    box-shadow: 0 100px 145px rgba(0, 0, 0, 0.25);
+    border-radius: 2em 0em 0em 2em;
+    display: flex;
+    row-gap: 1em;
+    flex-direction: column; 
+    width: 40em ;
+    height: 20em;
+    font-family: inter, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    padding: 1em;
+    overflow: auto;
+    scrollbar-width: thin;
+    align-items: center;
+} 
+
+.file{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 1em;
+    border: black 0.1em solid;
+    width: 85%;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    font-weight: 700;
+}
+
+.configure-selector {
+	border: 1em solid #000000; /* Establece un borde sólido de 2px de ancho */
+	border-radius: 0 2em 2em 0; /* Agrega esquinas redondeadas al botón */
+	background-color: #000000; /* Establece el color de fondo del botón */
+	color: white; /* Establece el color del texto del botón */
+	cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+	width: 4em;
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+	gap : 3em;
+
+	label {
+		font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
+		text-align: center; /* Alinea el texto al centro */
+		font-size: 1.2em; /* Establece el tamaño de la fuente del texto del botón */
+		font-weight: bold;
+		cursor: inherit; 
+	}
+
+	select {
+        border-radius: 0.5em;
+		text-align: center;
+		cursor: inherit; 
+        padding: auto;
+	}
+
+	input{
+		text-align: center;
+    }
+
+    button{
+        border: 1px solid white; 
+        border-radius: 0.3em; 
+        color: black;
+        background-color: white; 
+        cursor: pointer; 
+        transition: background-color 0.3s, color 0.3s;
+        justify-content: center;
+        align-content: center;
+        display: flex;
+    }
+
+    button:hover {
+        background-color: black; /* Color de fondo al pasar el ratón */
+        color: white; /* Color del texto al pasar el ratón */
+    }
+
+}
