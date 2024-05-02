@@ -1,18 +1,16 @@
-<section draggable="false">
-	<div
-		class="dropzone"
-		(drop)="onDrop($event)"
-		(dragover)="onDragOver($event)"
-		(dragleave)="onDragLeave($event)"
-		draggable="false"
+<div
+	class="dropzone"
+	(drop)="onDrop($event)"
+	(dragover)="onDragOver($event)"
+	(dragleave)="onDragLeave($event)"
+	draggable="false"
+>
+	<img src="/assets/videoplaceholder.jpg" draggable="false" />
+	<em draggable="false" style="user-select: none"
+		>Drag and drop videos here</em
 	>
-		<img src="/assets/videoplaceholder.jpg" draggable="false" />
-		<em draggable="false" style="user-select: none"
-			>Drag and drop videos here</em
-		>
-		<em draggable="false" style="user-select: none"
-			>or click to select video</em
-		>
-		<input type="file" (change)="onFileSelected($event)" multiple/>
-	</div>
-</section>
+	<em draggable="false" style="user-select: none"
+		>or click to select video</em
+	>
+	<input type="file" (change)="onFileSelected($event)" multiple />
+</div>

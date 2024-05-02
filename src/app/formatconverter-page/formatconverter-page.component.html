@@ -1,3 +1,5 @@
 <app-header/>
-<app-frame-uploader #files_uploader/>
-<app-file-list [inputFiles]="files_uploader.fileList_event"/>
+<div class="container">
+    <app-frame-uploader #files_uploader/>
+    <app-file-list [inputFiles]="files_uploader.fileList_event"/>
+</div>
