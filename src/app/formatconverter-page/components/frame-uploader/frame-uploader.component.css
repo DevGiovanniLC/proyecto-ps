@@ -16,6 +16,8 @@
     height: 100%;
     position: relative;
     user-select: none;
+    margin-top: 2em;
+    margin-bottom: 5em;
 
     input{
         opacity: 0;

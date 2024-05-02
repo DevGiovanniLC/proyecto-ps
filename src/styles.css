@@ -5,9 +5,8 @@ html {
 	background-size: cover; /* La imagen se ajustará para cubrir todo el fondo */
 	background-position: center bottom; /* La imagen se centrará en el fondo */
 	background-repeat: repeat; /* Evita que la imagen de fondo se repita */
-	height: 100%;
-	width: 100%;
 }
+
 
 .mat-mdc-dialog-container {
 	--mdc-dialog-container-shape: 2em;
