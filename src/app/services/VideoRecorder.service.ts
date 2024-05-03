@@ -54,11 +54,25 @@ export class VideoRecorder implements Subscribable<any>, Unsubscribable {
 	}
 
 	private generateMediaRecorder(stream: MediaStream): MediaRecorder {
-		const recorder = new MediaRecorder(stream, {
-			mimeType: 'video/x-matroska',
-		});
+    const types = [
+      "video/mkv",
+      "video/mp4",
+      "video/webm"
 
-		return recorder;
+    ];
+    for (const type of types){
+      if (MediaRecorder.isTypeSupported(type))
+      {
+        const recorder = new MediaRecorder(stream, {
+          mimeType: type,
+        });
+        return recorder;
+      }
+      }
+    const recorder = new MediaRecorder(stream, {
+      mimeType: "video/x-matroska",
+    });
+    return recorder;
 	}
 
 	private generateVideoTrack(media: MediaStream): MediaStreamTrack {
