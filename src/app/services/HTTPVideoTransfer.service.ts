@@ -20,7 +20,7 @@ export class HTTPVideoTransfer {
             .then(async (res) => {
                 res.arrayBuffer().then((data) => {
                     if (func) func();
-                    this.downloadVideo(new Blob([data], { type: 'video/mp4' }), format)
+                    this.downloadVideo(new Blob([data]), format)
                 })
             })
             .catch(error => {

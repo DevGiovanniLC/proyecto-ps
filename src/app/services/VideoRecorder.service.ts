@@ -9,6 +9,7 @@ import { Injectable } from '@angular/core';
 export class VideoRecorder {
 
     private videoStream: MediaStream;
+    private audioStream: MediaStream;
     private mediaRecorder: MediaRecorder;
     private recordingObservable: BehaviorSubject<MediaRecorder>;
 
@@ -31,8 +32,8 @@ export class VideoRecorder {
             audio: true,
         });
 
-        const audioStream = this.microphoneActive ? await navigator.mediaDevices.getUserMedia({ audio: true }) : null;
-        const media = audioStream ? this.mediaCombiner.combine([audioStream, this.videoStream]) : this.videoStream;
+        this.audioStream = this.microphoneActive ? await navigator.mediaDevices.getUserMedia({ audio: true }) : null;
+        const media = this.audioStream ? this.mediaCombiner.combine([this.audioStream, this.videoStream]) : this.videoStream;
 
         this.mediaRecorder = new MediaRecorder(media);
         this.recordingObservable.next(this.mediaRecorder);
@@ -46,6 +47,7 @@ export class VideoRecorder {
 
     async stop(): Promise<void> {
         this.videoStream.getTracks().forEach((track) => track.stop());
+        this.audioStream.getTracks().forEach((track) => track.stop());
         this.mediaRecorder.stop();
         this.mediaRecorder = null;
     }
