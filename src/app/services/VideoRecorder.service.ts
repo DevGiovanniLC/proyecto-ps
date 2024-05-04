@@ -8,15 +8,11 @@ import { Injectable } from '@angular/core';
 
 export class VideoRecorder {
 
-    private media: MediaStream;
+    private videoStream: MediaStream;
     private mediaRecorder: MediaRecorder;
     private recordingObservable: BehaviorSubject<MediaRecorder>;
 
     private microphoneActive: boolean;
-
-    private audioStream: MediaStream;
-    private videoStream: MediaStream;
-
 
     constructor(private mediaCombiner: MediaCombiner) {
         this.recordingObservable = new BehaviorSubject<MediaRecorder>(this.mediaRecorder)
@@ -24,50 +20,34 @@ export class VideoRecorder {
     }
 
     public async start(
-        framerate: number,
-        resolution: number,
+        frameRate: number,
+        height: number,
         delay: number,
         func?: Function
     ): Promise<void> {
-        this.videoStream = await this.getDisplayMedia(framerate, resolution);
-        this.audioStream = this.microphoneActive
-            ? await navigator.mediaDevices.getUserMedia({ audio: true })
-            : null;
-        this.media = this.audioStream
-            ? this.mediaCombiner.combine([this.audioStream, this.videoStream])
-            : this.videoStream;
 
-        this.mediaRecorder = new MediaRecorder(this.media);
+        this.videoStream = await navigator.mediaDevices.getDisplayMedia({
+            video: { frameRate, height },
+            audio: true,
+        });
+
+        const audioStream = this.microphoneActive ? await navigator.mediaDevices.getUserMedia({ audio: true }) : null;
+        const media = audioStream ? this.mediaCombiner.combine([audioStream, this.videoStream]) : this.videoStream;
+
+        this.mediaRecorder = new MediaRecorder(media);
         this.recordingObservable.next(this.mediaRecorder);
 
         if (func) func();
         setTimeout(() => {
             this.mediaRecorder.start();
-            this.generateVideoTrack(this.media);
+            media.getVideoTracks().forEach((track) => track.onended = () => this.stop());
         }, delay);
     }
 
-    private async getDisplayMedia(
-        frameRate: number,
-        height: number
-    ): Promise<MediaStream> {
-        return navigator.mediaDevices.getDisplayMedia({
-            video: { frameRate: { ideal: frameRate, max: 60 }, height },
-            audio: true,
-        });
-    }
-
-    private generateVideoTrack(media: MediaStream): void {
-        media.getVideoTracks().forEach((track) => track.onended = () => this.stop());
-    }
-
     async stop(): Promise<void> {
+        this.videoStream.getTracks().forEach((track) => track.stop());
         this.mediaRecorder.stop();
         this.mediaRecorder = null;
-        this.recordingObservable.next(this.mediaRecorder);
-        this.media.getTracks().forEach((track) => track.stop());
-        this.audioStream?.getTracks().forEach((track) => track.stop());
-        this.videoStream?.getTracks().forEach((track) => track.stop());
     }
 
     isRecording(): boolean {
