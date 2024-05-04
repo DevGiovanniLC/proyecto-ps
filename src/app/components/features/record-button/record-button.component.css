@@ -48,6 +48,7 @@
 	background-color: #000000; /* Establece el color de fondo del botón */
 	color: white; /* Establece el color del texto del botón */
 	font-size: 1em; /* Establece el tamaño de la fuente del texto del botón */
+    font-weight: bold;
 	font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
 }
 

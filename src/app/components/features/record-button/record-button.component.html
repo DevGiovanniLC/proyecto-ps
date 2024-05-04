@@ -1,16 +1,16 @@
 <section class="record-container">
-	<h2 class="info-feature" #record_info>{{ $recordingState }}</h2>
+	<h2 class="info-feature" #record_info>{{ (isRecording)? 'RECORDING' : 'RECORD' }}</h2>
 	<div class="control-buttons">
 		<button
 			class="recordButton"
             [style.backgroundImage]="$iconRecord"
-            [disabled]="$recordingIconDisabled"
+            [disabled]="$recordingButtonDisabled"
 			(click)="toggleRecording()"
 		></button>
 		<button
 			class="microButton"
 			[style.backgroundImage]="$iconMicro"
-            [disabled]="$microphoneIconDisabled"
+            [disabled]="$microphoneButtonDisabled"
 			(click)="toggleMicrophone()"
 		></button>
 	</div>

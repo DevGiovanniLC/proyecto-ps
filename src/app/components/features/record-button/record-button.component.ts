@@ -20,16 +20,26 @@ export class RecordButtonComponent {
     @Input() _delay: number;
     @Input() _format: string;
 
-    protected $recordingState: string;
+    protected isRecording: boolean;
+    protected isMicrophoneEnabled: boolean;
+    private icons:any
 
     protected $iconRecord: string;
-    protected $recordingIconDisabled: boolean;
+    protected $recordingButtonDisabled: boolean;
+
     protected $iconMicro: string;
-    protected $microphoneIconDisabled: boolean;
+    protected $microphoneButtonDisabled: boolean;
 
     constructor(private _matDialog: MatDialog, private videoRecorder: VideoRecorder) {
-        this.$recordingState = 'RECORD';
-        this.$microphoneIconDisabled = true;
+        this.icons = {
+            STOPPED: 'url(/assets/stopped_state.webp)',
+            RECORDING: 'url(/assets/recording_state.webp)',
+            MICROENABLED: 'url(/assets/micro_enable.webp)',
+            MICROCLOSED: 'url(/assets/micro_disable.webp)',
+        }
+
+        this.isRecording = false;
+        this.isMicrophoneEnabled = true
     }
 
     ngOnInit(): void {
@@ -52,40 +62,40 @@ export class RecordButtonComponent {
         if (this.videoRecorder.isRecording()) {
             await this.videoRecorder.stop();
         } else {
-            this.videoRecorder.toggleMicrophone(this.$microphoneIconDisabled);
+            this.videoRecorder.toggleMicrophone(this.isMicrophoneEnabled);
             await this.videoRecorder.start(this._framerate, this._resolution, this._delay,()=>{
-                this.$recordingIconDisabled = true
+                this.$recordingButtonDisabled = true
             });
         }
     }
 
     private handleMediaRecorderEvents(recorder: MediaRecorder): void {
         recorder.addEventListener('start', () => {
-            this.updateStateAndButtonStyle('RECORDING');
-            this.$recordingIconDisabled = false
+            this.isRecording = true;
+            this.updateStateAndButtonStyle();
+            this.$recordingButtonDisabled = false
         }
         );
         recorder.addEventListener('dataavailable', (event: BlobEvent) => {
-            this.updateStateAndButtonStyle('RECORD')
+            this.isRecording = false
+            this.updateStateAndButtonStyle()
             this.openModal(event.data, this._format);
         });
     }
 
-    private updateStateAndButtonStyle(state: string): void {
+    private updateStateAndButtonStyle(): void {
 
-        this.$recordingState = state;
-
-        if (state === 'RECORDING') {
-            this.$iconRecord = "url('/assets/recording_state.webp')"
-            this.$microphoneIconDisabled = true;
+        if (this.isRecording) {
+            this.$iconRecord = this.icons.RECORDING
+            this.$microphoneButtonDisabled = true;
         } else {
-            this.$iconRecord = "url('/assets/stopped_state.webp')"
-            this.$microphoneIconDisabled = false
+            this.$iconRecord = this.icons.STOPPED
+            this.$microphoneButtonDisabled = false
         }
     }
 
     protected toggleMicrophone() {
-        this.$microphoneIconDisabled = !this.$microphoneIconDisabled;
-        this.$iconMicro = this.$microphoneIconDisabled ? 'url(/assets/micro_enable.webp)' : 'url(/assets/micro_disable.webp'
+        this.isMicrophoneEnabled = !this.isMicrophoneEnabled
+        this.$iconMicro = (this.isMicrophoneEnabled) ? this.icons.MICROENABLED : this.icons.MICROCLOSED;
     }
 }
