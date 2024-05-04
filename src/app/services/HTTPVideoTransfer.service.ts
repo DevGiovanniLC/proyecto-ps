@@ -20,19 +20,19 @@ export class HTTPVideoTransfer {
             .then(async (res) => {
                 res.arrayBuffer().then((data) => {
                     if (func) func();
-                    this.downloadVideo(new Blob([data]), format)
+                    this.downloadVideo(new Blob([data]))
                 })
             })
             .catch(error => {
-                this.downloadVideo(file, "mkv")
+                this.downloadVideo(file)
             });
 
     }
 
-    private async downloadVideo(data: Blob, format: string): Promise<void> {
+    private async downloadVideo(data: Blob): Promise<void> {
         const link = document.createElement('a');
         link.href = URL.createObjectURL(data);
-        link.download = 'video.' + format;
+        link.download = 'video'
         link.click();
     }
 
