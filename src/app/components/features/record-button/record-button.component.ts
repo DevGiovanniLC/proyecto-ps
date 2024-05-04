@@ -72,18 +72,18 @@ export class RecordButtonComponent {
     private handleMediaRecorderEvents(recorder: MediaRecorder): void {
         recorder.addEventListener('start', () => {
             this.isRecording = true;
-            this.updateStateAndButtonStyle();
+            this.updateButtonStyle();
             this.$recordingButtonDisabled = false
         }
         );
         recorder.addEventListener('dataavailable', (event: BlobEvent) => {
             this.isRecording = false
-            this.updateStateAndButtonStyle()
+            this.updateButtonStyle()
             this.openModal(event.data, this._format);
         });
     }
 
-    private updateStateAndButtonStyle(): void {
+    private updateButtonStyle(): void {
 
         if (this.isRecording) {
             this.$iconRecord = this.icons.RECORDING
