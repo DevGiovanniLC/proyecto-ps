@@ -12,7 +12,7 @@ export class VideoRecorder {
     private mediaRecorder: MediaRecorder;
     private recordingObservable: BehaviorSubject<MediaRecorder>;
 
-    private microphone: boolean;
+    private microphoneActive: boolean;
 
     private audioStream: MediaStream;
     private videoStream: MediaStream;
@@ -20,16 +20,17 @@ export class VideoRecorder {
 
     constructor(private mediaCombiner: MediaCombiner) {
         this.recordingObservable = new BehaviorSubject<MediaRecorder>(this.mediaRecorder)
-        this.microphone = true;
+        this.microphoneActive = true;
     }
 
     public async start(
         framerate: number,
         resolution: number,
-        delay: number
+        delay: number,
+        func?: Function
     ): Promise<void> {
         this.videoStream = await this.getDisplayMedia(framerate, resolution);
-        this.audioStream = this.microphone
+        this.audioStream = this.microphoneActive
             ? await navigator.mediaDevices.getUserMedia({ audio: true })
             : null;
         this.media = this.audioStream
@@ -39,6 +40,7 @@ export class VideoRecorder {
         this.mediaRecorder = new MediaRecorder(this.media);
         this.recordingObservable.next(this.mediaRecorder);
 
+        if (func) func();
         setTimeout(() => {
             this.mediaRecorder.start();
             this.generateVideoTrack(this.media);
@@ -74,7 +76,7 @@ export class VideoRecorder {
     }
 
     toggleMicrophone(state: boolean): void {
-        this.microphone = state;
+        this.microphoneActive = state;
     }
 
     getMediaRecorder(): BehaviorSubject<MediaRecorder> {

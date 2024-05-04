@@ -15,21 +15,21 @@ import { VideoRecorder } from '../../../services/VideoRecorder.service';
     styleUrl: './record-button.component.css',
 })
 export class RecordButtonComponent {
-    @ViewChild('record_button') $recordButton: ElementRef;
-    @ViewChild('micro_button') $microButton: ElementRef;
-
-    private microphoneEnabled: boolean;
-
-    protected state: string;
-
     @Input() _framerate: number;
     @Input() _resolution: number;
     @Input() _delay: number;
     @Input() _format: string;
 
+    protected $recordingState: string;
+
+    protected $iconRecord: string;
+    protected $recordingIconDisabled: boolean;
+    protected $iconMicro: string;
+    protected $microphoneIconDisabled: boolean;
+
     constructor(private _matDialog: MatDialog, private videoRecorder: VideoRecorder) {
-        this.state = 'RECORD';
-        this.microphoneEnabled = true;
+        this.$recordingState = 'RECORD';
+        this.$microphoneIconDisabled = true;
     }
 
     ngOnInit(): void {
@@ -52,14 +52,18 @@ export class RecordButtonComponent {
         if (this.videoRecorder.isRecording()) {
             await this.videoRecorder.stop();
         } else {
-            this.videoRecorder.toggleMicrophone(this.microphoneEnabled);
-            await this.videoRecorder.start(this._framerate, this._resolution, this._delay);
+            this.videoRecorder.toggleMicrophone(this.$microphoneIconDisabled);
+            await this.videoRecorder.start(this._framerate, this._resolution, this._delay,()=>{
+                this.$recordingIconDisabled = true
+            });
         }
     }
 
     private handleMediaRecorderEvents(recorder: MediaRecorder): void {
-        recorder.addEventListener('start', () =>
-            this.updateStateAndButtonStyle('RECORDING')
+        recorder.addEventListener('start', () => {
+            this.updateStateAndButtonStyle('RECORDING');
+            this.$recordingIconDisabled = false
+        }
         );
         recorder.addEventListener('dataavailable', (event: BlobEvent) => {
             this.updateStateAndButtonStyle('RECORD')
@@ -68,22 +72,20 @@ export class RecordButtonComponent {
     }
 
     private updateStateAndButtonStyle(state: string): void {
-        this.state = state;
-        this.$recordButton.nativeElement.style.backgroundImage =
-            state === 'RECORDING'
-                ? "url('/assets/recording_state.webp')"
-                : "url('/assets/stopped_state.webp')";
-        this.$microButton.nativeElement.disabled = state !== 'RECORD';
+
+        this.$recordingState = state;
+
+        if (state === 'RECORDING') {
+            this.$iconRecord = "url('/assets/recording_state.webp')"
+            this.$microphoneIconDisabled = true;
+        } else {
+            this.$iconRecord = "url('/assets/stopped_state.webp')"
+            this.$microphoneIconDisabled = false
+        }
     }
 
     protected toggleMicrophone() {
-        this.microphoneEnabled = !this.microphoneEnabled;
-        if (this.microphoneEnabled) {
-            this.$microButton.nativeElement.style.backgroundImage =
-                "url('/assets/micro_enable.webp')";
-        } else {
-            this.$microButton.nativeElement.style.backgroundImage =
-                "url('/assets/micro_disable.webp')";
-        }
+        this.$microphoneIconDisabled = !this.$microphoneIconDisabled;
+        this.$iconMicro = this.$microphoneIconDisabled ? 'url(/assets/micro_enable.webp)' : 'url(/assets/micro_disable.webp'
     }
 }
