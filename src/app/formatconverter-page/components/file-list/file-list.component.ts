@@ -3,6 +3,8 @@ import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { BehaviorSubject, tap } from 'rxjs';
 import { HTTPVideoTransfer } from '../../../services/HTTPVideoTransfer.service';
 import { FormsModule } from '@angular/forms';
+import { Blob } from 'buffer';
+import { promises } from 'dns';
 
 @Component({
     selector: 'app-file-list',
@@ -15,17 +17,26 @@ import { FormsModule } from '@angular/forms';
 export class FileListComponent implements OnInit {
     @Input() inputFiles: EventEmitter<FileList>
 
-    fileList = []
-    format: string = "mp4";
+    protected fileList = []
+    protected format: string;
 
-    constructor(public http: HTTPVideoTransfer) { }
+
+    constructor(private http: HTTPVideoTransfer) { 
+        this.format = "mp4";
+    }
 
     ngOnInit() {
+
         this.inputFiles.subscribe(files => {
+
             if (files == undefined) return;
 
             for (let i = 0; i < files.length; i++) {
-                this.fileList.push(files[i]);
+                
+                if (this.isVideoFormat(files[i])){
+                    this.fileList.push(files[i]);
+                }
+
             }
         })
     }
@@ -35,11 +46,17 @@ export class FileListComponent implements OnInit {
     }
 
     convertFiles() {
-        for(let file of this.fileList){
-            this.http.sendVideo(file, this.format, ()=>{
+        for (let file of this.fileList) {
+            
+            this.http.sendVideo(file, this.format, () => {
                 this.fileList.splice(this.fileList.indexOf(file), 1);
             })
         }
     }
 
+    private isVideoFormat(file: File) {
+        return /^video\//.test(file.type);
+    }
+
 }
+
