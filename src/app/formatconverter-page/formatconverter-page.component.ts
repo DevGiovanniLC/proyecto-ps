@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import HeaderComponent from '../components/header/header.component';
-import { HTTPVideoTransfer } from '../services/HTTPVideoTransfer.service';
 import { FrameUploaderComponent } from './components/frame-uploader/frame-uploader.component';
 import { FileListComponent } from './components/file-list/file-list.component';
 
@@ -14,13 +13,10 @@ import { FileListComponent } from './components/file-list/file-list.component';
         FrameUploaderComponent,
         FileListComponent
     ],
-    providers: [HTTPVideoTransfer]
-
 })
-export class FormatconverterPageComponent implements OnInit {
+export class FormatconverterPageComponent {
 
-    constructor(private httpVideo: HTTPVideoTransfer) { }
+    constructor() { }
 
-    ngOnInit() { }
 
 }

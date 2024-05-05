@@ -1,10 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit } from '@angular/core';
-import { BehaviorSubject, tap } from 'rxjs';
 import { HTTPVideoTransfer } from '../../../services/HTTPVideoTransfer.service';
 import { FormsModule } from '@angular/forms';
-import { Blob } from 'buffer';
-import { promises } from 'dns';
 
 @Component({
     selector: 'app-file-list',

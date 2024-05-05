@@ -1,5 +1,4 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { HTTPVideoTransfer } from '../../../services/HTTPVideoTransfer.service';
 
 @Component({
     selector: 'app-frame-uploader',
