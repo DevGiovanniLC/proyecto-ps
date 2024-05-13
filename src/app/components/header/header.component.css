@@ -1,4 +1,4 @@
-button {
+button, select {
 	padding: 0.2em 1em; /* Establece la altura del botón */
 	border: 1px solid #000000; /* Establece un borde sólido de 2px de ancho */
 	border-radius: 0.2em; /* Agrega esquinas redondeadas al botón */
