@@ -3,5 +3,6 @@
     "log_in": "LOG IN", 
     "sign up": "SIGN UP", 
     "log_out" :"LOG OUT",
-    "format_converter": "FORMAT CONVERTER"
+    "format_converter": "FORMAT CONVERTER",
+    "home": "HOME"
 }

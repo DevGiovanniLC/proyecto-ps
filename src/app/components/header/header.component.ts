@@ -18,8 +18,8 @@ export default class HeaderComponent implements OnInit{
     isloogedIn: boolean
     firebaseService = inject(AuthService);
     targetLanguages = ['es', 'ar', 'fr', 'it', 'en', 'pt', 'zh-CN', 'ja', 'ru', 'hi'];
-    menuItems: string[] = ['WHO WE ARE', 'LOG IN', 'SIGN UP', 'LOG OUT', 'FORMAT CONVERTER'];
-    selectedLanguage: string = 'en';
+    menuItems: string[] = ['WHO WE ARE', 'LOG IN', 'SIGN UP', 'LOG OUT', 'FORMAT CONVERTER', "HOME"];
+    selectedLanguage: string;
     jsonData: any;
     currentPage: string;
     constructor(private translation: TranslationService, private http: HttpClient, private router: Router) {
@@ -28,23 +28,26 @@ export default class HeaderComponent implements OnInit{
                 this.currentPage = event.url;
             }
         });
-
-
+        this.selectedLanguage = localStorage.getItem('selectedLanguage');
+        
     }
 
-    ngOnInit() {
-        this.http.get<any>("../../../assets/i18n/header_content.json").subscribe(data => {
-            this.jsonData = data;
-        });
+    async ngOnInit() {
+        this.jsonData = await this.http.get<any>("../../../assets/i18n/header_content.json").toPromise();
+        
+        this.translateAll();    
     }
 
     translateAll() {
         
-
+        localStorage.setItem('selectedLanguage', this.selectedLanguage);
         let values: string[] = Object.values(this.jsonData);
         
+        
+
         values.forEach((text, index) => {
           this.translate(text, index);
+          
         });
       }
 
