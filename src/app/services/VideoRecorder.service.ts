@@ -1,99 +1,68 @@
-import { NextObserver, Subscribable, Unsubscribable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { MediaCombiner } from './MediaCombiner.service';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-	providedIn: 'root'
+    providedIn: 'root'
 })
 
-export class VideoRecorder implements Subscribable<any>, Unsubscribable {
-	private media: MediaStream;
-	private mediaRecorder: MediaRecorder;
+export class VideoRecorder {
 
-	private observers: NextObserver<any>[];
-	private micro: boolean;
+    private videoStream: MediaStream;
+    private audioStream: MediaStream;
+    private mediaRecorder: MediaRecorder;
+    private recordingObservable: BehaviorSubject<MediaRecorder>;
 
-	private audioStream: MediaStream;
-	private videoStream: MediaStream;
+    private microphoneActive: boolean;
 
-	constructor(private mediaCombiner: MediaCombiner) {
-		this.observers = [];
-		this.micro = true;
-	}
+    constructor(private mediaCombiner: MediaCombiner) {
+        this.recordingObservable = new BehaviorSubject<MediaRecorder>(this.mediaRecorder)
+        this.microphoneActive = true;
+    }
 
-	public async start(
-		framerate: number,
-		resolution: number,
-		delay: number
-	): Promise<void> {
-		this.videoStream = await this.getDisplayMedia(framerate, resolution);
-		this.audioStream = this.micro
-		? await navigator.mediaDevices.getUserMedia({ audio: true })
-		: null;
-		this.media = this.audioStream
-			? this.mediaCombiner.combine([this.audioStream, this.videoStream])
-			: this.videoStream;
+    public async start(
+        frameRate: number,
+        height: number,
+        delay: number,
+        func?: Function
+    ): Promise<void> {
 
-		this.mediaRecorder = this.generateMediaRecorder(this.media);
+        this.videoStream = await navigator.mediaDevices.getDisplayMedia({
+            video: { frameRate, height },
+            audio: true,
+        });
 
-		setTimeout(() => {
-			this.notifyObserver(this.mediaRecorder);
-			this.mediaRecorder.start();
-			this.generateVideoTrack(this.media);
-		}, delay);
-	}
+        this.audioStream = this.microphoneActive ? await navigator.mediaDevices.getUserMedia({ audio: true }) : null;
+        const media = this.audioStream ? this.mediaCombiner.combine([this.audioStream, this.videoStream]) : this.videoStream;
 
-	private async getDisplayMedia(
-		frameRate: number,
-		height: number
-	): Promise<MediaStream> {
-		return navigator.mediaDevices.getDisplayMedia({
-			video: { frameRate: { ideal: frameRate, max: 60 }, height },
-			audio: true,
-		});
-	}
+        this.mediaRecorder = new MediaRecorder(media);
+        this.recordingObservable.next(this.mediaRecorder);
 
-	private generateMediaRecorder(stream: MediaStream): MediaRecorder {
-		const recorder = new MediaRecorder(stream, {
-			mimeType: 'video/x-matroska',
-		});
+        if (func) func();
+        setTimeout(() => {
+            this.mediaRecorder.start();
+            media.getVideoTracks().forEach((track) => track.onended = () => this.stop());
+        }, delay);
+    }
 
-		return recorder;
-	}
+    async stop(): Promise<void> {
+        this.videoStream.getTracks().forEach((track) => track.stop());
+        this.audioStream.getTracks().forEach((track) => track.stop());
+        this.mediaRecorder.stop();
+        this.mediaRecorder = null;
+    }
 
-	private generateVideoTrack(media: MediaStream): MediaStreamTrack {
-		const videoTrack = media.getVideoTracks()[0];
-		videoTrack.onended = () => this.stop();
-		return videoTrack;
-	}
+    isRecording(): boolean {
+        if (this.mediaRecorder == null) return false;
+        return true;
+    }
 
-	async stop(): Promise<void> {
-		this.mediaRecorder?.stop();
-		this.mediaRecorder = null;
-		this.media.getTracks().forEach((track) => track.stop());
-		this.audioStream?.getTracks().forEach((track) => track.stop());
-		this.videoStream?.getTracks().forEach((track) => track.stop());
-	}
+    toggleMicrophone(state: boolean): void {
+        this.microphoneActive = state;
+    }
 
-	isRecording(): boolean {
-		if (this.mediaRecorder == null) return false;
-		return true;
-	}
+    getMediaRecorder(): BehaviorSubject<MediaRecorder> {
+        return this.recordingObservable
+    }
 
-	toggleMicrophone(enabled: boolean): void {
-		this.micro = enabled;
-	}
-
-	subscribe(observer: NextObserver<any>): Unsubscribable {
-		this.observers.push(observer);
-		return this;
-	}
-
-	private notifyObserver(data: any): void {
-		this.observers.forEach((observer) => observer.next(data));
-	}
-
-	unsubscribe(): void {
-		this.observers = [];
-	}
 }

@@ -1,10 +1,11 @@
 <div id="closediv">
-  <div id="buttonclose" mat-dialog-close>&times;</div>
+	<div id="buttonclose" mat-dialog-close>&times;</div>
 </div>
-  <video id="videomodal" src='{{this.VideoUrl}}' controls></video>
+
+<video id="videomodal" src="{{ this.VideoUrl }}" controls></video>
+
 <div id="optionsmodal">
-  <button id="buttondownload" (click)="this.downloadVideo(this.blob)">Descargar</button>
+	<button id="buttondownload" (click)="this.downloadVideo()">
+		Descargar
+	</button>
 </div>
-
-
-
