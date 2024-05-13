@@ -1,9 +1,9 @@
 <body>
-	<a class="exit" draggable="false" routerLink="">Go Back</a>
+	<a class="exit" draggable="false" routerLink="">{{ menuItems[0] }}</a>
 	<div class="login-container">
 		<div class="login-form">
 			<div class="h2box">
-				<h2>LOG IN</h2>
+				<h2>{{ menuItems[1] }}</h2>
 			</div>
 			<form
 				[formGroup]="form"
@@ -13,7 +13,7 @@
 				(ngSubmit)="submit()"
 			>
 				<div class="input-group">
-					<label for="email">EMAIL</label>
+					<label for="email">{{ menuItems[2] }}</label>
 					<input
 						formControlName="email"
 						type="email"
@@ -29,7 +29,7 @@
 					></div>
 				</div>
 				<div class="input-group">
-					<label for="password">PASSWORD</label>
+					<label for="password">{{ menuItems[3] }}</label>
 					<input
 						formControlName="password"
 						type="password"
@@ -45,20 +45,20 @@
 						style="display: none; color: red"
 					></div>
 				</div>
-				<a href="/forgotpassword">Forgot Password?</a>
+				<a href="/forgotpassword">{{ menuItems[4] }}</a>
 
 				<div class="botones">
 					<button id="login" class="login" type="submit">
-						LOG IN
+						{{ menuItems[5] }}
 					</button>
 
 					<button routerLink="/" id="login1" class="login" type="">
-						CANCEL
+						{{ menuItems[6] }}
 					</button>
 				</div>
 			</form>
 			<p class="sign-up-text">
-				Dont have an account yet? <a routerLink="/signup">Sign up</a>
+				{{ menuItems[7] }}<a routerLink="/signup">{{ menuItems[8] }}</a>
 			</p>
 		</div>
 	</div>

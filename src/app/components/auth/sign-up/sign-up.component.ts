@@ -1,11 +1,12 @@
-import { Component, inject } from "@angular/core";
+import { Component, inject, OnInit } from "@angular/core";
 import { RouterLink } from "@angular/router";
 import { AuthService } from "../../../services/AuthService.service";
 import { CommonModule } from "@angular/common";
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
 import { User } from "./user.model";
 import { Router } from '@angular/router';
-
+import { HttpClient } from "@angular/common/http";
+import { TranslationService } from "../../../../translation";
 
 @Component({
     selector: 'app-sign-up',
@@ -17,12 +18,44 @@ import { Router } from '@angular/router';
     templateUrl: './sign-up.component.html',
     styleUrl: './sign-up.component.css'
 })
-export class SignUpComponent {
+export class SignUpComponent implements OnInit {
 
     firebaseService = inject(AuthService);
+    jsonData: any;
+	selectedLanguage: string;
+	menuItems: string[] = ['', '', ''];
 
-    constructor(private router: Router) {
+	constructor(private translation: TranslationService, private http: HttpClient, private router: Router) {
+		this.selectedLanguage = localStorage.getItem('selectedLanguage');
+	}
+
+	async ngOnInit() {
+        this.jsonData = await this.http.get<any>("../../../../assets/i18n/sign_in.json").toPromise();
+        
+        this.translateAll();    
     }
+
+	translateAll() {
+        
+        localStorage.setItem('selectedLanguage', this.selectedLanguage);
+        let values: string[] = Object.values(this.jsonData);
+        
+        
+
+        values.forEach((text, index) => {
+          this.translate(text, index);
+          
+        });
+      }
+
+    translate(text: string, index: number) {
+        this.translation.translateText(text, this.selectedLanguage)
+          .subscribe((response: any) => {
+            this.menuItems[index] = response.data.translations[0].translatedText;
+          }, (error) => {
+            console.error('Error al traducir:', error);
+          });
+        }
 
     form = new FormGroup({
         email: new FormControl("", [Validators.required, Validators.email]),

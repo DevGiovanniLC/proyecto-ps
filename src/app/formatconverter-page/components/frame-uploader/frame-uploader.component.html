@@ -7,10 +7,10 @@
 >
 	<img src="/assets/videoplaceholder.webp" draggable="false" />
 	<em draggable="false" style="user-select: none"
-		>Drag and drop videos here</em
+		>{{ menuItems[0] }}</em
 	>
 	<em draggable="false" style="user-select: none"
-		>or click to select video</em
+		>{{ menuItems[1] }}</em
 	>
 	<input type="file" (change)="onFileSelected($event)" multiple />
 </div>
