@@ -18,11 +18,11 @@ export default class HeaderComponent implements OnInit{
     isloogedIn: boolean
     firebaseService = inject(AuthService);
     targetLanguages = ['es', 'ar', 'fr', 'it', 'en', 'pt', 'zh-CN', 'ja', 'ru', 'hi'];
-    menuItems: string[] = ['WHO WE ARE', 'LOG IN', 'SIGN UP', 'LOG OUT'];
+    menuItems: string[] = ['WHO WE ARE', 'LOG IN', 'SIGN UP', 'LOG OUT', 'FORMAT CONVERTER'];
     selectedLanguage: string = 'en';
     jsonData: any;
     currentPage: string;
-    constructor(private traduccion: TranslationService, private http: HttpClient, private router: Router) {
+    constructor(private translation: TranslationService, private http: HttpClient, private router: Router) {
         this.router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
                 this.currentPage = event.url;
@@ -49,7 +49,7 @@ export default class HeaderComponent implements OnInit{
       }
 
     translate(text: string, index: number) {
-        this.traduccion.translateText(text, this.selectedLanguage)
+        this.translation.translateText(text, this.selectedLanguage)
           .subscribe((response: any) => {
             this.menuItems[index] = response.data.translations[0].translatedText;
           }, (error) => {

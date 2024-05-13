@@ -1,35 +1,33 @@
 <header class="header">
-	<header class="header">
-		<section>
-			<a href="/whoweare" draggable="false">{{ menuItems[0] }}</a>
-			@if (currentPage == '/home' || currentPage == '/') {
-				<a href="/formatconverter" draggable="false">FORMAT CONVERTER</a>
-			}@else{
-				<a href="/home" draggable="false">HOME</a>
-			}
-		</section>
-		<section class="users-buttons">
-			@if(storage()){
-				<a (click)="getout()" routerLink draggable="false">{{ menuItems[3] }}</a>
-			} @else {
-				<a routerLink="/login" draggable="false">{{ menuItems[1] }}</a>
-				<a routerLink="/signup" draggable="false">{{ menuItems[2] }}</a>
-	
-			}
-			<button class="secundary" type="button" draggable="false">...</button>
-		</section>
-			<div>
-				<select id="targetLanguage" [(ngModel)]="selectedLanguage" (change)="translateAll()">
-					<option value="en">English</option>
-					<option value="es">Espanol</option>
-					<option value="ar">Arabe</option>
-					<option value="it">Italiano</option>
-					<option value="pt">Portugues</option>
-					<option value="zh-CN">Chino Tradicional</option>
-					<option value="ja">Japones</option>
-					<option value="ru">Ruso</option>
-					<option value="hi">Indu</option>
-				</select>
-			</div>
-	</header>
+	<section>
+		<a href="/whoweare" draggable="false">{{ menuItems[0] }}</a>
+		@if (currentPage == '/home' || currentPage == '/') {
+			<a href="/formatconverter" draggable="false">{{ menuItems[4] }}</a>
+		}@else{
+			<a href="/home" draggable="false">HOME</a>
+		}
+	</section>
+	<section class="users-buttons">
+		@if(storage()){
+			<a (click)="getout()" routerLink draggable="false">{{ menuItems[3] }}</a>
+		} @else {
+			<a routerLink="/login" draggable="false">{{ menuItems[1] }}</a>
+			<a routerLink="/signup" draggable="false">{{ menuItems[2] }}</a>
+
+		}
+	</section>
+		<div>
+			<select id="targetLanguage" [(ngModel)]="selectedLanguage" (change)="translateAll()">
+				<option value="en">English</option>
+				<option value="es">Espanol</option>
+				<option value="ar">Arabe</option>
+				<option value="it">Italiano</option>
+				<option value="pt">Portugues</option>
+				<option value="zh-CN">Chino Tradicional</option>
+				<option value="ja">Japones</option>
+				<option value="ru">Ruso</option>
+				<option value="hi">Indu</option>
+			</select>
+		</div>
+</header>
 	
