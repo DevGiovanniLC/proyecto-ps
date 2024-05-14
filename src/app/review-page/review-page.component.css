@@ -12,48 +12,43 @@ h1 {
 
 .card {
 	background: #ffffff;
+	opacity: 0.8;
 	box-shadow: 0 100px 145px rgba(0, 0, 0, 0.25);
 	border-radius: 15px;
 	display: flex;
 	flex-direction: column;
-	width: 23em;
+	width: 30em;
 	justify-content: center;
 	align-items: center;
 	font-family: inter, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 	padding: 0.1em;
 	gap: 1em;
+	margin-bottom: 16px;
+	border: 2px solid #a1a1a1;
 
 	h2 {
 		margin-top: 1em;
+		font-weight: bolder;
+		color: #a1a1a1;
 	}
 
-	textarea {
-		resize: none;
-		width: 18em;
-		height: 10em;
-		margin-bottom: 0.2em;
-		font-family: inherit;
-		font-size: 1.05em;
-		padding: 0.5em;
-		border-radius: 0.5em;
-		outline: 0;
-		border: rgba(32, 43, 137, 30%) 2px solid;
-	}
-
-	textarea::placeholder{
-		font-size: 0.8;
-	}
 }
 
 .stars {
 	display: flex;
-	flex-direction: row;
-	min-height: 1.5em;
+	scale: 1.4;
+	cursor: pointer;
 }
 
 .unselectedStar {
 	opacity: 0.5;
 	padding: 0.2em;
+}
+
+.stars img:hover,
+.stars img.selectedStar,
+.stars img.hoverStar {
+  opacity: 1; /* Opacidad al pasar el cursor */
 }
 
 .selectedStar {
@@ -76,16 +71,10 @@ input[type="submit"] {
 input[type="submit"]:hover {
 	cursor: pointer;
 	opacity: 0.9;
+	transform: translateY(-2px);
 }
 
-.card {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 16px;
-    background-color: #fff;
-  }
-  
+
   .header-reseña {
     display: flex;
     align-items: center;
@@ -99,16 +88,5 @@ input[type="submit"]:hover {
     margin-right: 16px;
   }
   
-  .stars {
-    list-style: none;
-    padding: 0;
-    display: flex;
-  }
+
   
-  .stars li {
-    margin-right: 4px;
-  }
-  
-  .comment {
-    margin-top: 8px;
-  }
