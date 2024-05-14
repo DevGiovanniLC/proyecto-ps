@@ -1,0 +1,52 @@
+<app-header></app-header>
+<div>
+  <div class="título" style="display: flex; justify-content: center;">
+    <h1 class="highlight">REVIEWS</h1>
+  </div>
+  
+  <!-- Mostrar el formulario solo si el usuario está autenticado -->
+  <div *ngIf="user; else notAuthenticated">
+    <div class="card">
+      <h2>Escriba su reseña</h2>
+      <input type="email" (input)="onEmailInput($event)" placeholder="Ingrese su correo electrónico" required>
+      <div class="stars" (mouseleave)="unselectStars(valoracion)">
+        <img src="https://firebasestorage.googleapis.com/v0/b/test-5dfd9.appspot.com/o/assets%2FVector.webp?alt=media&token=a6a86d65-52d5-4c12-8e74-c350a8c142e0"
+             (mouseenter)="selectStars(i+1)"
+             [class.selectedStar]="i < valoracion"
+             (click)="setRating(i+1)"
+             id="star{{i+1}}"
+             *ngFor="let item of [].constructor(5); let i = index">
+      </div>
+      <input type="text" (input)="onDescripcionInput($event)" placeholder="Comparta su opinión con nosotros" required>
+      <input type="submit" (click)="submit()">
+    </div>
+  </div>
+  
+  <!-- Mostrar este mensaje si el usuario no está autenticado -->
+  <ng-template #notAuthenticated>
+    <p>Por favor, inicia sesión para escribir una reseña.</p>
+  </ng-template>
+
+  <div *ngIf="reviews.length > 0">
+    <h2>Reseñas Anteriores</h2>
+    <div *ngFor="let review of reviews">
+      <article class="card">
+        <header class="header-reseña">
+          <img
+            class="user-image"
+            src="https://firebasestorage.googleapis.com/v0/b/test-5dfd9.appspot.com/o/assets%2FPortrait_Placeholder.webp?alt=media&token=906bc66e-828c-43bd-aa3c-59b85e87a16d"
+          />
+          <h2>{{ review.email }}</h2>
+          <ul class="stars">
+            <li *ngFor="let item of [].constructor(review.valoracion); let i = index">
+              <img src="https://firebasestorage.googleapis.com/v0/b/test-5dfd9.appspot.com/o/assets%2FVector.webp?alt=media&token=a6a86d65-52d5-4c12-8e74-c350a8c142e0" />
+            </li>
+          </ul>
+        </header>
+        <div class="comment">
+          <p>{{ review.descripcion }}</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>

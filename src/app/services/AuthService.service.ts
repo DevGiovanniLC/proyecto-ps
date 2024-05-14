@@ -8,6 +8,7 @@ import {
 import { User } from "../components/auth/sign-up/user.model";
 import { Router } from "@angular/router";
 import firebase from "firebase/compat";
+import { Observable } from 'rxjs';
 import app = firebase.app;
 
 @Injectable({
@@ -26,9 +27,9 @@ export class AuthService implements OnInit {
     }
 
     getAuth() {
-
         return getAuth();
     }
+
 
     googlesignin() {
 
@@ -38,8 +39,6 @@ export class AuthService implements OnInit {
 
         }).catch()
 
-
-
     }
     enviarCorreo() {
         sendEmailVerification(getAuth().currentUser).then(() => {
@@ -47,10 +46,7 @@ export class AuthService implements OnInit {
     }
 
 
-
     signup(user: User) {
-
-
 
         return createUserWithEmailAndPassword(getAuth(), user.email, user.password);
 
@@ -86,6 +82,10 @@ export class AuthService implements OnInit {
             .catch((error) => {
                 window.alert(error)
             })
+    }
+
+    getUser(): Observable<firebase.User | null> {
+        return this.auth.authState;
     }
 
 }
