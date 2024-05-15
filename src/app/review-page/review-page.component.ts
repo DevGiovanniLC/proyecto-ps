@@ -79,6 +79,7 @@ export class ReviewPageComponent {
   }
 
   submit() {
+
     if (!this.user) {
       alert('Debes iniciar sesión para crear una reseña.');
       return;
@@ -89,7 +90,7 @@ export class ReviewPageComponent {
       return;
     }
 
-    const newReview = {
+      const newReview = {
       uid: this.user.uid,
       email: this.email,
       descripcion: this.descripcion,
