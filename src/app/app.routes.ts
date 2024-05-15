@@ -7,6 +7,9 @@ import { ForgotpasswordComponent } from "./components/auth/forgotpassword/forgot
 import { HomePageComponent } from './home-page/home-page.component';
 import { FormatconverterPageComponent } from './formatconverter-page/formatconverter-page.component';
 import { ReviewPageComponent } from './review-page/review-page.component';
+import {
+  PrevisualitionOptionDialogComponent
+} from "./components/features/previsualition-option-dialog/previsualition-option-dialog.component";
 
 export const routes: Routes = [
     {path:"", redirectTo:"home", pathMatch:"full"},
@@ -17,4 +20,5 @@ export const routes: Routes = [
     { path: "formatconverter", loadComponent: () => FormatconverterPageComponent },
     { path: "forgotpassword", loadComponent: () => ForgotpasswordComponent },
     { path: 'review', component: ReviewPageComponent },
+    {path: "option",component:PrevisualitionOptionDialogComponent}
 ];

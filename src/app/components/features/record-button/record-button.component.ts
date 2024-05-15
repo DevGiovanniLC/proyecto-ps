@@ -63,6 +63,7 @@ export class RecordButtonComponent {
             await this.videoRecorder.stop();
         } else {
             this.videoRecorder.toggleMicrophone(this.isMicrophoneEnabled);
+
             await this.videoRecorder.start(this._framerate, this._resolution, this._delay,()=>{
                 this.$recordingButtonDisabled = true
             });

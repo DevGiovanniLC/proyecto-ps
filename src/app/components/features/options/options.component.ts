@@ -54,4 +54,13 @@ export class OptionsComponent {
 	onformatImageChange() {
 		this.formatimagechange.emit(this.imageformat);
 	}
+  getOptions() {
+    return {
+      framerate: this.framerate,
+      resolution: this.resolution,
+      delay: this.delay,
+      videoformat: this.videoformat,
+      imageformat: this.imageformat
+    };
+  }
 }

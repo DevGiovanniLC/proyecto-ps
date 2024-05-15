@@ -1,5 +1,5 @@
 <body>
-	<app-header></app-header>
+<app-header (optionsChanged)="receiveOptions($event)"></app-header>
 	<main>
 		<app-record-button
 			[_framerate]="options.framerate"
@@ -11,6 +11,6 @@
 			[_formatImage]="options.imageformat"
 			[_delay]="options.delay * 1000"
 		/>
-		<app-options #options />
+
 	</main>
 </body>

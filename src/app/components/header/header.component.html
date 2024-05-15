@@ -11,7 +11,7 @@
 		}@else{
 			<a href="/home" draggable="false">HOME</a>
 		}
-		
+
 	</section>
 
 	<section class="users-buttons">
@@ -21,6 +21,6 @@
 			<a routerLink="/login" draggable="false">LOG IN</a>
 			<a routerLink="/signup" draggable="false">SIGN UP</a>
 		}
-		<button class="secundary" type="button" draggable="false">...</button>
+		<button (click)="openModal()"  type="button" draggable="false">OPTIONS</button>
 	</section>
 </header>
