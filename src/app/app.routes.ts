@@ -10,6 +10,7 @@ import { ReviewPageComponent } from './review-page/review-page.component';
 import {
   PrevisualitionOptionDialogComponent
 } from "./components/features/previsualition-option-dialog/previsualition-option-dialog.component";
+import { MyRecordsComponent } from './my-records/my-records.component';
 
 export const routes: Routes = [
     {path:"", redirectTo:"home", pathMatch:"full"},
@@ -19,6 +20,7 @@ export const routes: Routes = [
     { path: "signup", loadComponent: () => SignUpComponent },
     { path: "formatconverter", loadComponent: () => FormatconverterPageComponent },
     { path: "forgotpassword", loadComponent: () => ForgotpasswordComponent },
-    { path: 'review', component: ReviewPageComponent },
-    {path: "option",component:PrevisualitionOptionDialogComponent}
-];
+    { path: 'review', loadComponent: () => ReviewPageComponent },
+    { path: "option",component:PrevisualitionOptionDialogComponent},
+    { path: "myrecords",component:MyRecordsComponent},
+];  

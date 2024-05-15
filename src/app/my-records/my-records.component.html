@@ -1,0 +1,16 @@
+<app-header></app-header>
+<div *ngIf="user; else notAuthenticated" style="padding: 20px;">
+  <h2>Upload Your Records</h2>
+  <input type="file" (change)="onFileSelected($event)" accept="image/*,video/*">
+  <button (click)="uploadFile()">Upload</button>
+  <div *ngIf="uploadProgress !== null">
+    <p>Upload Progress: {{ uploadProgress }}%</p>
+  </div>
+  <div *ngIf="downloadURL">
+    <p>File available at: <a [href]="downloadURL" target="_blank">{{ downloadURL }}</a></p>
+  </div>
+</div>
+
+<ng-template #notAuthenticated>
+  <p>You need to be logged in to upload files.</p>
+</ng-template>
