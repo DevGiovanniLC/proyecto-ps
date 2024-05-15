@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter,Output} from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { RecordButtonComponent } from '../components/features/record-button/record-button.component';
 import HeaderComponent  from '../components/header/header.component';
@@ -22,10 +22,23 @@ import { PrevisualitionContentDialogComponent } from '../components/features/pre
 ]
 })
 export class HomePageComponent implements OnInit {
+  options: any = {
+    framerate: 60, // Valores predeterminados
+    resolution: 1080,
+    delay: 0,
+    videoformat: 'mp4',
+    imageformat: 'png'
+  };
+
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  receiveOptions(result: any) {
+    this.options = result;
+    console.log('Opciones recibidas en el MainComponent:', this.options);
+
+  }
 }

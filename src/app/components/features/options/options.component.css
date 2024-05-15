@@ -37,14 +37,14 @@ form {
 		text-align: center; /* Alinea el texto al centro */
 		font-size: 1em; /* Establece el tamaño de la fuente del texto del botón */
 		font-weight: 700;
-		cursor: inherit; 
+		cursor: inherit;
 	}
 
 	select {
 		padding-left: 1em;
 		width: 100%;
 		text-align: center;
-		cursor: inherit; 
+		cursor: inherit;
 	}
 
 	input{

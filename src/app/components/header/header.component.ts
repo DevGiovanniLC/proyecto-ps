@@ -1,7 +1,11 @@
-import { Component, inject } from "@angular/core";
+import { Component, EventEmitter, inject, Output } from "@angular/core";
 import { Router, RouterLink, NavigationEnd } from "@angular/router";
 import { LogInComponent } from "../auth/log-in/log-in.component";
 import { AuthService } from "../../services/AuthService.service";
+import { MatDialog } from "@angular/material/dialog";
+import {
+  PrevisualitionOptionDialogComponent
+} from "../features/previsualition-option-dialog/previsualition-option-dialog.component";
 
 
 
@@ -17,8 +21,9 @@ export default class HeaderComponent {
     isloogedIn: boolean
     firebaseService = inject(AuthService);
     currentPage: string;
+  @Output() optionsChanged: EventEmitter<any> = new EventEmitter<any>();
 
-    constructor(private router: Router) {
+    constructor(private router: Router,private dialog: MatDialog) {
         this.router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
                 this.currentPage = event.url;
@@ -38,6 +43,24 @@ export default class HeaderComponent {
     getout() {
         return this.firebaseService.signout()
     }
+
+  openModal(): void {
+    const dialogRef = this.dialog.open(PrevisualitionOptionDialogComponent, {
+      width: '65%',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.optionsChanged.emit(result)
+        console.log('Opciones recibidas en el Header:', result);
+      } else {
+        console.log('El modal fue cerrado sin guardar cambios');
+      }
+    });
+  }
+
+
+
 
 
 
