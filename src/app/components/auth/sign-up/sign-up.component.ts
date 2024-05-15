@@ -25,6 +25,7 @@ export class SignUpComponent {
     }
 
     form = new FormGroup({
+        username: new FormControl("", [Validators.required]),
         email: new FormControl("", [Validators.required, Validators.email]),
         password: new FormControl("", [Validators.required]),
         password1: new FormControl("", [Validators.required])
@@ -121,32 +122,31 @@ export class SignUpComponent {
     }
 
     async submit() {
-        const x = this.passwordverification();
+        const passwordError = this.passwordverification();
         if (this.emailerrorr()) {
-            if (this.passwordverification() === "") {
+            if (passwordError === "") {
                 try {
                     await this.firebaseService.signup(this.form.value as User);
                     this.firebaseService.enviarCorreo()
                     window.alert("Usuario Creado");
                     this.router.navigate(["/login"])
                 } catch (error) {
-                    const x = error.code
-                    if (x == 'auth/email-already-in-use') {
+                    if (error.code == 'auth/email-already-in-use') {
                         this.emailUsed();
                     }
 
                 }
 
             } else {
-                this.passwordlenght(x);
+                this.passwordlenght(passwordError);
 
             }
 
         } else {
             this.emailBadly();
             this.clean()
-            if (x != "") {
-                this.passwordlenght(x);
+            if (passwordError != "") {
+                this.passwordlenght(passwordError);
             }
         }
     }

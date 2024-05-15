@@ -35,8 +35,9 @@ h1 {
 }
 
 .stars {
+	list-style: none;
 	display: flex;
-	scale: 1.4;
+	scale: 1.2;
 	cursor: pointer;
 }
 
@@ -78,7 +79,12 @@ input[type="submit"]:hover {
   .header-reseña {
     display: flex;
     align-items: center;
-    margin-bottom: 8px;
+	justify-content: space-evenly;
+    padding: 8px;
+  }
+
+  .stars_reseña{
+	opacity: 1;
   }
   
   .user-image {

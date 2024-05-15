@@ -11,7 +11,7 @@ export class ReviewService {
 
   constructor(private db: AngularFireDatabase) {}
 
-  createReview(review: { uid: string, email: string, descripcion: string, valoracion: number }): void {
+  createReview(review: { uid: string, username: string, descripcion: string, valoracion: number }): void {
     this.db.list(this.dbPath).push(review).then(_ => {
       console.log('Reseña guardada');
     }).catch(error => {

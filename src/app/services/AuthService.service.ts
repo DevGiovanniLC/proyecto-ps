@@ -47,10 +47,14 @@ export class AuthService implements OnInit {
 
 
     signup(user: User) {
-
-        return createUserWithEmailAndPassword(getAuth(), user.email, user.password);
-
-
+        return createUserWithEmailAndPassword(getAuth(), user.email, user.password).then(Credential => {
+            return this.firestore.collection('users').doc(Credential.user?.uid).set({
+              username : user.username,
+              email: user.email  
+            })
+        }).catch(error => {
+            console.error('Error during sign up:', error);
+        });
     }
 
     login(user: User) {
@@ -86,6 +90,10 @@ export class AuthService implements OnInit {
 
     getUser(): Observable<firebase.User | null> {
         return this.auth.authState;
+    }
+
+    getUserDetails(uid: string): Observable<any> {
+        return this.firestore.collection('users').doc(uid).valueChanges();
     }
 
 }

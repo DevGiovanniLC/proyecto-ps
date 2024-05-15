@@ -21,7 +21,7 @@ import firebase from "firebase/compat/app";
   
 })
 export class ReviewPageComponent {
-  email: string = '';
+  username: string = '';
   descripcion: string = '';
   valoracion: number = 0;
   reviews: any[] = [];
@@ -35,9 +35,12 @@ export class ReviewPageComponent {
     this.authService.getUser().subscribe(user => {
       this.user = user;
       if (this.user) {
+        this.authService.getUserDetails(this.user.uid).subscribe(userDetail => {
+          this.username = userDetail.username;
+        });
         this.checkIfUserHasReviewed();
       }
-    })
+    });
   }
 
   loadReviews() {
@@ -52,11 +55,6 @@ export class ReviewPageComponent {
         this.hasReviewed = hasReviewed;
       });
     }
-  }
-
-  onEmailInput(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    this.email = inputElement.value;
   }
 
   onDescripcionInput(event: Event) {
@@ -92,13 +90,12 @@ export class ReviewPageComponent {
 
       const newReview = {
       uid: this.user.uid,
-      email: this.email,
+      username: this.username,
       descripcion: this.descripcion,
       valoracion: this.valoracion
     };
     this.reviewService.createReview(newReview);
     alert("Reseña guardada");
-    this.email = '';
     this.descripcion = '';
     this.valoracion = 0;
     this.loadReviews();  // Recargar las reseñas después de guardar una nueva

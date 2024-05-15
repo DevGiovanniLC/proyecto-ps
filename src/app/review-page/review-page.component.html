@@ -8,11 +8,10 @@
   <div *ngIf="user; else notAuthenticated" style="display: flex; justify-content: center; margin-top: 40px;">
     <div class="card">
       <h2>PUBLISH YOUR OPINION</h2>
-      <input type="email" (input)="onEmailInput($event)" placeholder="Ingrese su correo" style="border-radius: 5px; font-size: 20px;" required>
       <div class="stars" (mouseleave)="unselectStars(0)">
         <img  src="https://firebasestorage.googleapis.com/v0/b/test-5dfd9.appspot.com/o/assets%2FVector.webp?alt=media&token=a6a86d65-52d5-4c12-8e74-c350a8c142e0"  (mouseenter)="selectStars(i+1)" (mouseleave)="unselectStars" class="unselectedStar" (click)="setRating(i+1)" id="star{{i+1}}" *ngFor="let item of [].constructor(5); let i = index">
       </div>
-      <input type="text" (input)="onDescripcionInput($event)" placeholder="Aporta con tu opinión" style="border-radius: 5px; font-size: 20px;" required>
+      <textarea (input)="onDescripcionInput($event)" placeholder="Aporta con tu opinión" style="border-radius: 5px; font-size: 20px; height: 200px; width: 300px;" required></textarea>
       <input type="submit" (click)="submit()">
     </div>
   </div>
@@ -36,11 +35,9 @@
               class="user-image"
               src="https://firebasestorage.googleapis.com/v0/b/test-5dfd9.appspot.com/o/assets%2FPortrait_Placeholder.webp?alt=media&token=906bc66e-828c-43bd-aa3c-59b85e87a16d"
             />
-            <h2>{{ review.email }}</h2>
+            <h2>{{ review.username }}</h2>
             <ul class="stars">
-              <li *ngFor="let item of [].constructor(review.valoracion); let i = index">
-                <img src="https://firebasestorage.googleapis.com/v0/b/test-5dfd9.appspot.com/o/assets%2FVector.webp?alt=media&token=a6a86d65-52d5-4c12-8e74-c350a8c142e0" />
-              </li>
+              <li id="stars_reseña" *ngFor="let item of [].constructor(review.valoracion); let i = index" ><img src="https://firebasestorage.googleapis.com/v0/b/test-5dfd9.appspot.com/o/assets%2FVector.webp?alt=media&token=a6a86d65-52d5-4c12-8e74-c350a8c142e0" /></li>
             </ul>
           </header>
           <div class="comment">
