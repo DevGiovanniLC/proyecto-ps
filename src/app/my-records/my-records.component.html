@@ -6,10 +6,23 @@
   <div *ngIf="uploadProgress !== null">
     <p>Upload Progress: {{ uploadProgress }}%</p>
   </div>
-  <div *ngIf="downloadURL">
-    <p>File available at: <a [href]="downloadURL" target="_blank">{{ downloadURL }}</a></p>
+
+  <div *ngIf="downloadURL2?.length > 0 else back">
+    <li  *ngFor="let url of downloadURL2">
+
+      <img class="uploaded-image" [src]="url" alt="Uploaded Image">
+    </li>
+
   </div>
+
+
+
+
 </div>
+
+<ng-template #back>
+  <p>no hay archivos</p>
+</ng-template>
 
 <ng-template #notAuthenticated>
   <p>You need to be logged in to upload files.</p>

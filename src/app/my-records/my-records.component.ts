@@ -6,6 +6,7 @@ import firebase from 'firebase/compat/app';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import HeaderComponent from '../components/header/header.component';
+import {AngularFirestore} from "@angular/fire/compat/firestore";
 
 @Component({
   selector: 'app-my-records',
@@ -18,23 +19,33 @@ export class MyRecordsComponent implements OnInit {
   user: firebase.User | null = null;
   selectedFile: File | null = null;
   uploadProgress: number | null = null;
-  downloadURL: string | null = null;
+  downloadURL: string[] = []
+  downloadURL2: string[] = []
+  couldbe:boolean = false
 
-  constructor(private uploadService: UploadService, private authService: AuthService) {}
+  constructor(private uploadService: UploadService, private authService: AuthService, private firestore: AngularFirestore) {}
 
   ngOnInit(): void {
     this.authService.getUser().subscribe(user => {
       this.user = user;
       if (this.user) {
-        console.log("mamahuevo");
+
         this.loadFileUrl(this.user.uid);
+
       }
     });
+  }
+  getUser(){
+    this.authService.getUser().subscribe(user => {
+      this.user = user;
+      console.log(this.user)
+    })
+
   }
 
   loadFileUrl(userId: string): void {
     this.uploadService.getUserFileUrl(userId).subscribe(userDoc => {
-      this.downloadURL = userDoc?.url || null;
+      this.downloadURL2 = userDoc?.urls || null;
     });
   }
 
@@ -46,6 +57,7 @@ export class MyRecordsComponent implements OnInit {
   }
 
   uploadFile(): void {
+
     if (!this.selectedFile || !this.user) {
       alert('No file selected or user not authenticated!');
       return;
@@ -56,8 +68,18 @@ export class MyRecordsComponent implements OnInit {
     });
 
     this.uploadService.uploadFile(this.selectedFile, this.user.uid).subscribe(url => {
-      this.downloadURL = url;
+      this.downloadURL =url
+      this.downloadURL2 = this.downloadURL
       this.uploadProgress = null;
+      this.ngOnInit()
     });
   }
+  isImage(): boolean {
+    if (this.selectedFile) {
+      return this.selectedFile.type.startsWith('image/');
+    }
+    return false;
+  }
+
+
 }
