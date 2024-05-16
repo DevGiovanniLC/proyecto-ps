@@ -1,45 +1,48 @@
-<section class="info">
-	<a href="/whoweare" draggable="false">{{ menuItems[0] }}</a>
-	<a href="/review" draggable="false">{{ menuItems[9] }}</a>
-	
-</section>
+<header>
+	<section class="info">
+		<a href="/whoweare" draggable="false">{{ menuItems[0] }}</a>
+		<a href="/review" draggable="false">{{ menuItems[9] }}</a>
+		<select
+			id="targetLanguage"
+			[(ngModel)]="selectedLanguage"
+			(change)="translateAll()"
+		>
+			<option value="en">English</option>
+			<option value="es">Espanol</option>
+			<option value="ar">Arabe</option>
+			<option value="it">Italiano</option>
+			<option value="pt">Portugues</option>
+			<option value="zh-CN">Chino Tradicional</option>
+			<option value="ja">Japones</option>
+			<option value="ru">Ruso</option>
+			<option value="hi">Indu</option>
+		</select>
+	</section>
 
-<div>
-	<select id="targetLanguage" [(ngModel)]="selectedLanguage" (change)="translateAll()">
-		<option value="en">English</option>
-		<option value="es">Espanol</option>
-		<option value="ar">Arabe</option>
-		<option value="it">Italiano</option>
-		<option value="pt">Portugues</option>
-		<option value="zh-CN">Chino Tradicional</option>
-		<option value="ja">Japones</option>
-		<option value="ru">Ruso</option>
-		<option value="hi">Indu</option>
-	</select>
-</div>
+	<section class="features">
+		<ul>
+			<li>
+				<a href="/home" draggable="false">{{ menuItems[6] }}</a>
+			</li>
+			<li>
+				<a href="/formatconverter" draggable="false">{{
+					menuItems[8]
+				}}</a>
+			</li>
+			<li>
+				<a href="/myrecords" draggable="false">{{ menuItems[7] }}</a>
+			</li>
+		</ul>
+	</section>
 
-<section class="features">
-	<ul>
-		<li>
-			<a href="/home" draggable="false">{{ menuItems[6] }}</a>
-		</li>
-		<li>
-			<a href="/formatconverter" draggable="false">{{ menuItems[8] }}</a>
-		</li>
-		<li>
-			<a href="/myrecords" draggable="false">{{ menuItems[7] }}</a>
-		</li>
-	</ul>
-</section>
-
-<section class="users-buttons">
-	@if(storage()){
-	<a (click)="getout()" routerLink draggable="false">{{ menuItems[3] }}</a>
-	} @else {
-	<a routerLink="/login" draggable="false">>{{ menuItems[1] }}</a>
-	<a routerLink="/signup" draggable="false">>{{ menuItems[2] }}</a>
-	}
-</section>
-		
-
-	
+	<section class="users-buttons">
+		@if(storage()){
+		<a (click)="getout()" routerLink draggable="false">{{
+			menuItems[3]
+		}}</a>
+		} @else {
+		<a routerLink="/login" draggable="false">>{{ menuItems[1] }}</a>
+		<a routerLink="/signup" draggable="false">>{{ menuItems[2] }}</a>
+		}
+	</section>
+</header>
