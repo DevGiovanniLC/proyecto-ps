@@ -8,6 +8,8 @@ import firebase from "firebase/compat/app";
 import { AngularFireDatabase } from "@angular/fire/compat/database";
 import { Observable } from "rxjs";
 import { user } from "@angular/fire/auth";
+import { TranslationService } from "../../translation";
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -31,10 +33,15 @@ export class ReviewPageComponent{
   reviews: any[] = [];
   user: firebase.User | null = null;
   hasReviewed: boolean = false;
+  menuItems: string[] = ['', '', '', ''];
+  selectedLanguage: string;
+  jsonData: any;
 
-  constructor(private reviewService: ReviewService, private authService: AuthService) {}
+  constructor(private reviewService: ReviewService, private authService: AuthService, private translation: TranslationService, private http: HttpClient) {
+    this.selectedLanguage = localStorage.getItem('selectedLanguage');
+  }
 
-  ngOnInit(): void {
+  async ngOnInit(){
     this.loadReviews();  // Cargar las reseñas al inicializar el componente
     this.authService.getUser().subscribe(user => {
       this.user = user;
@@ -45,6 +52,32 @@ export class ReviewPageComponent{
         this.checkIfUserHasReviewed();
       }
     });
+    this.jsonData = await this.http.get<any>("../../../assets/i18n/resenas.json").toPromise();
+        
+    this.translateAll();   
+    
+  }
+
+  translateAll() {
+        
+    localStorage.setItem('selectedLanguage', this.selectedLanguage);
+    let values: string[] = Object.values(this.jsonData);
+    
+    
+
+    values.forEach((text, index) => {
+      this.translate(text, index);
+      
+    });
+  }
+
+translate(text: string, index: number) {
+    this.translation.translateText(text, this.selectedLanguage)
+      .subscribe((response: any) => {
+        this.menuItems[index] = response.data.translations[0].translatedText;
+      }, (error) => {
+        console.error('Error al traducir:', error);
+      });
   }
 
   ngAfterViewChecked(): void {

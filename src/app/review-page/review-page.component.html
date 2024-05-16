@@ -1,13 +1,13 @@
 <app-header></app-header>
 <div>
   <div class="título" style="display: flex; justify-content: center;">
-    <h1 class="highlight">REVIEWS</h1>
+    <h1 class="highlight">{{ menuItems[0] }}</h1>
   </div>
 
   <!-- Mostrar el formulario solo si el usuario está autenticado -->
   <div *ngIf="user; else notAuthenticated" style="display: flex; justify-content: center; margin-top: 40px;">
     <div class="card">
-      <h2>PUBLISH YOUR OPINION</h2>
+      <h2>{{ menuItems[1] }}</h2>
       <div class="stars" (mouseleave)="unselectStars(0)">
         <img  src="https://firebasestorage.googleapis.com/v0/b/test-5dfd9.appspot.com/o/assets%2FVector.webp?alt=media&token=a6a86d65-52d5-4c12-8e74-c350a8c142e0"  (mouseenter)="selectStars(i+1)" (mouseleave)="unselectStars(i)" class="unselectedStar" (click)="setRating(i+1)" id="star{{i+1}}" *ngFor="let item of [].constructor(5); let i = index">
       </div>
@@ -19,13 +19,13 @@
   <!-- Mostrar este mensaje si el usuario no está autenticado -->
   <ng-template #notAuthenticated >
     <div style="display: flex; justify-content: center; margin-top: 100px;">
-      <p style="color: red;">Puedes ver las reseñas en esta página, sin embargo, si quieres hacer tu aportación, deberás inciar sesión.</p>
+      <p style="color: red;">{{ menuItems[2] }}</p>
     </div>
   </ng-template>
 
   <div style="display: flex; flex-direction: column; align-items: center;" *ngIf="reviews.length > 0" >
     <div>
-      <h2>Reseñas Anteriores</h2>
+      <h2>{{ menuItems[3] }}</h2>
     </div>
     <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center;">
       <div *ngFor="let review of reviews" style="padding: 30px;">
