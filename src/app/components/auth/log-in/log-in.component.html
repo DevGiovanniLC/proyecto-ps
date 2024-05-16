@@ -51,7 +51,14 @@
 					<button id="login" class="login" type="submit">
 						LOG IN
 					</button>
-
+					<button
+						(click)="googlesignin()"
+						type="button"
+						class="login-with-google-btn"
+						style="margin-right: 80px"
+					>
+						Log in with Google
+					</button>
 					<button routerLink="/" id="login1" class="login" type="">
 						CANCEL
 					</button>
