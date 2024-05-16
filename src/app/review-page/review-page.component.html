@@ -3,19 +3,19 @@
   <div class="título" style="display: flex; justify-content: center;">
     <h1 class="highlight">REVIEWS</h1>
   </div>
-  
+
   <!-- Mostrar el formulario solo si el usuario está autenticado -->
   <div *ngIf="user; else notAuthenticated" style="display: flex; justify-content: center; margin-top: 40px;">
     <div class="card">
       <h2>PUBLISH YOUR OPINION</h2>
       <div class="stars" (mouseleave)="unselectStars(0)">
-        <img  src="https://firebasestorage.googleapis.com/v0/b/test-5dfd9.appspot.com/o/assets%2FVector.webp?alt=media&token=a6a86d65-52d5-4c12-8e74-c350a8c142e0"  (mouseenter)="selectStars(i+1)" (mouseleave)="unselectStars" class="unselectedStar" (click)="setRating(i+1)" id="star{{i+1}}" *ngFor="let item of [].constructor(5); let i = index">
+        <img  src="https://firebasestorage.googleapis.com/v0/b/test-5dfd9.appspot.com/o/assets%2FVector.webp?alt=media&token=a6a86d65-52d5-4c12-8e74-c350a8c142e0"  (mouseenter)="selectStars(i+1)" (mouseleave)="unselectStars(i)" class="unselectedStar" (click)="setRating(i+1)" id="star{{i+1}}" *ngFor="let item of [].constructor(5); let i = index">
       </div>
       <textarea (input)="onDescripcionInput($event)" placeholder="Aporta con tu opinión" style="border-radius: 5px; font-size: 20px; height: 200px; width: 300px;" required></textarea>
       <input type="submit" (click)="submit()">
     </div>
   </div>
-  
+
   <!-- Mostrar este mensaje si el usuario no está autenticado -->
   <ng-template #notAuthenticated >
     <div style="display: flex; justify-content: center; margin-top: 100px;">

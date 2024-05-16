@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from "@angular/core";
 import HeaderComponent from '../components/header/header.component';
 import { ReviewService } from '../services/review.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/AuthService.service';
 import firebase from "firebase/compat/app";
+import { AngularFireDatabase } from "@angular/fire/compat/database";
+import { Observable } from "rxjs";
+import { user } from "@angular/fire/auth";
 
 
 
@@ -18,16 +21,17 @@ import firebase from "firebase/compat/app";
     FormsModule,
     CommonModule,
   ],
-  
+
 })
-export class ReviewPageComponent {
+export class ReviewPageComponent{
   username: string = '';
   descripcion: string = '';
   valoracion: number = 0;
+  starlist: HTMLElement[] = [];
   reviews: any[] = [];
   user: firebase.User | null = null;
-  hasReviewed: boolean = false; 
-  
+  hasReviewed: boolean = false;
+
   constructor(private reviewService: ReviewService, private authService: AuthService) {}
 
   ngOnInit(): void {
@@ -41,6 +45,12 @@ export class ReviewPageComponent {
         this.checkIfUserHasReviewed();
       }
     });
+  }
+
+  ngAfterViewChecked(): void {
+    for (let i = 0; i < 5; i++) {
+      this.starlist[i] = document.getElementById("star" + (i + 1))!
+    }
   }
 
   loadReviews() {
@@ -63,17 +73,27 @@ export class ReviewPageComponent {
   }
 
   selectStars(id: number) {
-    this.valoracion = id;
+    for (let i = 0; i < id; i++) {
+      this.starlist[i].classList.add("selectedStar");
+    }
   }
 
   unselectStars(id: number) {
-    if (this.valoracion === id) {
-      this.valoracion = 0;
+    for (let i = id; i < 5; i++) {
+      this.starlist[i].classList.remove("selectedStar");
     }
   }
 
   setRating(id: number) {
     this.valoracion = id;
+    for (let i = 0; i < id; i++) {
+      this.starlist[i].classList.remove("selectedStar");
+      this.starlist[i].classList.add("fullSelectedStar");
+    }
+
+    for (let i = id; i < 5; i++) {
+      this.starlist[i].classList.remove("fullSelectedStar");
+    }
   }
 
   submit() {
@@ -101,8 +121,6 @@ export class ReviewPageComponent {
     this.loadReviews();  // Recargar las reseñas después de guardar una nueva
     this.hasReviewed = true;
   }
-
-  
 }
 
 

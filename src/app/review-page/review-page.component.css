@@ -36,9 +36,9 @@ h1 {
 
 .stars {
 	list-style: none;
-	display: flex;
-	scale: 1.2;
-	cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  min-height: 1.5em;
 }
 
 .unselectedStar {
@@ -46,11 +46,6 @@ h1 {
 	padding: 0.2em;
 }
 
-.stars img:hover,
-.stars img.selectedStar,
-.stars img.hoverStar {
-  opacity: 1; /* Opacidad al pasar el cursor */
-}
 
 .selectedStar {
 	opacity: 1;
@@ -86,13 +81,12 @@ input[type="submit"]:hover {
   .stars_reseña{
 	opacity: 1;
   }
-  
+
   .user-image {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     margin-right: 16px;
   }
-  
 
-  
+
