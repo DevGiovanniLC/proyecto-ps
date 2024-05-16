@@ -20,16 +20,7 @@ export class UploadService {
   constructor(private storage: AngularFireStorage, private firestore: AngularFirestore,
               private authService:AuthService, private httpClient: HttpClient) {}
 
-  async test() {
-    this.authService.getUser().subscribe(user => {
-      this.user = user;
-      if (this.user) {
-        console.log(this.user)
-        //this.loadFileUrl(this.user.uid);
-      }
 
-    });
-  }
 
   loadFileUrl(userId: string): void {
     this.getUserFileUrl(userId).subscribe(userDoc => {
@@ -42,8 +33,8 @@ export class UploadService {
     const filePath = `uploads/${new Date().getTime()}_${file.name}`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
-    this.test()
-    console.log(this.user)
+
+
     this.loadFileUrl(userId)
 
     return new Observable<string[]>(observer => {
@@ -51,6 +42,7 @@ export class UploadService {
         finalize(() => {
           fileRef.getDownloadURL().subscribe(url => {
             // Almacena la URL en el documento del usuario
+            console.log(url)
             this.urls.push(url)
 
 

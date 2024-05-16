@@ -95,5 +95,30 @@ export class MyRecordsComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustUrl(dataUrl + url);
   }
 
+  getFileType(url){
+
+    const x = ".mp4"
+    const y = ".mkvs"
+    const z = ".webm"
+
+    const a = ".jpeg"
+    const b = ".jpg"
+    const c = ".png"
+    const d = ".gif"
+
+    if(url.includes(x) || url.includes(y) || url.includes(z)){
+      return "video"
+    }
+    if(url.includes(a) || url.includes(b) || url.includes(c) || url.includes(d)){
+      return "image"
+    }
+
+    return  null
+  }
+
+  getFileName(url: string): string {
+    return url.substring(url.lastIndexOf('/') + 1);
+  }
+
 
 }

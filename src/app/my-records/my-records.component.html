@@ -10,20 +10,19 @@
 
 
   <div *ngIf="downloadURL2?.length > 0 else back">
-    <li  *ngFor="let url of downloadURL2">
 
-      <img class="uploaded-image" [src]="url" alt="Uploaded Image">
-      <a #downloadLink [href]="descargarImagen(url)"
-         [download]="'CoverImage'"></a>
-      <button (click)="downloadLink.click()">
-        Download
-      </button>
-
-
-
-
-
+    <li *ngFor="let url of downloadURL2">
+      <ng-container [ngSwitch]="getFileType(url)">
+        <img *ngSwitchCase="'image'" class="uploaded-image" [src]="url" alt="Uploaded Image" width="300">
+        <video *ngSwitchCase="'video'" class="uploaded-video" [src]="url" controls width="300"></video>
+      </ng-container>
+      <a #downloadLink [href]="descargarImagen(url)" [download]="getFileName(url)"></a>
+      <button (click)="downloadLink.click()">Download</button>
     </li>
+
+
+
+
 
   </div>
 
