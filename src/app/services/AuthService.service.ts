@@ -51,7 +51,9 @@ export class AuthService implements OnInit {
     return createUserWithEmailAndPassword(getAuth(), user.email, user.password).then(Credential => {
       return this.firestore.collection('users').doc(Credential.user?.uid).set({
         username : user.username,
-        email: user.email
+        email: user.email,
+        urls:[]
+
       })
     }).catch(error => {
       console.error('Error during sign up:', error);

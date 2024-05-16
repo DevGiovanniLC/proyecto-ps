@@ -102,7 +102,7 @@ export class MyRecordsComponent implements OnInit {
     const z = ".webm"
 
     const a = ".jpeg"
-    const b = ".jpg"
+    const b = ".JPG"
     const c = ".png"
     const d = ".gif"
 
