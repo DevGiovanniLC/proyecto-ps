@@ -1,5 +1,4 @@
 <section class="record-container">
-	<h2 class="info-feature" #record_info>{{ (isRecording)? 'RECORDING' : 'RECORD' }}</h2>
 	<div class="control-buttons">
         <button class="settings" (click)="openOptions()"></button>
 		<button
@@ -7,7 +6,7 @@
             [style.backgroundImage]="$iconRecord"
             [disabled]="$recordingButtonDisabled"
 			(click)="toggleRecording()"
-		></button>
+		><h2 class="info-feature" #record_info>{{ (isRecording)? 'RECORDING' : 'RECORD' }}</h2></button>
 		<button
 			class="microButton"
 			[style.backgroundImage]="$iconMicro"
