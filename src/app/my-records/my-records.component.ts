@@ -9,6 +9,8 @@ import HeaderComponent from '../components/header/header.component';
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import { HttpClient } from "@angular/common/http";
 import { saveAs} from 'file-saver';
+import { HTTPVideoTransfer } from "../services/HTTPVideoTransfer.service";
+import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
 
 @Component({
   selector: 'app-my-records',
@@ -27,7 +29,7 @@ export class MyRecordsComponent implements OnInit {
 
   constructor(private uploadService: UploadService,
               private authService: AuthService,
-              private firestore: AngularFirestore, private http:HttpClient) {}
+              private firestore: AngularFirestore, private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
     this.authService.getUser().subscribe(user => {
@@ -86,8 +88,11 @@ export class MyRecordsComponent implements OnInit {
   }
 
 
-  descargarImagen(url): void {
-    console.log("en proceso de descarga")
+  descargarImagen(url): SafeUrl {
+
+
+    const dataUrl = 'data:image/jpeg;base64,';
+    return this.sanitizer.bypassSecurityTrustUrl(dataUrl + url);
   }
 
 

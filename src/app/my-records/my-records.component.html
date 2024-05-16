@@ -7,12 +7,20 @@
     <p>Upload Progress: {{ uploadProgress }}%</p>
   </div>
 
+
+
   <div *ngIf="downloadURL2?.length > 0 else back">
     <li  *ngFor="let url of downloadURL2">
 
       <img class="uploaded-image" [src]="url" alt="Uploaded Image">
+      <a #downloadLink [href]="descargarImagen(url)"
+         [download]="'CoverImage'"></a>
+      <button (click)="downloadLink.click()">
+        Download
+      </button>
 
-      <button (click)="descargarImagen(url)">Descargar</button>
+
+
 
 
     </li>
