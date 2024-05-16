@@ -1,31 +1,29 @@
 <header class="header">
-	<section>
+	<section class="info">
 		<a href="/whoweare" draggable="false">WHO WE ARE</a>
-		@if (currentPage == '/home' || currentPage == '/review' || currentPage == '/myrecords' || currentPage == '/' ) {
-			<a href="/formatconverter" draggable="false">FORMAT CONVERTER</a>
-		}@else{
-			<a href="/home" draggable="false">HOME</a>
-		}
-		@if (currentPage == '/home' || currentPage == '/formatconverter' || currentPage == '/myrecords' || currentPage == '/') {
-			<a href="/review" draggable="false">REVIEWS</a>
-		}@else{
-			<a href="/home" draggable="false">HOME</a>
-		}
-		@if (currentPage == '/home' || currentPage == '/formatconverter' || currentPage == '/review' || currentPage == '/') {
-			<a href="/myrecords" draggable="false">My Records</a>
-		}@else{
-			<a href="/home" draggable="false">HOME</a>
-		}
-
+        <a href="/review" draggable="false">REVIEWS</a>
 	</section>
+
+    <section class="features">
+        <ul>
+            <li>
+                <a href="/home" draggable="false">RECORD</a>
+            </li>
+            <li>
+                <a href="/formatconverter" draggable="false">CONVERTER</a>
+            </li>
+            <li>
+                <a href="/myrecords" draggable="false">GALLERY</a>
+            </li>
+        </ul>
+    </section>
 
 	<section class="users-buttons">
 		@if(storage()){
-			<a (click)="getout()" routerLink draggable="false">LOG OUT</a>
+		<a (click)="getout()" routerLink draggable="false">LOG OUT</a>
 		} @else {
-			<a routerLink="/login" draggable="false">LOG IN</a>
-			<a routerLink="/signup" draggable="false">SIGN UP</a>
+		<a routerLink="/login" draggable="false">LOG IN</a>
+		<a routerLink="/signup" draggable="false">SIGN UP</a>
 		}
-		<button (click)="openModal()"  type="button" draggable="false">OPTIONS</button>
 	</section>
 </header>

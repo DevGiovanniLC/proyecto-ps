@@ -1,4 +1,16 @@
 app-screenshot-button {
 	display: flex;
 	justify-content: center;
+    align-items: center;
+}
+
+app-record-button{
+    display: flex;
+	justify-content: center;
+    align-items: center;
+}
+
+#settings{
+    background-image: "/assets/settings.webp";
+    width: 4em;
 }
