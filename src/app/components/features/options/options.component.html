@@ -6,7 +6,6 @@
 				name="resolution-selector"
 				id="resolution-selector"
 				[(ngModel)]="resolution"
-				(change)="onResolutionChange()"
 			>
 				<option selected>1080</option>
 				<option>720</option>
@@ -20,7 +19,6 @@
 				name="framerate-selector"
 				id="framerate-selector"
 				[(ngModel)]="framerate"
-				(change)="onFramerateChange()"
 			>
 				<option selected>60</option>
 				<option>30</option>
@@ -37,7 +35,6 @@
 				type="number"
 				id="delay-input"
 				[(ngModel)]="delay"
-				(change)="onDelayChange()"
 				min="0"
 			/>
 		</div>
@@ -50,7 +47,6 @@
                 name="format-video-selector"
                     id="format-video-selector"
                     [(ngModel)]="videoformat"
-                    (change)="onformatVideoChange()"
                 >
                     <option selected>mp4</option>
                     <option>avi</option>
@@ -65,7 +61,6 @@
                     name="format-image-selector"
                     id="format-image-selector"
                     [(ngModel)]="imageformat"
-                    (change)="onformatImageChange()"
                 >
                     <option selected>png</option>
                     <option>jpeg</option>
