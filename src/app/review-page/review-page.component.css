@@ -10,6 +10,18 @@ h1 {
     margin-top: 100px;
 }
 
+.h22{
+    background-color: black; /* Color de fondo */
+    padding: 0.7em; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra del recuadro */
+    display: inline-block; /* Ajusta el ancho al contenido */
+    color: white;
+    font-weight: bolder;
+    font-size: 3em;
+    margin-top: 100px;
+}
+
 .card {
 	background: #ffffff;
 	opacity: 0.8;

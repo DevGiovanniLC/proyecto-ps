@@ -97,7 +97,7 @@ export class MyRecordsComponent implements OnInit {
   getFileType(url){
 
     const x = ".mp4"
-    const y = ".mkvs"
+    const y = ".mkv"
     const z = ".webm"
 
     const a = ".jpeg"
