@@ -8,7 +8,6 @@ import { CommonModule } from '@angular/common';
 import HeaderComponent from '../components/header/header.component';
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import { HttpClient } from "@angular/common/http";
-import { saveAs} from 'file-saver';
 import { HTTPVideoTransfer } from "../services/HTTPVideoTransfer.service";
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
 

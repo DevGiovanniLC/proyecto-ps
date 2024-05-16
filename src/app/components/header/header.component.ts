@@ -1,5 +1,4 @@
-import { Component, EventEmitter, inject, Output } from "@angular/core";
-import { Component, inject, OnInit } from "@angular/core";
+import { Component, EventEmitter, inject, Output, OnInit } from "@angular/core";
 import { Router, RouterLink, NavigationEnd } from "@angular/router";
 import { LogInComponent } from "../auth/log-in/log-in.component";
 import { AuthService } from "../../services/AuthService.service";
