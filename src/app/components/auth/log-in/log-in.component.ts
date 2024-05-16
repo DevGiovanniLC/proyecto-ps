@@ -53,9 +53,11 @@ export class LogInComponent {
 				console.error("el error es:" + x);
 			}
 		}
-
-
 	}
+
+    googlesignin() {
+        this.firebaseService.googlesignin();
+    }
 
 
 }

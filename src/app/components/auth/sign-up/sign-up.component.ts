@@ -91,7 +91,6 @@ export class SignUpComponent {
     }
 
     googlesignin() {
-
         this.firebaseService.googlesignin();
     }
 
