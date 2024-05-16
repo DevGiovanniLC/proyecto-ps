@@ -1,6 +1,13 @@
 app-screenshot-button {
 	display: flex;
 	justify-content: center;
+    align-items: center;
+}
+
+app-record-button{
+    display: flex;
+	justify-content: center;
+    align-items: center;
 }
 
 #settings{
