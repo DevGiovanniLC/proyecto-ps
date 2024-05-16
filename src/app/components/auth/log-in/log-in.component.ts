@@ -88,9 +88,11 @@ export class LogInComponent implements OnInit {
 				console.error("el error es:" + x);
 			}
 		}
-
-
 	}
+
+    googlesignin() {
+        this.firebaseService.googlesignin();
+    }
 
 
 }

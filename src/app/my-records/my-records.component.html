@@ -1,0 +1,40 @@
+<app-header></app-header>
+<div *ngIf="user; else notAuthenticated" style="padding: 20px;">
+  <h2>Upload Your Records</h2>
+  <input type="file" (change)="onFileSelected($event)" accept="image/*,video/*">
+  <button (click)="uploadFile()">Upload</button>
+  <div *ngIf="uploadProgress !== null">
+    <p>Upload Progress: {{ uploadProgress }}%</p>
+  </div>
+
+
+
+  <div *ngIf="downloadURL2?.length > 0 else back">
+
+    <li *ngFor="let url of downloadURL2">
+      <ng-container [ngSwitch]="getFileType(url)">
+        <img *ngSwitchCase="'image'" class="uploaded-image" [src]="url" alt="Uploaded Image" width="300">
+        <video *ngSwitchCase="'video'" class="uploaded-video" [src]="url" controls width="300"></video>
+      </ng-container>
+      <a #downloadLink [href]="descargarImagen(url)" [download]="getFileName(url)"></a>
+      <button (click)="downloadLink.click()">Download</button>
+    </li>
+
+
+
+
+
+  </div>
+
+
+
+
+</div>
+
+<ng-template #back>
+  <p>no hay archivos</p>
+</ng-template>
+
+<ng-template #notAuthenticated>
+  <p>You need to be logged in to upload files.</p>
+</ng-template>

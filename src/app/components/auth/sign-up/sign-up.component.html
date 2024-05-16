@@ -12,6 +12,18 @@
 				method="POST"
 				(ngSubmit)="submit()"
 			>
+				
+				<div class="input-group">
+					<label for="username">USERNAME</label>
+					<input
+					  formControlName="username"
+					  type="text"
+					  id="username"
+					  name="username"
+					  class="username"
+					  required
+					/>
+			  	</div>
 				<div class="input-group">
 					<label for="email">{{ menuItems[2] }}</label>
 					<input

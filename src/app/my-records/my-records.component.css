@@ -1,0 +1,11 @@
+.uploaded-image {
+  max-width: 200px;
+  max-height: 200px;
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+
+li{
+  list-style: none;
+}

@@ -1,23 +1,26 @@
 form {
-	display: block;
+	display: flex;
 	justify-content: center;
 	align-items: center;
 	margin-top: 3.5em;
+    gap: 1em;
 }
+
 
 .first-row {
 	display: flex;
 	justify-content: center;
-	flex-direction: row;
-	gap: 10%;
+	flex-direction: column;
+    flex-wrap: wrap;
+	gap: 1em;
 }
 
 .second-row {
 	display: flex;
 	justify-content: center;
-	flex-direction: row;
+	flex-direction: column;
 	flex-wrap: wrap;
-	gap: 10%;
+	gap: 1em;
 }
 
 .configure-selector {
@@ -26,30 +29,31 @@ form {
 	background-color: #000000; /* Establece el color de fondo del botón */
 	color: white; /* Establece el color del texto del botón */
 	cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-	width: 6em;
-	justify-content: center;
+	justify-content: space-between;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	gap : 0.8em;
 
 	label {
 		font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;;
 		text-align: center; /* Alinea el texto al centro */
-		font-size: 1em; /* Establece el tamaño de la fuente del texto del botón */
-		font-weight: 700;
-		cursor: inherit; 
+		font-size: 0.8em; /* Establece el tamaño de la fuente del texto del botón */
+		font-weight: 500;
+		cursor: inherit;
 	}
 
 	select {
-		padding-left: 1em;
 		width: 100%;
 		text-align: center;
-		cursor: inherit; 
+		cursor: inherit;
+        width: 6em;
+        border-radius: 0.5em;
 	}
 
 	input{
 		text-align: center;
-		padding-left: 1em;
+        width: 5.5em;
+        border-radius: 0.5em;
 	}
 
 }

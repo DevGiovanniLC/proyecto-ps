@@ -6,11 +6,12 @@
 			[_resolution]="options.resolution"
 			[_delay]="options.delay * 1000"
 			[_format]="options.videoformat"
+            (optionsChanged)="receiveOptions($event)"
 		/>
+
 		<app-screenshot-button
 			[_formatImage]="options.imageformat"
 			[_delay]="options.delay * 1000"
 		/>
-		<app-options #options />
 	</main>
 </body>

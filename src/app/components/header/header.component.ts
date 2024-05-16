@@ -1,7 +1,9 @@
+import { Component, EventEmitter, inject, Output } from "@angular/core";
 import { Component, inject, OnInit } from "@angular/core";
 import { Router, RouterLink, NavigationEnd } from "@angular/router";
 import { LogInComponent } from "../auth/log-in/log-in.component";
 import { AuthService } from "../../services/AuthService.service";
+import { MatDialog } from "@angular/material/dialog";
 import { TranslationService } from "../../../translation";
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -22,7 +24,8 @@ export default class HeaderComponent implements OnInit{
     selectedLanguage: string;
     jsonData: any;
     currentPage: string;
-    constructor(private translation: TranslationService, private http: HttpClient, private router: Router) {
+
+    constructor(private translation: TranslationService, private http: HttpClient, private router: Router, private dialog: MatDialog) {
         this.router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
                 this.currentPage = event.url;
@@ -72,10 +75,6 @@ export default class HeaderComponent implements OnInit{
     getout() {
         return this.firebaseService.signout()
     }
-
-
-
-
 
 
 }

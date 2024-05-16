@@ -1,37 +1,4 @@
 <form class="main">
-	@if(storage()){
-	<div class="first-row">
-		<div class="configure-selector">
-			<label>VIDEO FORMAT</label>
-			<select
-			name="format-video-selector"
-				id="format-video-selector"
-				[(ngModel)]="videoformat"
-				(change)="onformatVideoChange()"
-			>
-				<option selected>mp4</option>
-				<option>avi</option>
-				<option>webm</option>
-				<option>mov</option>
-				<option>flv</option>
-				<option>mkv</option>
-			</select>
-		</div>
-		<div class="configure-selector">
-			<label>IMAGE FORMAT</label>
-			<select
-				name="format-image-selector"
-				id="format-image-selector"
-				[(ngModel)]="imageformat"
-				(change)="onformatImageChange()"
-			>
-				<option selected>png</option>
-				<option>jpeg</option>
-				<option>webp</option>
-			</select>
-		</div>
-	</div>
-	}
 	<div class="second-row">
 		<div class="configure-selector">
 			<label>RESOLUTION</label>
@@ -39,7 +6,6 @@
 				name="resolution-selector"
 				id="resolution-selector"
 				[(ngModel)]="resolution"
-				(change)="onResolutionChange()"
 			>
 				<option selected>1080</option>
 				<option>720</option>
@@ -53,7 +19,6 @@
 				name="framerate-selector"
 				id="framerate-selector"
 				[(ngModel)]="framerate"
-				(change)="onFramerateChange()"
 			>
 				<option selected>60</option>
 				<option>30</option>
@@ -70,9 +35,38 @@
 				type="number"
 				id="delay-input"
 				[(ngModel)]="delay"
-				(change)="onDelayChange()"
 				min="0"
 			/>
 		</div>
 	</div>
+    @if(storage()){
+        <div class="first-row">
+            <div class="configure-selector">
+                <label>VIDEO FORMAT</label>
+                <select
+                name="format-video-selector"
+                    id="format-video-selector"
+                    [(ngModel)]="videoformat"
+                >
+                    <option selected>mp4</option>
+                    <option>avi</option>
+                    <option>webm</option>
+                    <option>mov</option>
+                    <option>mkv</option>
+                </select>
+            </div>
+            <div class="configure-selector">
+                <label>IMAGE FORMAT</label>
+                <select
+                    name="format-image-selector"
+                    id="format-image-selector"
+                    [(ngModel)]="imageformat"
+                >
+                    <option selected>png</option>
+                    <option>jpeg</option>
+                    <option>webp</option>
+                </select>
+            </div>
+        </div>
+        }
 </form>

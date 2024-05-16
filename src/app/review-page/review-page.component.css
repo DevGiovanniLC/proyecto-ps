@@ -1,0 +1,92 @@
+h1 {
+    background-color: black; /* Color de fondo */
+    padding: 0.7em; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra del recuadro */
+    display: inline-block; /* Ajusta el ancho al contenido */
+    color: white;
+    font-weight: bolder;
+    font-size: 3em;
+    margin-top: 100px;
+}
+
+.card {
+	background: #ffffff;
+	opacity: 0.8;
+	box-shadow: 0 100px 145px rgba(0, 0, 0, 0.25);
+	border-radius: 15px;
+	display: flex;
+	flex-direction: column;
+	width: 30em;
+	justify-content: center;
+	align-items: center;
+	font-family: inter, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	padding: 0.1em;
+	gap: 1em;
+	margin-bottom: 16px;
+	border: 2px solid #a1a1a1;
+
+	h2 {
+		margin-top: 1em;
+		font-weight: bolder;
+		color: #a1a1a1;
+	}
+
+}
+
+.stars {
+	list-style: none;
+  display: flex;
+  flex-direction: row;
+  min-height: 1.5em;
+}
+
+.unselectedStar {
+	opacity: 0.5;
+	padding: 0.2em;
+}
+
+
+.selectedStar {
+	opacity: 1;
+}
+
+.fullSelectedStar {
+	opacity: 1;
+}
+
+input[type="submit"] {
+	background-color: rgb(32, 43, 137);
+	color: aliceblue;
+	padding: 1em 2em;
+	margin-bottom: 1em;
+	border-radius: 1em;
+	border: none;
+}
+
+input[type="submit"]:hover {
+	cursor: pointer;
+	opacity: 0.9;
+	transform: translateY(-2px);
+}
+
+
+  .header-reseña {
+    display: flex;
+    align-items: center;
+	justify-content: space-evenly;
+    padding: 8px;
+  }
+
+  .stars_reseña{
+	opacity: 1;
+  }
+
+  .user-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 16px;
+  }
+
+

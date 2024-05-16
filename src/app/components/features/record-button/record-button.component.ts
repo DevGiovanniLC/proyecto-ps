@@ -1,10 +1,11 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ScreenshotButtonComponent } from '../screenshot-button/screenshot-button.component';
 import { OptionsComponent } from '../options/options.component';
 import { PrevisualitionContentDialogComponent } from '../previsualition-content-dialog/previsualition-content-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { VideoRecorder } from '../../../services/VideoRecorder.service';
+import { PrevisualitionOptionDialogComponent } from '../previsualition-option-dialog/previsualition-option-dialog.component';
 
 @Component({
     selector: 'app-record-button',
@@ -19,6 +20,7 @@ export class RecordButtonComponent {
     @Input() _resolution: number;
     @Input() _delay: number;
     @Input() _format: string;
+    @Output() optionsChanged: EventEmitter<any> = new EventEmitter<any>();
 
     protected isRecording: boolean;
     protected isMicrophoneEnabled: boolean;
@@ -63,6 +65,7 @@ export class RecordButtonComponent {
             await this.videoRecorder.stop();
         } else {
             this.videoRecorder.toggleMicrophone(this.isMicrophoneEnabled);
+
             await this.videoRecorder.start(this._framerate, this._resolution, this._delay,()=>{
                 this.$recordingButtonDisabled = true
             });
@@ -98,4 +101,21 @@ export class RecordButtonComponent {
         this.isMicrophoneEnabled = !this.isMicrophoneEnabled
         this.$iconMicro = (this.isMicrophoneEnabled) ? this.icons.MICROENABLED : this.icons.MICROCLOSED;
     }
+
+
+    openOptions(): void {
+        const dialogRef = this._matDialog.open(PrevisualitionOptionDialogComponent, {
+            width: '65%',
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.optionsChanged.emit(result)
+                console.log('Opciones recibidas en el Header:', result);
+            } else {
+                console.log('El modal fue cerrado sin guardar cambios');
+            }
+        });
+    }
+
 }
