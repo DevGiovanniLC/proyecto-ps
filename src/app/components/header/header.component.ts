@@ -19,7 +19,7 @@ export default class HeaderComponent implements OnInit{
     isloogedIn: boolean
     firebaseService = inject(AuthService);
     targetLanguages = ['es', 'ar', 'fr', 'it', 'en', 'pt', 'zh-CN', 'ja', 'ru', 'hi'];
-    menuItems: string[] = ['WHO WE ARE', 'LOG IN', 'SIGN UP', 'LOG OUT', 'FORMAT CONVERTER', "HOME"];
+    menuItems: string[] = ['WHO WE ARE', 'LOG IN', 'SIGN UP', 'LOG OUT', 'CONVERTER', "RECORDER"];
     selectedLanguage: string;
     jsonData: any;
     currentPage: string;
