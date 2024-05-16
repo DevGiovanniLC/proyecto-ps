@@ -9,7 +9,7 @@ button, select {
 	font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.header {
+header {
 	display: flex; /* Centra verticalmente los elementos */
 	justify-content: space-between;
 	flex-direction: row;
@@ -22,7 +22,7 @@ button, select {
 .info{
     display: flex;
     flex-direction: row;
-    width: 20em;
+    width: 30em;
 }
 
 
@@ -51,7 +51,7 @@ button, select {
         align-items: center;
         justify-content: center;
         text-decoration: none;
-        width: 5em;
+        
     }
 }
 
@@ -60,14 +60,14 @@ button, select {
     justify-content: end;
 	flex-direction: row;
 	column-gap: 1em;
-    width: 20em;
+    width: 30em;
 }
 
 a {
 	display: flex;
     align-items: center;
     justify-content: center;
-	padding: 8px 16px; 
+	padding: 8px 1em; 
 	border: 1px solid #ccc; 
 	border-radius: 0.3em;
 	text-decoration: none;
