@@ -11,6 +11,10 @@
     <li  *ngFor="let url of downloadURL2">
 
       <img class="uploaded-image" [src]="url" alt="Uploaded Image">
+
+      <button (click)="descargarImagen(url)">Descargar</button>
+
+
     </li>
 
   </div>

@@ -6,6 +6,7 @@ import firebase from "firebase/compat/app";
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthService } from "./AuthService.service";
 import {MyRecordsComponent} from "../my-records/my-records.component"
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,18 @@ export class UploadService {
 
   public urls: Array<string> = [];
   constructor(private storage: AngularFireStorage, private firestore: AngularFirestore,
-              private authService:AuthService) {}
+              private authService:AuthService, private httpClient: HttpClient) {}
+
+  async test() {
+    this.authService.getUser().subscribe(user => {
+      this.user = user;
+      if (this.user) {
+        console.log(this.user)
+        //this.loadFileUrl(this.user.uid);
+      }
+
+    });
+  }
 
   loadFileUrl(userId: string): void {
     this.getUserFileUrl(userId).subscribe(userDoc => {
@@ -30,8 +42,9 @@ export class UploadService {
     const filePath = `uploads/${new Date().getTime()}_${file.name}`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
-
-    //this.loadFileUrl("lElU2rh5onTVk8JbDrHKfvXtqr03")
+    this.test()
+    console.log(this.user)
+    this.loadFileUrl(userId)
 
     return new Observable<string[]>(observer => {
       task.snapshotChanges().pipe(
@@ -54,6 +67,7 @@ export class UploadService {
         })
       ).subscribe();
     });
+
   }
 
   getUploadProgress(file: File): Observable<number | undefined> {
@@ -66,6 +80,8 @@ export class UploadService {
   getUserFileUrl(userId: string): Observable<any> {
     return this.firestore.collection('users').doc(userId).valueChanges();
   }
+
+
 
 
 }

@@ -7,6 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import HeaderComponent from '../components/header/header.component';
 import {AngularFirestore} from "@angular/fire/compat/firestore";
+import { HttpClient } from "@angular/common/http";
+import { saveAs} from 'file-saver';
 
 @Component({
   selector: 'app-my-records',
@@ -23,7 +25,9 @@ export class MyRecordsComponent implements OnInit {
   downloadURL2: string[] = []
   couldbe:boolean = false
 
-  constructor(private uploadService: UploadService, private authService: AuthService, private firestore: AngularFirestore) {}
+  constructor(private uploadService: UploadService,
+              private authService: AuthService,
+              private firestore: AngularFirestore, private http:HttpClient) {}
 
   ngOnInit(): void {
     this.authService.getUser().subscribe(user => {
@@ -79,6 +83,11 @@ export class MyRecordsComponent implements OnInit {
       return this.selectedFile.type.startsWith('image/');
     }
     return false;
+  }
+
+
+  descargarImagen(url): void {
+    console.log("en proceso de descarga")
   }
 
 
