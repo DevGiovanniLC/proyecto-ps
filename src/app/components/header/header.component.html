@@ -1,17 +1,17 @@
 <header class="header">
 	<section>
 		<a href="/whoweare" draggable="false">WHO WE ARE</a>
-		@if (currentPage == '/home' || currentPage == '/review' || currentPage == '/myrecords') {
+		@if (currentPage == '/home' || currentPage == '/review' || currentPage == '/myrecords' || currentPage == '/' ) {
 			<a href="/formatconverter" draggable="false">FORMAT CONVERTER</a>
 		}@else{
 			<a href="/home" draggable="false">HOME</a>
 		}
-		@if (currentPage == '/home' || currentPage == '/formatconverter' || currentPage == '/myrecords') {
+		@if (currentPage == '/home' || currentPage == '/formatconverter' || currentPage == '/myrecords' || currentPage == '/') {
 			<a href="/review" draggable="false">REVIEWS</a>
 		}@else{
 			<a href="/home" draggable="false">HOME</a>
 		}
-		@if (currentPage == '/home' || currentPage == '/formatconverter' || currentPage == '/review') {
+		@if (currentPage == '/home' || currentPage == '/formatconverter' || currentPage == '/review' || currentPage == '/') {
 			<a href="/myrecords" draggable="false">My Records</a>
 		}@else{
 			<a href="/home" draggable="false">HOME</a>
