@@ -104,11 +104,12 @@ export class MyRecordsComponent implements OnInit {
     const b = ".JPG"
     const c = ".png"
     const d = ".gif"
+    const e = ".jpg"
 
     if(url.includes(x) || url.includes(y) || url.includes(z)){
       return "video"
     }
-    if(url.includes(a) || url.includes(b) || url.includes(c) || url.includes(d)){
+    if(url.includes(a) || url.includes(b) || url.includes(c) || url.includes(d) || url.includes(e)){
       return "image"
     }
 
