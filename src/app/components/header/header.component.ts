@@ -15,7 +15,7 @@ import { HttpClient } from '@angular/common/http';
     templateUrl: './header.component.html',
     styleUrl: './header.component.css',
 })
-export default class HeaderComponent implements OnInit{
+export default class HeaderComponent implements OnInit {
     isloogedIn: boolean
     firebaseService = inject(AuthService);
     targetLanguages = ['es', 'ar', 'fr', 'it', 'en', 'pt', 'zh-CN', 'ja', 'ru', 'hi'];
@@ -25,42 +25,49 @@ export default class HeaderComponent implements OnInit{
     currentPage: string;
 
     constructor(private translation: TranslationService, private http: HttpClient, private router: Router, private dialog: MatDialog) {
+
         this.router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
                 this.currentPage = event.url;
             }
         });
+
         this.selectedLanguage = localStorage.getItem('selectedLanguage');
-        
+        if (this.selectedLanguage == null) this.selectedLanguage = 'en';
     }
 
     async ngOnInit() {
+
         this.jsonData = await this.http.get<any>("../../../assets/i18n/header_content.json").toPromise();
+        this.translateAll();
+    }
+
+    ngAfterViewInit(): void {
+
         
-        this.translateAll();    
     }
 
     translateAll() {
-        
+
         localStorage.setItem('selectedLanguage', this.selectedLanguage);
         let values: string[] = Object.values(this.jsonData);
-        
-        
+
+
 
         values.forEach((text, index) => {
-          this.translate(text, index);
-          
+            this.translate(text, index);
+
         });
-      }
+    }
 
     translate(text: string, index: number) {
         this.translation.translateText(text, this.selectedLanguage)
-          .subscribe((response: any) => {
-            this.menuItems[index] = response.data.translations[0].translatedText;
-          }, (error) => {
-            console.error('Error al traducir:', error);
-          });
-      }
+            .subscribe((response: any) => {
+                this.menuItems[index] = response.data.translations[0].translatedText;
+            }, (error) => {
+                console.error('Error al traducir:', error);
+            });
+    }
 
     storage() {
         return localStorage.getItem('isloogedIn') === 'true'
